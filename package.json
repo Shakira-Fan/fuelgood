@@ -1,0 +1,25 @@
+{
+  "name": "fuelgood",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shakira-Fan/fuelgood.git"
+  },
+  "author": "linda40685@gmail.com, kesiang.peng@gmail.com, wenlinlee-82gogolee@gmail.com, ella51741@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shakira-Fan/fuelgood/issues"
+  },
+  "homepage": "https://github.com/Shakira-Fan/fuelgood#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.6"
+  }
+}
