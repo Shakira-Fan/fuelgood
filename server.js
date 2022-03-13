@@ -45,7 +45,7 @@ app.all("/*", function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send("爽啦ＭＤＦＫ");
+  res.send("FUEL GOOOOOOOO!!!!!!!!");
 });
 
 app.listen(process.env.PORT || 3000, () =>
