@@ -1,3 +1,4 @@
+const dotenv = require("dotenv").config();
 const express = require("express");
 const app = express();
 
@@ -5,14 +6,16 @@ const mongoose = require("mongoose");
 //const Item = require("./modules/collection.js");
 
 const bodyParser = require("body-parser");
+const { process_params } = require("express/lib/router");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-const username = encodeURIComponent("lucien");
-const password = encodeURIComponent("fuelsogood");
-const collection = encodeURIComponent("member");
-const uri = `mongodb+srv://${username}:${password}@fuel-good-db.zfk5k.mongodb.net/${collection}?retryWrites=true&w=majority`;
+// const username = encodeURIComponent("lucien");
+// const password = encodeURIComponent("fuelsogood");
+// const collection = encodeURIComponent("member");
+// const uri = `mongodb+srv://${username}:${password}@fuel-good-db.zfk5k.mongodb.net/${collection}?retryWrites=true&w=majority`;
+const uri = process.env.MONGODB_URI;
 
 mongoose
   .connect(uri, {
@@ -45,6 +48,7 @@ app.all("/*", function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
+  console.log(process.env);
   res.send("FUEL GOOOOOOOO!!!!!!!!");
 });
 
