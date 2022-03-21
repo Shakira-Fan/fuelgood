@@ -8,7 +8,6 @@ const uri = process.env.MONGODB_URI;
 const passport = require("passport");
 require("./config/passport");
 
-//const { process_params } = require("express/lib/router");
 
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
