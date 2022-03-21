@@ -6,14 +6,12 @@ const bodyParser = require("body-parser");
 const app = express();
 const uri = process.env.MONGODB_URI;
 const passport = require("passport");
-const session = require("express-session");
 require("./config/passport");
 
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
-app.use(passport.session());
 //app.use(express.static("public"));
 app.use("/auth", authRoute);
 
