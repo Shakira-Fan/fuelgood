@@ -64,16 +64,20 @@ router.get(
   })
 );
 
-router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  if (req.session.returnTo) {
-    let newPath = req.session.returnTo;
-    req.session.returnTo = "";
-    //res.redirect(newPath);
-    res.send("Test3");
-  } else {
-    //res.redirect("/profile");
-    res.send("Test2");
-  }
+router.get("/google/redirect", (req, res) => {
+  res.send("YES");
 });
+
+// router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
+//   if (req.session.returnTo) {
+//     let newPath = req.session.returnTo;
+//     req.session.returnTo = "";
+//     //res.redirect(newPath);
+//     res.send("Test3");
+//   } else {
+//     //res.redirect("/profile");
+//     res.send("Test2");
+//   }
+// });
 
 module.exports = router;
