@@ -48,7 +48,6 @@ app.all("/*", function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  console.log(process.env);
   res.send("FUEL GOOOOOOOO!!!!!!!!");
 });
 
