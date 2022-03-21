@@ -1,21 +1,21 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
-const app = express();
-
+const authRoute = require("./routes/auth-route");
 const mongoose = require("mongoose");
-//const Item = require("./modules/collection.js");
-
 const bodyParser = require("body-parser");
-const { process_params } = require("express/lib/router");
+const app = express();
+const uri = process.env.MONGODB_URI;
+const passport = require("passport");
+require("./config/passport");
+
+//const { process_params } = require("express/lib/router");
+
+//Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use(express.static("public"));
-
-// const username = encodeURIComponent("lucien");
-// const password = encodeURIComponent("fuelsogood");
-// const collection = encodeURIComponent("member");
-// const uri = `mongodb+srv://${username}:${password}@fuel-good-db.zfk5k.mongodb.net/${collection}?retryWrites=true&w=majority`;
-const uri = process.env.MONGODB_URI;
+app.use("/auth", authRoute);
 
 mongoose
   .connect(uri, {
