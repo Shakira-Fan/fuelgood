@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const uri = process.env.MONGODB_URI;
 const passport = require("passport");
+app.set("view engine", "html");
 require("./config/passport");
 
 //Middlewares
@@ -14,6 +15,8 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 //app.use(express.static("public"));
 app.use("/auth", authRoute);
+
+app.use(express.static(__dirname + "/views"));
 
 mongoose
   .connect(uri, {
@@ -46,7 +49,7 @@ app.all("/*", function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send("FUEL GOOOOOOOO!!!!!!!!");
+  res.render("index.html");
 });
 
 app.listen(process.env.PORT || 3000, () =>
