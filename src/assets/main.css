@@ -1,0 +1,21 @@
+:root {
+  --color-primary: #ffd32d;
+  --color-secondary: #084594;
+  --color-secondary1: #008e89;
+  --color-secondary2: #085e7d;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+  font-size: 2rem;
+}
