@@ -1,61 +1,30 @@
 const router = require("express").Router();
 const passport = require("passport");
+const registerValidation = require("../validation").registerValidation;
+const loginValidation = require("../validation").loginValidation;
 const bcrypt = require("bcrypt");
 const User = require("../models/user-model");
+const jwt = require("jsonwebtoken");
 
-router.get("/login", (req, res) => {
-  res.render("login", { user: req.user });
+router.use((req, res, next) => {
+  console.log("A request is coming into auth-route.js middleware");
+  next();
 });
 
-router.get("/signup", (req, res) => {
-  res.render("signup", { user: req.user });
+router.get("/testAPI", (req, res) => {
+  const msgObj = {
+    message: "Test API is working.",
+  };
+  return res.json(msgObj);
 });
 
+//Log out
 router.get("/logout", (req, res) => {
   req.logOut();
   res.redirect("/");
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    failureRedirect: "/auth/login",
-    failureFlash: "Wrong email or password.",
-  }),
-  (req, res) => {
-    if (req.session.returnTo) {
-      let newPath = req.session.returnTo;
-      req.session.returnTo = "";
-      res.redirect(newPath);
-    } else {
-      res.redirect("/profile");
-    }
-  }
-);
-
-router.post("/signup", async (req, res) => {
-  console.log(req.body);
-  let { name, email, password } = req.body;
-  //check if the data is already in db
-  const emailExist = await User.findOne({ email });
-  if (emailExist) {
-    console.log("error_msg", "Email has already been registered.");
-    res.redirect("/auth/signup");
-  }
-
-  const hash = await bcrypt.hash(password, 10);
-  password = hash;
-  let newUser = new User({ name, email, password });
-  try {
-    await newUser.save();
-    console.log("success_msg", "Registration succeeds. You can login now.");
-    res.redirect("/auth/login");
-  } catch (err) {
-    console.log("error_msg", err.errors.name.properties.message);
-    res.redirect("/auth/signup");
-  }
-});
-
+//Google oauth Login
 router.get(
   "/google",
   passport.authenticate("google", {
@@ -70,6 +39,73 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
     res.redirect(newPath);
   } else {
     res.redirect("/");
+  }
+});
+
+//Local Login
+router.get("/login", (req, res) => {
+  res.render("login", { user: req.user });
+});
+
+router.post("/login", (req, res) => {
+  // check the validation of data
+  const { error } = loginValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (err) {
+      res.status(400).send(err);
+    }
+    if (!user) {
+      res.status(401).send("User not found.");
+    } else {
+      user.comparePassword(req.body.password, function (err, isMatch) {
+        if (err) return res.status(400).send(err);
+        if (isMatch) {
+          const tokenObject = { _id: user._id, email: user.email };
+          const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+          res.send({ success: true, token: "JWT " + token, user });
+          //res.render("login", { user: req.user });
+        } else {
+          res.status(401).send("Wrong password.");
+        }
+      });
+    }
+  });
+});
+
+//Local Sign Up
+router.get("/signup", (req, res) => {
+  res.render("signup", { user: req.user });
+});
+
+//JWT
+router.post("/signup", async (req, res) => {
+  // check the validation of data
+  console.log(req.body);
+  const { error } = registerValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  // check if the user exists
+  const emailExist = await User.findOne({ email: req.body.email });
+  if (emailExist)
+    return res.status(400).send("Email has already been registered.");
+
+  // register the user
+  const newUser = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+  });
+  try {
+    const savedUser = await newUser.save();
+    res.status(200).send({
+      msg: "success",
+      savedObject: savedUser,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).send("User not saved.");
   }
 });
 
