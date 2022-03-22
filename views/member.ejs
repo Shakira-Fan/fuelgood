@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ("partials/header") %>
+    <title>Login</title>
+    <style>
+      body{
+        text-align: center;
+      }
+      section{
+        height: 80vh;
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+      }
+      .profile{
+        line-height: 2rem;
+      }
+      
+
+    </style>
+  </head>
+  <body>
+    <%- include ("partials/nav") %> 
+    <section>
+      <div class="profile">
+        <h1>Welcome to <%= user.name %>'s page.</h1>
+        <img src="<%= user.thumbnail %>" alt="" />
+        <p><%= user.googleID %></p>
+        <p><%= user.date %></p>
+      </div>
+    </section>
+  </body>
+</html>

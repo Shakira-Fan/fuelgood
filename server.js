@@ -1,22 +1,31 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
-const authRoute = require("./routes/auth-route");
+const authRoute = require("./routes").auth;
+const memRoute = require("./routes").member;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const uri = process.env.MONGODB_URI;
 const passport = require("passport");
-app.set("view engine", "html");
+const session = require("express-session");
 require("./config/passport");
 
 //Middlewares
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.use(passport.initialize());
-//app.use(express.static("public"));
-app.use("/auth", authRoute);
-
+app.use(passport.session());
+app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/views"));
+app.use("/auth", authRoute);
+app.use("/member", memRoute);
 
 mongoose
   .connect(uri, {
@@ -49,7 +58,7 @@ app.all("/*", function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.render("index.html");
+  res.render("index.ejs", { user: req.user });
 });
 
 app.listen(process.env.PORT || 3000, () =>

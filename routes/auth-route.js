@@ -4,18 +4,17 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user-model");
 
 router.get("/login", (req, res) => {
-  //res.render("login", { user: req.user });
-  res.send("TEST");
+  res.render("login", { user: req.user });
 });
 
 router.get("/signup", (req, res) => {
-  //res.render("signup", { user: req.user });
+  res.render("signup", { user: req.user });
 });
 
-// router.get("/logout", (req, res) => {
-//   req.logOut();
-//   res.redirect("/");
-// });
+router.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/");
+});
 
 router.post(
   "/login",
@@ -64,20 +63,14 @@ router.get(
   })
 );
 
-router.get("/google/redirect", (req, res) => {
-  res.send("YES");
+router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
+  if (req.session.returnTo) {
+    let newPath = req.session.returnTo;
+    req.session.returnTo = "";
+    res.redirect(newPath);
+  } else {
+    res.redirect("/");
+  }
 });
-
-// router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-//   if (req.session.returnTo) {
-//     let newPath = req.session.returnTo;
-//     req.session.returnTo = "";
-//     //res.redirect(newPath);
-//     res.send("Test3");
-//   } else {
-//     //res.redirect("/profile");
-//     res.send("Test2");
-//   }
-// });
 
 module.exports = router;
