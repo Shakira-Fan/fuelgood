@@ -8,6 +8,8 @@ const app = express();
 const uri = process.env.MONGODB_URI;
 const passport = require("passport");
 const session = require("express-session");
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger.json");
 require("./config/passport");
 
 //Middlewares
@@ -24,6 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/views"));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", authRoute);
 app.use("/member", memRoute);
 

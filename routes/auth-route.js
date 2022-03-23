@@ -64,8 +64,8 @@ router.post("/login", (req, res) => {
         if (isMatch) {
           const tokenObject = { _id: user._id, email: user.email };
           const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
-          res.send({ success: true, token: "JWT " + token, user });
-          //res.render("login", { user: req.user });
+          console.log({ success: true, token: "JWT " + token, user });
+          res.status(200).render("/member", { user });
         } else {
           res.status(401).send("Wrong password.");
         }
@@ -99,10 +99,11 @@ router.post("/signup", async (req, res) => {
   });
   try {
     const savedUser = await newUser.save();
-    res.status(200).send({
-      msg: "success",
-      savedObject: savedUser,
-    });
+    res.render("login", { user: req.user });
+    // res.status(200).send({
+    //   msg: "success",
+    //   savedObject: savedUser,
+    // });
   } catch (err) {
     console.log(err);
     res.status(400).send("User not saved.");

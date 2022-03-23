@@ -5,7 +5,6 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 const GoogleStrategy = require("passport-google-oauth20");
 const bcrypt = require("bcrypt");
 
-
 passport.serializeUser((user, done) => {
   console.log("Serializing user now");
   done(null, user._id);
@@ -18,7 +17,6 @@ passport.deserializeUser((_id, done) => {
     done(null, user);
   });
 });
-
 
 passport.use(
   new GoogleStrategy(
@@ -51,7 +49,6 @@ passport.use(
     }
   )
 );
-
 
 module.exports = (passport) => {
   let opts = {};
