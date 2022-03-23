@@ -15,7 +15,7 @@ router.get("/testAPI", (req, res) => {
   const msgObj = {
     message: "Test API is working.",
   };
-  return res.json(msgObj);
+  return res.json(msgObj.message);
 });
 
 //Log out
