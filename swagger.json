@@ -29,6 +29,121 @@
             }
           }
         }
+      },
+      "/google": {
+        "get": {
+            "tags": [
+                "USER"
+            ],
+          "summary": "Google登入",
+          "description": "透過Google Oauth登入",
+          "responses": {
+            "200": {
+              "description": "null",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "null"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },    
+      "/login": {
+        "post": {
+          "tags": [
+            "USER"
+          ],
+          "summary": "登入系統",
+          "operationId": "loginUser",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "輸入註冊之email/密碼",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid username/password supplied",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/signup": {
+        "post": {
+          "tags": [
+            "USER"
+          ],
+          "summary": "註冊新帳戶",
+          "operationId": "loginUser",
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "輸入使用者名稱/電子郵件/密碼",
+              "required": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                    },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid username/email/password supplied",
+              "content": {}
+            }
+          }
+        }
       }
+
+
     }
-  }
+}
+
