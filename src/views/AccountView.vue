@@ -1,13 +1,10 @@
 <template>
-  <form class="signup-form" v-if="account">
+  <!-- <form class="signup-form" v-if="account" @submit.prevent="handleLog">
     <h1>登入</h1>
-    <div class="round">
-      <div class="icon">G</div>
-    </div>
     <label>Email:</label>
-    <input type="text" name="email" required />
+    <input type="text" name="email" v-model="email" required />
     <label>Password:</label>
-    <input type="password" name="password" required />
+    <input type="password" name="password" v-model="password" required />
     <button class="sign-up-btn">Log in</button>
 
     <div class="alternative">
@@ -16,19 +13,20 @@
         Sign Up Now!
       </button>
     </div>
-  </form>
+  </form> -->
 
-  <form class="signup-form" v-if="!account">
+  <p v-if="error.length">{{ error }}</p>
+  <form class="signup-form" v-if="account" @submit.prevent="handleSignUp">
     <h1>註冊</h1>
-    <div class="round">
+    <div class="round" @click="handleGoogleAuth">
       <div class="icon">G</div>
     </div>
     <label>Username:</label>
-    <input type="text" name="name" required />
+    <input type="text" name="name" v-model="name" required />
     <label>Email:</label>
-    <input type="email" name="password" required />
+    <input type="email" name="email" v-model="email" required />
     <label>Password:</label>
-    <input type="password" name="password" required />
+    <input type="password" name="password" v-model="password" required />
     <button class="sign-up-btn">Sign up Now!</button>
     <div class="alternative">
       <span>Already have an account?</span>
@@ -42,7 +40,44 @@ export default {
   data() {
     return {
       account: true,
+      name: null,
+      email: null,
+      password: null,
+      error: '',
     };
+  },
+  methods: {
+    handleSignUp() {
+      if (this.password.length < 8) {
+        alert('Password should be at least 8 characters');
+      } else {
+        (async () => {
+          try {
+            const res = await fetch(
+              'https://fuel-good.herokuapp.com/auth/signup',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  name: this.name,
+                  email: this.email,
+                  password: this.password,
+                }),
+              }
+            );
+            const data = await res.json();
+            console.log(data);
+            this.$router.push('/user' + '/' + data.savedObject._id);
+          } catch (err) {
+            this.error = err.message;
+            console.log(err.message);
+          }
+          console.log(this.name, this.email, this.password);
+        })();
+      }
+    },
   },
 };
 </script>
