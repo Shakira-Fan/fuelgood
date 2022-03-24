@@ -2,6 +2,7 @@ const dotenv = require("dotenv").config();
 const express = require("express");
 const authRoute = require("./routes").auth;
 const memRoute = require("./routes").member;
+const adminRoute = require("./routes").admin;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
@@ -45,6 +46,7 @@ app.use(express.static(__dirname + "/views"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", authRoute);
 app.use("/member", memRoute);
+app.use("/admin", adminRoute);
 
 mongoose
   .connect(uri, {
@@ -58,8 +60,6 @@ mongoose
     console.log("Failed to connect to MongoDB");
     console.log(e);
   });
-
-
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { user: req.user });

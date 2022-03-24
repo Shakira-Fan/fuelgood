@@ -7,12 +7,12 @@
     },
     "servers": [
       {
-        "url": "https://fuel-good.herokuapp.com/auth",
+        "url": "http://localhost:3000/",
         "description": "Heroku"
       }
     ],
     "paths": {
-      "/testAPI": {
+      "/auth/testAPI": {
         "get": {
           "summary": "API連線測試",
           "description": "確認連線是否正常",
@@ -30,7 +30,7 @@
           }
         }
       },
-      "/google": {
+      "/auth/google": {
         "get": {
             "tags": [
                 "USER"
@@ -51,7 +51,7 @@
           }
         }
       },    
-      "/login": {
+      "/auth/login": {
         "post": {
           "tags": [
             "USER"
@@ -79,7 +79,7 @@
           ],
           "responses": {
             "200": {
-              "description": "successful operation",
+              "description": "成功！",
               "content": {
                 "application/json": {
                   "schema": {
@@ -95,7 +95,7 @@
           }
         }
       },
-      "/signup": {
+      "/auth/signup": {
         "post": {
           "tags": [
             "USER"
@@ -126,7 +126,7 @@
           ],
           "responses": {
             "200": {
-              "description": "successful operation",
+              "description": "成功！",
               "content": {
                 "application/json": {
                   "schema": {
@@ -141,7 +141,92 @@
             }
           }
         }
+      },
+      "/admin/user/all": {
+        "get": {
+          "tags": [
+            "ADMIN"
+          ],
+          "summary": "列出所有已註冊用戶",
+          "operationId": "findAllUser",
+          "responses": {
+            "200": {
+              "description": "成功！"
+            },
+            "400": {
+              "description": "連線問題",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/admin/user/{name}": {
+        "get": {
+          "tags": [
+            "ADMIN"
+          ],
+          "summary": "使用{name}找出特定用戶",
+          "operationId": "findSpecificUser",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "name",
+              "description": "輸入使用者名稱",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                    }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "成功！"
+            },
+            "400": {
+              "description": "連線問題",
+              "content": {}
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "ADMIN"
+          ],
+          "summary": "使用{name}刪除特定用戶",
+          "operationId": "deleteSpecificUser",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "name",
+              "description": "輸入使用者名稱",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                    }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "成功！"
+            },
+            "400": {
+              "description": "連線問題",
+              "content": {}
+            }
+          }
+        }
       }
+
 
 
     }

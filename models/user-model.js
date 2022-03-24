@@ -1,35 +1,38 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minLength: 2,
-    maxLength: 255,
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minLength: 2,
+      maxLength: 255,
+    },
+    googleID: {
+      type: String,
+      default: "",
+    },
+    date: {
+      type: Date,
+      default: Date.now,
+    },
+    thumbnail: {
+      type: String,
+      default: "",
+    },
+    // local login
+    email: {
+      type: String,
+    },
+    password: {
+      type: String,
+      minLength: 8,
+      maxLength: 1024,
+    },
   },
-  googleID: {
-    type: String,
-    default: "",
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  thumbnail: {
-    type: String,
-    default: "",
-  },
-  // local login
-  email: {
-    type: String,
-  },
-  password: {
-    type: String,
-    minLength: 8,
-    maxLength: 1024,
-  },
-});
+  { versionKey: "_somethingElse" }
+);
 
 // mongoose schema middleare
 userSchema.pre("save", async function (next) {
