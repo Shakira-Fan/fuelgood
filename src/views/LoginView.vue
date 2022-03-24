@@ -1,21 +1,24 @@
 <template>
   <p v-if="error.length">{{ error }}</p>
-  <form class="signup-form" v-else @submit.prevent="handleSignUp">
-    <h1>註冊會員</h1>
+  <form class="signup-form" @submit.prevent="handleLog">
+    <h1>登入會員</h1>
     <div class="round" @click="handleGoogleAuth">
       <div class="icon">G</div>
     </div>
-    <label>姓名:</label>
-    <input type="text" name="name" v-model="name" required />
     <label>Email:</label>
-    <input type="email" name="email" v-model="email" required />
+    <input type="text" name="email" v-model="email" required />
     <label>密碼:</label>
     <input type="password" name="password" v-model="password" required />
-    <button class="sign-up-btn">註冊</button>
+    <button class="sign-up-btn">登入</button>
+
     <div class="alternative">
-      <span>已經有帳號了嗎?</span>
-      <button class="register-btn" @click="$router.push('/login')">
-        立刻登入
+      <span>尚未有帳號嗎?</span>
+      <button
+        type="button"
+        class="register-btn"
+        @click="$router.push('/account')"
+      >
+        立刻註冊
       </button>
     </div>
   </form>
@@ -54,9 +57,7 @@ export default {
             );
             const data = await res.json();
             console.log(data);
-            // this.$router.push('/user' + '/' + data.savedObject._id);
-            alert('Account created! Please sign in');
-            this.$router.push('/login');
+            this.$router.push('/user' + '/' + data.savedObject._id);
           } catch (err) {
             this.error = err.message;
             console.log(err.message);
@@ -97,7 +98,7 @@ input {
   padding: 2rem;
   border-radius: 4px;
   border: none;
-  border-bottom: 2px solid var(--color-grey);
+  border-bottom: 2px solid #eee;
 }
 .sign-up-btn {
   display: block;
@@ -137,13 +138,13 @@ span {
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-color: var(--color-grey);
+  background-color: #eee;
   margin: 2rem auto;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: white;
   font-weight: bold;
   cursor: pointer;
 }
