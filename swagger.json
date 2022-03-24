@@ -58,41 +58,40 @@
           ],
           "summary": "登入系統",
           "operationId": "loginUser",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "輸入註冊之email/密碼",
-              "required": true,
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
+          "requestBody":{
+            "content":{
+              "application/x-www-form-urlencoded":{
+                "schema": {
+                  "type": "object",
+                  "properties":{
+                    "email":{
+                      "type":"string"
+                    },
+                    "password":{
+                      "type":"string"
+                    }
                   }
+                }
+
+              }
+            }
+
+        },"responses": {
+          "200": {
+            "description": "成功！",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "成功！",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Invalid username/password supplied",
-              "content": {}
-            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied",
+            "content": {}
           }
+        }
         }
       },
       "/auth/signup": {
@@ -100,46 +99,45 @@
           "tags": [
             "USER"
           ],
-          "summary": "註冊新帳戶",
-          "operationId": "loginUser",
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "輸入使用者名稱/電子郵件/密碼",
-              "required": true,
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
+          "summary": "用戶註冊",
+          "operationId": "signupUser",
+          "requestBody":{
+            "content":{
+              "application/x-www-form-urlencoded":{
+                "schema": {
+                  "type": "object",
+                  "properties":{
+                    "name":{
+                      "type":"string"
                     },
-                  "email": {
-                    "type": "string"
-                  },
-                  "password": {
-                    "type": "string"
+                    "email":{
+                      "type":"string"
+                    },
+                    "password":{
+                      "type":"string"
+                    }
                   }
+                }
+
+              }
+            }
+
+        },"responses": {
+          "200": {
+            "description": "成功！",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
                 }
               }
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "成功！",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "400": {
-              "description": "Invalid username/email/password supplied",
-              "content": {}
-            }
+          },
+          "400": {
+            "description": "Invalid username/password/email supplied",
+            "content": {}
           }
+        }
         }
       },
       "/admin/user/all": {
@@ -226,8 +224,6 @@
           }
         }
       }
-
-
 
     }
 }
