@@ -1,36 +1,22 @@
 <template>
-  <!-- <form class="signup-form" v-if="account" @submit.prevent="handleLog">
-    <h1>登入</h1>
-    <label>Email:</label>
-    <input type="text" name="email" v-model="email" required />
-    <label>Password:</label>
-    <input type="password" name="password" v-model="password" required />
-    <button class="sign-up-btn">Log in</button>
-
-    <div class="alternative">
-      <span>Do not have an account yet?</span>
-      <button class="register-btn" @click="account = false">
-        Sign Up Now!
-      </button>
-    </div>
-  </form> -->
-
   <p v-if="error.length">{{ error }}</p>
-  <form class="signup-form" v-if="account" @submit.prevent="handleSignUp">
-    <h1>註冊</h1>
+  <form class="signup-form" v-else @submit.prevent="handleSignUp">
+    <h1>註冊會員</h1>
     <div class="round" @click="handleGoogleAuth">
       <div class="icon">G</div>
     </div>
-    <label>Username:</label>
+    <label>姓名:</label>
     <input type="text" name="name" v-model="name" required />
     <label>Email:</label>
     <input type="email" name="email" v-model="email" required />
-    <label>Password:</label>
+    <label>密碼:</label>
     <input type="password" name="password" v-model="password" required />
-    <button class="sign-up-btn">Sign up Now!</button>
+    <button class="sign-up-btn">註冊</button>
     <div class="alternative">
-      <span>Already have an account?</span>
-      <button class="register-btn" @click="account = true">Log in Now!</button>
+      <span>已經有帳號了嗎?</span>
+      <button class="register-btn" @click="$router.push('/login')">
+        立刻登入
+      </button>
     </div>
   </form>
 </template>
@@ -39,7 +25,6 @@
 export default {
   data() {
     return {
-      account: true,
       name: null,
       email: null,
       password: null,
@@ -69,7 +54,9 @@ export default {
             );
             const data = await res.json();
             console.log(data);
-            this.$router.push('/user' + '/' + data.savedObject._id);
+            // this.$router.push('/user' + '/' + data.savedObject._id);
+            alert('Account created! Please sign in');
+            this.$router.push('/login');
           } catch (err) {
             this.error = err.message;
             console.log(err.message);
@@ -94,7 +81,7 @@ p {
 .signup-form {
   max-width: 60rem;
   background: #fff;
-  margin: 5rem auto;
+  margin: 8rem auto;
   text-align: left;
   padding: 3rem;
   border-radius: 8px;
@@ -110,7 +97,7 @@ input {
   padding: 2rem;
   border-radius: 4px;
   border: none;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid var(--color-grey);
 }
 .sign-up-btn {
   display: block;
@@ -150,13 +137,13 @@ span {
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-color: #eee;
+  background-color: var(--color-grey);
   margin: 2rem auto;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
 }
