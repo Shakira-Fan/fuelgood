@@ -38,7 +38,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
     req.session.returnTo = "";
     res.redirect(newPath);
   } else {
-    res.redirect("/");
+    res.send(req.user);
   }
 });
 
@@ -100,11 +100,11 @@ router.post("/signup", async (req, res) => {
   });
   try {
     const savedUser = await newUser.save();
-    res.render("login", { user: req.user });
-    // res.status(200).send({
-    //   msg: "success",
-    //   savedObject: savedUser,
-    // });
+    //res.render("login", { user: req.user });
+    res.status(200).send({
+      msg: "success",
+      savedObject: savedUser,
+    });
   } catch (err) {
     console.log(err);
     res.status(400).send("User not saved.");
