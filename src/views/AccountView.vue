@@ -31,6 +31,7 @@ export default {
       error: '',
     };
   },
+
   methods: {
     handleSignUp() {
       if (this.password.length < 8) {
