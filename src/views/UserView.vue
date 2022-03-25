@@ -1,5 +1,5 @@
 <template>
-  <p>Hi, Welcome Back, {{ name }}</p>
+  <p>Hi, Welcome Back, {{ user[0].user.name }}</p>
   <div>
     <div class="inventory-container">
       <h2>您尚未提取的數量有:</h2>
@@ -53,9 +53,12 @@
 <script>
 export default {
   data() {
-    return {
-      name: 'WYN',
-    };
+    return {};
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
   },
 };
 </script>

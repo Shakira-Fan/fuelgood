@@ -1,6 +1,6 @@
 <template>
   <p v-if="error.length">{{ error }}</p>
-  <form class="signup-form" @submit.prevent="handleLog">
+  <form class="signup-form" @submit.prevent="handleLogin">
     <h1>登入會員</h1>
     <div class="round" @click="handleGoogleAuth">
       <div class="icon">G</div>
@@ -28,43 +28,44 @@
 export default {
   data() {
     return {
-      name: null,
       email: null,
       password: null,
       error: '',
     };
   },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
   methods: {
-    handleSignUp() {
-      if (this.password.length < 8) {
-        alert('Password should be at least 8 characters');
-      } else {
-        (async () => {
-          try {
-            const res = await fetch(
-              'https://fuel-good.herokuapp.com/auth/signup',
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  name: this.name,
-                  email: this.email,
-                  password: this.password,
-                }),
-              }
-            );
-            const data = await res.json();
-            console.log(data);
-            this.$router.push('/user' + '/' + data.savedObject._id);
-          } catch (err) {
-            this.error = err.message;
-            console.log(err.message);
-          }
-          console.log(this.name, this.email, this.password);
-        })();
-      }
+    handleLogin() {
+      (async () => {
+        try {
+          const res = await fetch(
+            'https://fuel-good.herokuapp.com/auth/login',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email: this.email,
+                password: this.password,
+              }),
+            }
+          );
+          const data = await res.json();
+          console.log(data);
+          this.user.push(data);
+          console.log(this.user);
+          this.$router.push('/user' + '/' + data.user._id);
+        } catch (err) {
+          this.error = err.message;
+          console.log(err.message);
+        }
+        console.log(this.email, this.password);
+      })();
     },
   },
 };
