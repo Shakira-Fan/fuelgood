@@ -49,8 +49,8 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res) => {
   // check the validation of data
-  const { error } = loginValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  // const { error } = loginValidation(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
 
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) {
@@ -66,7 +66,6 @@ router.post("/login", (req, res) => {
           const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
 
           res.status(200).send({ success: true, token: "JWT " + token, user });
-          //render("member", { user });
         } else {
           res.status(401).send("Wrong password.");
         }
