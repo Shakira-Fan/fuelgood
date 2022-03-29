@@ -1,5 +1,5 @@
 <template>
-  <p>Hi, Welcome Back, {{ user[0].user.name }}</p>
+  <p>Hi, 歡迎回來, {{ user[0].user.name }}</p>
   <div>
     <div class="inventory-container">
       <h2>您尚未提取的數量有:</h2>
@@ -39,6 +39,10 @@
 
   <div class="container">
     <h2>歷史訂單</h2>
+    <div>
+      <div>2022/01/05 95:5公升 總金額:5000元</div>
+      <div>2022/01/01 95:1公升 總金額:1000元</div>
+    </div>
   </div>
   <div class="container">
     <h2>產出會員QR CODE</h2>
