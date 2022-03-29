@@ -224,7 +224,7 @@
           }
         }
       },
-      "/price/recent/": {
+      "/crawler/price/recent/": {
         "get": {
           "tags": [
             "PRICE"
@@ -242,7 +242,7 @@
           }
         }
       },
-      "/price/history/all": {
+      "/crawler/price/history/all": {
         "get": {
           "tags": [
             "PRICE"
@@ -260,7 +260,7 @@
           }
         }
       },
-      "/price/history/{gasoline}": {
+      "/crawler/price/history/{gasoline}": {
         "get": {
           "tags": [
             "PRICE"
