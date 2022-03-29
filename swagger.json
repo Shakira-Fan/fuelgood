@@ -223,6 +223,77 @@
             }
           }
         }
+      },
+      "/price/recent/": {
+        "get": {
+          "tags": [
+            "PRICE"
+          ],
+          "summary": "列出當期油價",
+          "operationId": "findRecentPrice",
+          "responses": {
+            "200": {
+              "description": "成功！"
+            },
+            "400": {
+              "description": "連線問題",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/price/history/all": {
+        "get": {
+          "tags": [
+            "PRICE"
+          ],
+          "summary": "列出所有油價",
+          "operationId": "findAllPrice",
+          "responses": {
+            "200": {
+              "description": "成功！"
+            },
+            "400": {
+              "description": "連線問題",
+              "content": {}
+            }
+          }
+        }
+      },
+      "/price/history/{gasoline}": {
+        "get": {
+          "tags": [
+            "PRICE"
+          ],
+          "summary": "列出特定汽油之所有油價歷史",
+          "operationId": "findOnePrice",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "gasoline",
+              "description": "輸入汽油種類",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }  
+              }
+            }
+
+          ],
+          "responses": {
+            "200": {
+              "description": "成功！"
+            },
+            "400": {
+              "description": "連線問題",
+              "content": {}
+            }
+          }
+        }
       }
 
     }

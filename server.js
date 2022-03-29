@@ -19,9 +19,6 @@ const swaggerDocument = require("./swagger.json");
 const crawHistoryData = require("./modules/crawler").crawHistoryData;
 const crawRecentData = require("./modules/crawler").crawRecentData;
 
-setInterval(crawRecentData, 300000);
-setInterval(crawHistoryData, 300000);
-
 //Middlewares
 // CORS config here
 app.all("/*", function (req, res, next) {
@@ -78,3 +75,7 @@ app.get("/", (req, res) => {
 app.listen(process.env.PORT || 3000, () =>
   console.log("Server is running...Go! Go! GO!")
 );
+
+setInterval(crawRecentData, 300000);
+//crawHistoryData();
+//crawRecentData()
