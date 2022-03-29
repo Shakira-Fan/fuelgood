@@ -2,6 +2,10 @@ const router = require("express").Router();
 const User = require("../models/user-model");
 const mongoose = require("mongoose");
 
+router.get("/", async (req, res) => {
+  res.status(200).send("well connected");
+});
+
 router.get("/user/all", async (req, res) => {
   try {
     let data = await User.find({});

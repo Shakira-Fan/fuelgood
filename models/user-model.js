@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
       maxLength: 1024,
     },
   },
-  { versionKey: "_somethingElse" }
+  { versionKey: false }
 );
 
 // mongoose schema middleare

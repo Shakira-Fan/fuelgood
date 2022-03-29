@@ -1,17 +1,26 @@
 const dotenv = require("dotenv").config();
 const express = require("express");
+// Routes
 const authRoute = require("./routes").auth;
 const memRoute = require("./routes").member;
 const adminRoute = require("./routes").admin;
+const crawlerRoute = require("./routes").crawler;
+//
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const uri = process.env.MONGODB_URI;
 const passport = require("passport");
 const session = require("express-session");
+//API管理套件
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
-require("./config/passport");
+//爬蟲套件
+const crawHistoryData = require("./modules/crawler").crawHistoryData;
+const crawRecentData = require("./modules/crawler").crawRecentData;
+
+setInterval(crawRecentData, 300000);
+setInterval(crawHistoryData, 300000);
 
 //Middlewares
 // CORS config here
@@ -47,6 +56,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", authRoute);
 app.use("/member", memRoute);
 app.use("/admin", adminRoute);
+app.use("/crawler", crawlerRoute);
 
 mongoose
   .connect(uri, {
