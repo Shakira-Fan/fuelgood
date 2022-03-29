@@ -18,7 +18,7 @@
         class="register-btn"
         @click="$router.push('/account')"
       >
-        立刻註冊
+        立刻註冊!
       </button>
     </div>
   </form>
@@ -115,7 +115,6 @@ input {
   color: var(--color-primary);
   font-weight: bold;
   font-size: 1.8rem;
-  margin-top: 2rem;
   border-bottom: 1px solid var(--color-primary);
   padding: 0.3rem;
   cursor: pointer;
@@ -125,8 +124,9 @@ span {
   margin-right: 1rem;
 }
 .alternative {
-  margin-top: 2rem;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
 }
 .sign-up-btn {
   font-size: 1.8rem;

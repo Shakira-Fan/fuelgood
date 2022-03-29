@@ -30,11 +30,10 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log("clicked");
       this.user.pop();
       console.log(this.user);
-      alert("Logged out");
-      this.$router.push("/");
+      alert('Logged out');
+      this.$router.push('/');
     },
   },
 };

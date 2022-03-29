@@ -39,6 +39,7 @@ h2 {
 
 a {
   text-decoration: none;
+  color: #000;
 }
 .contact {
   background-color: var(--color-grey);
