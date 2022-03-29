@@ -9,8 +9,11 @@
         >登入／註冊</router-link
       >
       <div class="user-account" v-if="user.length">
-        <router-link :to="'/user' + '/' + user[0].user._id">{{
-          'HI,' + user[0].user.name
+        <router-link :to="'/cart'">購物車</router-link>
+      </div>
+      <div class="user-account" v-if="user.length">
+        <router-link :to="'/user/' + user[0].user._id">{{
+          `HI,${user[0].user.name}`
         }}</router-link>
         <span class="logout" @click="handleClick">登出</span>
       </div>
@@ -27,11 +30,11 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log('clicked');
+      console.log("clicked");
       this.user.pop();
       console.log(this.user);
-      alert('Logged out');
-      this.$router.push('/');
+      alert("Logged out");
+      this.$router.push("/");
     },
   },
 };
