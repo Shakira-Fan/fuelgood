@@ -15,7 +15,7 @@
     <button class="sign-up-btn">註冊</button>
     <div class="alternative">
       <span>已經有帳號了嗎?</span>
-      <button class="register-btn" @click="handleClick">立刻登入</button>
+      <button class="register-btn" @click="handleClick">立刻登入!</button>
     </div>
   </form>
 </template>
@@ -27,21 +27,21 @@ export default {
       name: null,
       email: null,
       password: null,
-      error: "",
+      error: '',
     };
   },
 
   methods: {
     async handleSignUp() {
       if (this.password.length < 8) {
-        alert("Password should be at least 8 characters");
+        alert('Password should be at least 8 characters');
         return;
       }
       try {
-        const res = await fetch("https://fuel-good.herokuapp.com/auth/signup", {
-          method: "POST",
+        const res = await fetch('https://fuel-good.herokuapp.com/auth/signup', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             name: this.name,
@@ -53,8 +53,8 @@ export default {
         console.log(data);
         // if(data.success)
         // this.$router.push('/user' + '/' + data.savedObject._id);
-        alert("Account created! Please sign in");
-        this.$router.push("/login");
+        alert('Account created! Please sign in');
+        this.$router.push('/login');
       } catch (err) {
         this.error = err.message;
         console.log(err.message);
@@ -111,7 +111,6 @@ input {
   color: var(--color-primary);
   font-weight: bold;
   font-size: 1.8rem;
-  margin-top: 2rem;
   border-bottom: 1px solid var(--color-primary);
   padding: 0.3rem;
   cursor: pointer;
@@ -121,8 +120,9 @@ span {
   margin-right: 1rem;
 }
 .alternative {
-  margin-top: 2rem;
-
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
 }
 .sign-up-btn {
   font-size: 1.8rem;
