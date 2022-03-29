@@ -11,15 +11,11 @@
     <input type="email" name="email" v-model="email" required />
     <label>密碼:</label>
     <input type="password" name="password" v-model="password" required />
-    <div>
-      <button class="sign-up-btn" type="submit">註冊</button>
 
-      <div class="alternative">
-        <span>已經有帳號了嗎?</span>
-        <button class="register-btn" @click="$router.push('/login')">
-          立刻登入
-        </button>
-      </div>
+    <button class="sign-up-btn">註冊</button>
+    <div class="alternative">
+      <span>已經有帳號了嗎?</span>
+      <button class="register-btn" @click="handleClick">立刻登入</button>
     </div>
   </form>
 </template>
@@ -64,6 +60,10 @@ export default {
         console.log(err.message);
       }
       console.log(this.name, this.email, this.password);
+    },
+    async handleClick() {
+      await this.$router.push('/login');
+      window.location.reload();
     },
   },
 };
@@ -121,7 +121,8 @@ span {
   margin-right: 1rem;
 }
 .alternative {
-  font-weight: bold;
+  margin-top: 2rem;
+
 }
 .sign-up-btn {
   font-size: 1.8rem;

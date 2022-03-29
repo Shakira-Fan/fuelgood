@@ -48,6 +48,7 @@ export default {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
+                // Authorization: 'Bearer ' + localStorage.getItem('token'),
               },
               body: JSON.stringify({
                 email: this.email,
@@ -59,6 +60,7 @@ export default {
           console.log(data);
           this.user.push(data);
           console.log(this.user);
+          localStorage.setItem('token', data.token);
           this.$router.push('/user' + '/' + data.user._id);
         } catch (err) {
           this.error = err.message;
@@ -123,7 +125,7 @@ span {
   margin-right: 1rem;
 }
 .alternative {
-  margin-top: 10rem;
+  margin-top: 2rem;
   font-weight: bold;
 }
 .sign-up-btn {
