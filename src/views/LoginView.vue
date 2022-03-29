@@ -125,7 +125,7 @@ span {
   margin-right: 1rem;
 }
 .alternative {
-  margin-top: 10rem;
+  margin-top: 2rem;
   font-weight: bold;
 }
 .sign-up-btn {

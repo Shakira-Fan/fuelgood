@@ -14,9 +14,7 @@
     <button class="sign-up-btn">註冊</button>
     <div class="alternative">
       <span>已經有帳號了嗎?</span>
-      <button class="register-btn" @click="$router.push('/login')">
-        立刻登入
-      </button>
+      <button class="register-btn" @click="handleClick">立刻登入</button>
     </div>
   </form>
 </template>
@@ -65,6 +63,10 @@ export default {
           console.log(this.name, this.email, this.password);
         })();
       }
+    },
+    async handleClick() {
+      await this.$router.push('/login');
+      window.location.reload();
     },
   },
 };
@@ -122,7 +124,7 @@ span {
   margin-right: 1rem;
 }
 .alternative {
-  margin-top: 10rem;
+  margin-top: 2rem;
   font-weight: bold;
 }
 .sign-up-btn {
