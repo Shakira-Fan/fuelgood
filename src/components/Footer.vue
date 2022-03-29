@@ -7,11 +7,11 @@
       <div class="contact-methods">
         <div class="link">
           <span class="material-icons"> email </span>
-          Email: contact@wels.com.tw
+          Email: <a href="mailto:contact@wels.com.tw">contact@wels.com.tw</a>
         </div>
         <div class="link">
           <span class="material-icons"> smartphone </span>
-          電話：0800-XXX-XXX
+          電話:<a href="tel:0922000122">0922000122</a>
         </div>
         <div class="link">
           <span class="material-icons">
@@ -36,6 +36,10 @@ h2 {
   border-bottom: 3px solid var(--color-primary);
   padding: 2rem;
 }
+
+a {
+  text-decoration: none;
+}
 .contact {
   background-color: var(--color-grey);
   padding: 4rem 0;
@@ -48,9 +52,11 @@ h2 {
 }
 .material-icons {
   font-size: 3rem;
+  margin-right: 0.5rem;
 }
 .link {
   font-size: 2.3rem;
+  display: flex;
 }
 .link:hover {
   cursor: pointer;

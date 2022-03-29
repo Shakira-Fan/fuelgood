@@ -11,12 +11,15 @@
     <input type="email" name="email" v-model="email" required />
     <label>密碼:</label>
     <input type="password" name="password" v-model="password" required />
-    <button class="sign-up-btn">註冊</button>
-    <div class="alternative">
-      <span>已經有帳號了嗎?</span>
-      <button class="register-btn" @click="$router.push('/login')">
-        立刻登入
-      </button>
+    <div>
+      <button class="sign-up-btn" type="submit">註冊</button>
+
+      <div class="alternative">
+        <span>已經有帳號了嗎?</span>
+        <button class="register-btn" @click="$router.push('/login')">
+          立刻登入
+        </button>
+      </div>
     </div>
   </form>
 </template>
@@ -28,43 +31,39 @@ export default {
       name: null,
       email: null,
       password: null,
-      error: '',
+      error: "",
     };
   },
 
   methods: {
-    handleSignUp() {
+    async handleSignUp() {
       if (this.password.length < 8) {
-        alert('Password should be at least 8 characters');
-      } else {
-        (async () => {
-          try {
-            const res = await fetch(
-              'https://fuel-good.herokuapp.com/auth/signup',
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                  name: this.name,
-                  email: this.email,
-                  password: this.password,
-                }),
-              }
-            );
-            const data = await res.json();
-            console.log(data);
-            // this.$router.push('/user' + '/' + data.savedObject._id);
-            alert('Account created! Please sign in');
-            this.$router.push('/login');
-          } catch (err) {
-            this.error = err.message;
-            console.log(err.message);
-          }
-          console.log(this.name, this.email, this.password);
-        })();
+        alert("Password should be at least 8 characters");
+        return;
       }
+      try {
+        const res = await fetch("https://fuel-good.herokuapp.com/auth/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: this.name,
+            email: this.email,
+            password: this.password,
+          }),
+        });
+        const data = await res.json();
+        console.log(data);
+        // if(data.success)
+        // this.$router.push('/user' + '/' + data.savedObject._id);
+        alert("Account created! Please sign in");
+        this.$router.push("/login");
+      } catch (err) {
+        this.error = err.message;
+        console.log(err.message);
+      }
+      console.log(this.name, this.email, this.password);
     },
   },
 };
@@ -122,7 +121,6 @@ span {
   margin-right: 1rem;
 }
 .alternative {
-  margin-top: 10rem;
   font-weight: bold;
 }
 .sign-up-btn {

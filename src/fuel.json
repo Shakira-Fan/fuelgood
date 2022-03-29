@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "92無鉛汽油",
+    "icon": "raddish",
+    "price": {
+      "NTD": 31.2
+    },
+    "type": "汽油"
+  },
+  {
+    "id": 2,
+    "name": "95無鉛汽油",
+    "icon": "artichoke",
+    "price": {
+      "NTD": 32.7
+    },
+    "type": "汽油"
+  },
+  {
+    "id": 3,
+    "name": "98無鉛汽油",
+    "icon": "broccoli",
+    "price": {
+      "NTD": 34.7
+    },
+    "type": "汽油"
+  },
+  {
+    "id": 5,
+    "name": "超級/高級柴油",
+    "icon": "cabbage",
+    "price": {
+      "NTD": 29.1
+    },
+    "type": "柴油"
+  }
+]
