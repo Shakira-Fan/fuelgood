@@ -38,6 +38,7 @@ passport.use(
             googleID: profile.id,
             thumbnail: profile.photos[0].value,
             email: profile.emails[0].value,
+            password: Math.floor(Math.random() * 100000000),
           })
             .save()
             .then((newUser) => {
