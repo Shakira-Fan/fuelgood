@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
+
 const registerValidation = require("../validation").registerValidation;
 const loginValidation = require("../validation").loginValidation;
 const bcrypt = require("bcrypt");
@@ -24,7 +25,6 @@ router.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-//Google oauth Login
 router.get(
   "/google",
   passport.authenticate("google", {
@@ -32,15 +32,21 @@ router.get(
   })
 );
 
-router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  if (req.session.returnTo) {
-    let newPath = req.session.returnTo;
-    req.session.returnTo = "";
-    res.redirect(newPath);
-  } else {
-    res.send(req.user);
+router.get("/error", (req, res) => res.send("Unknown Error"));
+
+router.get(
+  "/google/redirect",
+  passport.authenticate("google", { failureRedirect: "/error" }),
+  (req, res) => {
+    if (req.session.returnTo) {
+      let newPath = req.session.returnTo;
+      req.session.returnTo = "";
+      res.redirect(newPath);
+    } else {
+      res.send(req.user);
+    }
   }
-});
+);
 
 //Local Login
 router.get("/login", (req, res) => {

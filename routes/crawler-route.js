@@ -24,7 +24,7 @@ router.get("/price/recent", async (req, res) => {
 //列出所有歷史油價
 router.get("/price/history/all", async (req, res) => {
   try {
-    let data = await HistoryData.find({}, { _id: 0 }).sort({
+    let data = await HistoryData.find({}, { _id: 0,  }).sort({
       appliedDate: -1,
     });
 

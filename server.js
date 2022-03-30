@@ -1,18 +1,21 @@
-const dotenv = require("dotenv").config();
 const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
+
 // Routes
 const authRoute = require("./routes").auth;
 const memRoute = require("./routes").member;
 const adminRoute = require("./routes").admin;
 const crawlerRoute = require("./routes").crawler;
-//
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const app = express();
-const uri = process.env.MONGODB_URI;
+//API管理套件
+require("./config/passport");
 const passport = require("passport");
 const session = require("express-session");
-//API管理套件
+const bodyParser = require("body-parser");
+const uri = process.env.MONGODB_URI;
+
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 //爬蟲套件
@@ -36,6 +39,7 @@ app.all("/*", function (req, res, next) {
     next();
   }
 });
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
