@@ -1,6 +1,5 @@
 <template>
-  <p v-if="error.length">{{ error }}</p>
-  <form class="signup-form" @submit.prevent="handleLogin">
+  <form class="signup-form" @submit.prevent="handleSubmit">
     <h1>登入會員</h1>
     <div class="round" @click="handleGoogleAuth">
       <div class="icon">G</div>
@@ -9,6 +8,8 @@
     <input type="text" name="email" v-model="email" required />
     <label>密碼:</label>
     <input type="password" name="password" v-model="password" required />
+
+    <p class="err" v-if="error.length">{{ error }}</p>
     <button class="sign-up-btn">登入</button>
 
     <div class="alternative">
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -39,35 +41,30 @@ export default {
     },
   },
   methods: {
-    handleLogin() {
-      (async () => {
-        try {
-          const res = await fetch(
-            'https://fuel-good.herokuapp.com/auth/login',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                // Authorization: 'Bearer ' + localStorage.getItem('token'),
-              },
-              body: JSON.stringify({
-                email: this.email,
-                password: this.password,
-              }),
-            }
-          );
-          const data = await res.json();
-          console.log(data);
-          this.user.push(data);
-          console.log(this.user);
-          localStorage.setItem('token', data.token);
-          this.$router.push('/user' + '/' + data.user._id);
-        } catch (err) {
+    async handleSubmit() {
+      try {
+        const res = await axios.post(
+          'https://fuel-good.herokuapp.com/auth/login',
+          {
+            email: this.email,
+            password: this.password,
+          }
+        );
+        console.log(res);
+        this.user.push(res);
+        console.log(this.user);
+        localStorage.setItem('token', res.data.token);
+        this.$router.push('/user' + '/' + res.data.user._id);
+      } catch (err) {
+        if (err.response) {
+          this.error = err.response.data;
+          this.email = '';
+          this.password = '';
+        } else {
+          // throw new Error('Invalid email or password');
           this.error = err.message;
-          console.log(err.message);
         }
-        console.log(this.email, this.password);
-      })();
+      }
     },
   },
 };
@@ -150,5 +147,13 @@ span {
   color: white;
   font-weight: bold;
   cursor: pointer;
+}
+.err {
+  text-align: left;
+  font-weight: bold;
+  color: #cd1818;
+  padding-top: 2rem;
+  margin-left: 2rem;
+  font-size: 1.8rem;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
-  <p v-if="error.length">{{ error }}</p>
-  <form class="signup-form" v-else @submit.prevent="handleSignUp">
+  <form class="signup-form" @submit.prevent="handleSubmit">
     <h1>註冊會員</h1>
     <div class="round" @click="handleGoogleAuth">
       <div class="icon">G</div>
@@ -12,7 +11,9 @@
     <label>密碼:</label>
     <input type="password" name="password" v-model="password" required />
 
+    <p class="err" v-if="error.length">{{ error }}</p>
     <button class="sign-up-btn">註冊</button>
+
     <div class="alternative">
       <span>已經有帳號了嗎?</span>
       <button class="register-btn" @click="handleClick">立刻登入!</button>
@@ -21,6 +22,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -32,34 +34,28 @@ export default {
   },
 
   methods: {
-    async handleSignUp() {
-      if (this.password.length < 8) {
-        alert('Password should be at least 8 characters');
-        return;
-      }
+    async handleSubmit() {
       try {
-        const res = await fetch('https://fuel-good.herokuapp.com/auth/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
+        const res = await axios.post(
+          'https://fuel-good.herokuapp.com/auth/signup',
+          {
             name: this.name,
             email: this.email,
             password: this.password,
-          }),
-        });
-        const data = await res.json();
-        console.log(data);
-        // if(data.success)
-        // this.$router.push('/user' + '/' + data.savedObject._id);
+          }
+        );
         alert('Account created! Please sign in');
         this.$router.push('/login');
       } catch (err) {
-        this.error = err.message;
-        console.log(err.message);
+        if (err.response) {
+          this.error = err.response.data;
+          this.name = '';
+          this.email = '';
+          this.password = '';
+        } else {
+          this.error = err.message;
+        }
       }
-      console.log(this.name, this.email, this.password);
     },
     async handleClick() {
       await this.$router.push('/login');
@@ -146,5 +142,13 @@ span {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+}
+.err {
+  text-align: left;
+  font-weight: bold;
+  color: #cd1818;
+  padding-top: 2rem;
+  margin-left: 2rem;
+  font-size: 1.8rem;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <p>Hi, 歡迎回來, {{ user[0].user.name }}</p>
+  <p>Hi, 歡迎回來, {{ user[0].data.user.name }}</p>
   <div>
     <div class="inventory-container">
       <h2>您尚未提取的數量有:</h2>
@@ -55,6 +55,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {};
@@ -64,6 +65,14 @@ export default {
       return this.$store.state.user;
     },
   },
+  // async created() {
+  //   const res = await axios.get('user', {
+  //     headers: {
+  //       Authorization: 'Bearer ' + localStorage.getItem('token'),
+  //     },
+  //   });
+  //   console.log(res);
+  // },
 };
 </script>
 
