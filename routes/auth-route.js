@@ -8,7 +8,7 @@ const User = require("../models/user-model");
 const jwt = require("jsonwebtoken");
 
 router.use((req, res, next) => {
-  console.log("A request is coming into auth-route.js middleware");
+  console.log("A request is coming to auth-route.js middleware");
   next();
 });
 
@@ -43,7 +43,7 @@ router.get(
       req.session.returnTo = "";
       res.redirect(newPath);
     } else {
-      res.send(req.user);
+      res.redirect("https://www.google.com/");
     }
   }
 );
@@ -54,9 +54,9 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  // check the validation of data
-  // const { error } = loginValidation(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
+  //check the validation of data
+  const { error } = loginValidation(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
 
   User.findOne({ email: req.body.email }, function (err, user) {
     if (err) {

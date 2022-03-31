@@ -294,6 +294,128 @@
             }
           }
         }
+      },
+      "/order/add": {
+        "post": {
+          "tags": [
+            "ORDER"
+          ],
+          "summary": "新增訂單",
+          "operationId": "addOrder",
+          "requestBody":{
+            "content":{
+              "application/x-www-form-urlencoded":{
+                "schema": {
+                  "type": "object",
+                  "properties":{
+                    "email":{
+                      "type":"string"
+                    },
+                    "adding92":{
+                      "type":"number"
+                    },
+                    "adding95":{
+                      "type":"number"
+                    },
+                    "adding98":{
+                      "type":"number"
+                    },
+                    "addingDiesel":{
+                      "type":"number"
+                    }
+                  }
+                }
+
+              }
+            }
+
+        },"responses": {
+          "200": {
+            "description": "新增訂單成功！",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "訂單新增失敗",
+            "content": {}
+          }
+        }
+        }
+      },
+      "/order/deduct": {
+        "patch": {
+          "tags": [
+            "ORDER"
+          ],
+          "summary": "取用汽油扣除存量",
+          "operationId": "deductQty",
+          "requestBody":{
+            "content":{
+              "application/x-www-form-urlencoded":{
+                "schema": {
+                  "type": "object",
+                  "properties":{
+                    "email":{
+                      "type":"string"
+                    },
+                    "deducted92":{
+                      "type":"number"
+                    },
+                    "deducted95":{
+                      "type":"number"
+                    },
+                    "deducted98":{
+                      "type":"number"
+                    },
+                    "deductedDiesel":{
+                      "type":"number"
+                    }
+                  }
+                }
+
+              }
+            }
+
+        },"responses": {
+          "200": {
+            "description": "庫存取用成功！",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "庫存取用失敗",
+            "content": {}
+          }
+        }
+        }
+      },
+      "/order/all": {
+        "get": {
+          "tags": [
+            "ORDER"
+          ],
+          "summary": "列出所有訂單",
+          "operationId": "findAllOrder",
+          "responses": {
+            "200": {
+              "description": "成功列出所有訂單"
+            },
+            "400": {
+              "description": "發生問題",
+              "content": {}
+            }
+          }
+        }
       }
 
     }

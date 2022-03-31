@@ -30,6 +30,36 @@ const userSchema = new mongoose.Schema(
       minLength: 8,
       maxLength: 1024,
     },
+    properties: {
+      "92無鉛汽油": {
+        liter: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+      "95無鉛汽油": {
+        liter: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+      "98無鉛汽油": {
+        liter: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+      高級柴油: {
+        liter: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+    },
   },
   { versionKey: false }
 );

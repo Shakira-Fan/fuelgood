@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
 
 router.get("/user/all", async (req, res) => {
   try {
-    let data = await User.find({});
+    let data = await User.find({}, { __v: 0 });
     res.send(data);
   } catch (error) {
     res.send(error);
@@ -18,7 +18,7 @@ router.get("/user/all", async (req, res) => {
 router.get("/user/:name", async (req, res) => {
   let { name } = req.params;
   try {
-    await User.findOne({ name }).then((data) => {
+    await User.findOne({ name }, { __v: 0 }).then((data) => {
       if (data) res.send(data);
       else res.send("User not found");
     });
@@ -30,10 +30,12 @@ router.get("/user/:name", async (req, res) => {
 router.delete("/user/:name", async (req, res) => {
   let { name } = req.params;
   try {
-    await User.deleteOne({ name }).then((data) => {
-      if (data) res.send("User has been deleted");
-      else res.send("User not found");
-    });
+    await User.deleteOne({ name }, { __v: 0 })
+      .populate("email")
+      .then((data) => {
+        if (data) res.send("User has been deleted");
+        else res.send("User not found");
+      });
   } catch (e) {
     res.send(e);
   }

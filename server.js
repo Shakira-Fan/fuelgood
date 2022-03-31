@@ -9,13 +9,16 @@ const authRoute = require("./routes").auth;
 const memRoute = require("./routes").member;
 const adminRoute = require("./routes").admin;
 const crawlerRoute = require("./routes").crawler;
-//API管理套件
+const orderRoute = require("./routes").order;
+
+
 require("./config/passport");
 const passport = require("passport");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const uri = process.env.MONGODB_URI;
 
+//API管理套件
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./swagger.json");
 //爬蟲套件
@@ -57,6 +60,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/auth", authRoute);
 app.use("/member", memRoute);
 app.use("/admin", adminRoute);
+app.use("/order", orderRoute);
 app.use("/crawler", crawlerRoute);
 
 mongoose
@@ -73,11 +77,11 @@ mongoose
   });
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { user: req.user });
+  res.status(200).render("index.ejs", { user: req.user });
 });
 
 app.listen(process.env.PORT || 3000, () =>
-  console.log("Server is running...Go! Go! GO!")
+  console.log("Server is running...Fuel Good Go! Go! GO!")
 );
 
 setInterval(crawRecentData, 300000);
