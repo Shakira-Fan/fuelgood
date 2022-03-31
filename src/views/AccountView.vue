@@ -1,8 +1,8 @@
 <template>
   <form class="signup-form" @submit.prevent="handleSubmit">
     <h1>註冊會員</h1>
-    <div class="round" @click="handleGoogleAuth">
-      <div class="icon">G</div>
+    <div class="round">
+      <img class="logo" src="../assets/images/wels.svg" alt="" />
     </div>
     <label>姓名:</label>
     <input type="text" name="name" v-model="name" required />
@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
   data() {
     return {
@@ -34,6 +35,17 @@ export default {
   },
 
   methods: {
+    async handleGoogleAuth() {
+      try {
+        const res = await axios.get(
+          'https://fuel-good.herokuapp.com/auth/google'
+        );
+      } catch (err) {
+        if (err.response) {
+          console.log(err.response.data);
+        }
+      }
+    },
     async handleSubmit() {
       try {
         const res = await axios.post(
@@ -66,6 +78,9 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  width: 5rem;
+}
 h1 {
   font-size: 3rem;
   text-align: center;

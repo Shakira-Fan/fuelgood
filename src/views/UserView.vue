@@ -1,24 +1,24 @@
 <template>
-  <p>Hi, 歡迎回來, {{ user[0].data.user.name }}</p>
+  <p>Hi, 歡迎回來, {{ username }}</p>
   <div>
     <div class="inventory-container">
       <h2>您尚未提取的數量有:</h2>
       <div class="inventory">
-        <div>92</div>
+        <div>92無鉛汽油</div>
         <div class="progress-bar">
           <div class="blue"></div>
         </div>
       </div>
 
       <div class="inventory">
-        <div>95</div>
+        <div>95無鉛汽油</div>
         <div class="progress-bar">
           <div class="blue"></div>
         </div>
       </div>
 
       <div class="inventory">
-        <div>98</div>
+        <div>98無鉛汽油</div>
         <div class="progress-bar">
           <div class="blue"></div>
         </div>
@@ -40,8 +40,11 @@
   <div class="container">
     <h2>歷史訂單</h2>
     <div>
-      <div>2022/01/05 95:5公升 總金額:5000元</div>
-      <div>2022/01/01 95:1公升 總金額:1000元</div>
+      <div class="orders" v-for="order in orders.flat()" :key="order.email">
+        <span class="order-info">訂單號：{{ order.orderNumber }}</span>
+        <span class="order-info">訂單：{{ order.orders }}</span>
+        <span class="order-info">日期：{{ order.date }}</span>
+      </div>
     </div>
   </div>
   <div class="container">
@@ -56,23 +59,38 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 export default {
-  data() {
-    return {};
-  },
   computed: {
     user() {
       return this.$store.state.user;
     },
+    logIn() {
+      return this.$store.state.logIn;
+    },
+    username() {
+      return this.$store.state.username;
+    },
+    orders() {
+      return this.$store.state.orders;
+    },
+    date() {
+      return moment(this.order.date).format('YYYY MM DD');
+    },
   },
-  // async created() {
-  //   const res = await axios.get('user', {
-  //     headers: {
-  //       Authorization: 'Bearer ' + localStorage.getItem('token'),
-  //     },
-  //   });
-  //   console.log(res);
-  // },
+  async created() {
+    const res = await axios.get('https://fuel-good.herokuapp.com/order/all');
+    console.log(res);
+    if (!this.orders.length) {
+      await this.orders.push(
+        res.data.filter(order => {
+          return order.email === 'wll@gmail.com';
+        })
+      );
+    }
+
+    console.log(this.orders);
+  },
 };
 </script>
 
@@ -137,5 +155,14 @@ button:hover {
   height: 10rem;
   background-image: url('https://images.unsplash.com/photo-1550482768-88b710a445fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
   margin: 0 auto;
+}
+.orders {
+  background-color: #fff;
+  padding: 2rem;
+  margin: 1rem;
+}
+.order-info {
+  display: block;
+  text-align: left;
 }
 </style>

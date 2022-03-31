@@ -11,10 +11,8 @@
       <div class="user-account" v-if="user.length">
         <router-link :to="'/cart'">購物車</router-link>
       </div>
-      <div class="user-account" v-if="user.length">
-        <router-link :to="'/user/' + user[0].data.user._id">{{
-          `HI,${user[0].data.user.name}`
-        }}</router-link>
+      <div class="user-account" v-if="username">
+        <router-link :to="'/user/'">{{ username }}</router-link>
         <span class="logout" @click="handleClick">登出</span>
       </div>
     </div>
@@ -27,12 +25,21 @@ export default {
     user() {
       return this.$store.state.user;
     },
+    logIn() {
+      return this.$store.state.logIn;
+    },
+    username() {
+      return this.$store.state.username;
+    },
   },
   methods: {
     handleClick() {
       this.user.pop();
       localStorage.removeItem('token');
+      localStorage.removeItem('name');
       alert('Logged out');
+      this.$store.commit('updateLogIn', false);
+      this.$store.commit('updateName', '');
       this.$router.push('/');
     },
   },
