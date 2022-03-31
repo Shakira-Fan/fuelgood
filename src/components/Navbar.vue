@@ -12,7 +12,7 @@
         <router-link :to="'/cart'">購物車</router-link>
       </div>
       <div class="user-account" v-if="username">
-        <router-link :to="'/user/'">{{ username }}</router-link>
+        <router-link :to="`/user/${id}`">{{ username }}</router-link>
         <span class="logout" @click="handleClick">登出</span>
       </div>
     </div>
@@ -21,6 +21,7 @@
 
 <script>
 export default {
+  props: ['id'],
   computed: {
     user() {
       return this.$store.state.user;

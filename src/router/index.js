@@ -26,6 +26,7 @@ const routes = [
     path: '/user/:id',
     name: 'user',
     component: UserView,
+    props: true,
   },
   {
     path: '/account',
