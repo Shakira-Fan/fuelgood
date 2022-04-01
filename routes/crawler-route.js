@@ -7,18 +7,19 @@ router.get("/", async (req, res) => {
 });
 
 //篩出現在油價
-router.get("/price/recent", async (req, res) => {
+router.get("/price/recent", async (req, res, next) => {
   try {
     let data = await HistoryData.find({}, { _id: 0 }).limit(4);
 
     res.status(200).send(data);
   } catch (e) {
     console.log(e);
+    next(e);
   }
 });
 
 //列出所有歷史油價
-router.get("/price/history/all", async (req, res) => {
+router.get("/price/history/all", async (req, res, next) => {
   try {
     let data = await HistoryData.find({}, { _id: 0 }).sort({
       appliedDate: -1,
@@ -27,11 +28,12 @@ router.get("/price/history/all", async (req, res) => {
     res.status(200).send(data);
   } catch (e) {
     console.log(e);
+    next(e);
   }
 });
 
 //篩選各類汽油的歷史紀錄
-router.get("/price/history/:gasoline", async (req, res) => {
+router.get("/price/history/:gasoline", async (req, res, next) => {
   let { gasoline } = req.params;
   try {
     let data = await HistoryData.find({ gasoline: gasoline }, { _id: 0 }).sort({
@@ -46,11 +48,12 @@ router.get("/price/history/:gasoline", async (req, res) => {
     res.status(200).send(data);
   } catch (e) {
     console.log(e);
+    next(e);
   }
 });
 
 //篩選各類汽油的歷史紀錄(自訂）
-router.get("/price/recent/:gasoline/:num", async (req, res) => {
+router.get("/price/recent/:gasoline/:num", async (req, res, next) => {
   let { num, gasoline } = req.params;
 
   try {
@@ -76,7 +79,13 @@ router.get("/price/recent/:gasoline/:num", async (req, res) => {
     res.status(200).send(reverseData);
   } catch (e) {
     console.log(e);
+    next(e);
   }
+});
+
+router.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send("Something broke!!!!");
 });
 
 module.exports = router;

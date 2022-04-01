@@ -6,16 +6,16 @@ router.get("/", async (req, res) => {
   res.status(200).send("well connected");
 });
 
-router.get("/user/all", async (req, res) => {
+router.get("/user/all", async (req, res, next) => {
   try {
     let data = await User.find({}, { __v: 0 });
     res.send(data);
   } catch (error) {
-    res.send(error);
+    next(error);
   }
 });
 
-router.get("/user/:email", async (req, res) => {
+router.get("/user/:email", async (req, res, next) => {
   let { email } = req.params;
   try {
     await User.findOne({ email }, { __v: 0 }).then((data) => {
@@ -23,11 +23,11 @@ router.get("/user/:email", async (req, res) => {
       else res.send("User not found");
     });
   } catch (e) {
-    res.send(e);
+    next(e);
   }
 });
 
-router.delete("/user/:email", async (req, res) => {
+router.delete("/user/:email", async (req, res, next) => {
   let { email } = req.params;
   try {
     await User.deleteOne({ email }, { __v: 0 })
@@ -37,8 +37,13 @@ router.delete("/user/:email", async (req, res) => {
         else res.send("User not found");
       });
   } catch (e) {
-    res.send(e);
+    next(e);
   }
+});
+
+router.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send("Something broke!!!!");
 });
 
 module.exports = router;

@@ -11,7 +11,6 @@ const adminRoute = require("./routes").admin;
 const crawlerRoute = require("./routes").crawler;
 const orderRoute = require("./routes").order;
 
-
 require("./config/passport");
 const passport = require("passport");
 const session = require("express-session");
@@ -78,6 +77,15 @@ mongoose
 
 app.get("/", (req, res) => {
   res.status(200).render("index.ejs", { user: req.user });
+});
+
+app.get("*", (req, res) => {
+  res.status(400).send("404 page not dound");
+});
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send("Something broke!!!!");
 });
 
 app.listen(process.env.PORT || 3000, () =>

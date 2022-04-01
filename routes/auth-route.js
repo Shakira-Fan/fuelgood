@@ -6,6 +6,7 @@ const loginValidation = require("../validation").loginValidation;
 const bcrypt = require("bcrypt");
 const User = require("../models/user-model");
 const jwt = require("jsonwebtoken");
+const { next } = require("cheerio/lib/api/traversing");
 
 router.use((req, res, next) => {
   console.log("A request is coming to auth-route.js middleware");
@@ -32,8 +33,6 @@ router.get(
   })
 );
 
-router.get("/error", (req, res) => res.send("Unknown Error"));
-
 router.get(
   "/google/redirect",
   passport.authenticate("google", { failureRedirect: "/error" }),
@@ -53,31 +52,37 @@ router.get("/login", (req, res) => {
   res.render("login", { user: req.user });
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", (req, res, next) => {
   //check the validation of data
   const { error } = loginValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  User.findOne({ email: req.body.email }, function (err, user) {
-    if (err) {
-      res.status(400).send(err);
-    }
-    if (!user) {
-      res.status(401).send("User not found.");
-    } else {
-      user.comparePassword(req.body.password, function (err, isMatch) {
-        if (err) return res.status(400).send(err);
-        if (isMatch) {
-          const tokenObject = { _id: user._id, email: user.email };
-          const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
+  try {
+    User.findOne({ email: req.body.email }, function (err, user) {
+      if (err) {
+        res.status(400).send(err);
+      }
+      if (!user) {
+        res.status(401).send("User not found.");
+      } else {
+        user.comparePassword(req.body.password, function (err, isMatch) {
+          if (err) return res.status(400).send(err);
+          if (isMatch) {
+            const tokenObject = { _id: user._id, email: user.email };
+            const token = jwt.sign(tokenObject, process.env.PASSPORT_SECRET);
 
-          res.status(200).send({ success: true, token: "JWT " + token, user });
-        } else {
-          res.status(401).send("Wrong password.");
-        }
-      });
-    }
-  });
+            res
+              .status(200)
+              .send({ success: true, token: "JWT " + token, user });
+          } else {
+            res.status(401).send("Wrong password.");
+          }
+        });
+      }
+    });
+  } catch (e) {
+    next(e);
+  }
 });
 
 //Local Sign Up
@@ -86,7 +91,7 @@ router.get("/signup", (req, res) => {
 });
 
 //JWT
-router.post("/signup", async (req, res) => {
+router.post("/signup", async (req, res, next) => {
   // check the validation of data
   console.log(req.body);
   const { error } = registerValidation(req.body);
@@ -113,7 +118,13 @@ router.post("/signup", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(400).send("User not saved.");
+    next(err);
   }
+});
+
+router.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send("Something broke!!!!");
 });
 
 module.exports = router;

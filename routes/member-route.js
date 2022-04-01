@@ -15,4 +15,9 @@ router.get("/", authCheck, async (req, res) => {
   res.render("member.ejs", { user: req.user });
 });
 
+router.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send("Something broke!!!!");
+});
+
 module.exports = router;
