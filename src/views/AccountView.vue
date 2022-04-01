@@ -96,6 +96,7 @@ p {
   text-align: left;
   padding: 3rem;
   border-radius: 8px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
 label {
   display: block;

@@ -61,9 +61,9 @@ export default {
         console.log(res);
         this.user.push(res);
         console.log(this.user);
-        // localStorage.setItem('token', res.data.token);
         localStorage.setItem('token', JSON.stringify(this.user[0].data));
         localStorage.setItem('name', this.user[0].data.user.name);
+        localStorage.setItem('email', this.user[0].data.user.email);
         this.$router.push('/user' + '/' + res.data.user._id);
         this.$store.commit('updateLogIn', true);
         this.$store.commit('updateName', localStorage.getItem('name'));
@@ -101,6 +101,7 @@ p {
   text-align: left;
   padding: 3rem;
   border-radius: 8px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
 label {
   display: block;
