@@ -242,6 +242,55 @@
           }
         }
       },
+      "/crawler/price/recent/{gasoline}/{num}": {
+        "get": {
+          "tags": [
+            "PRICE"
+          ],
+          "summary": "列出特定汽油之油價歷史(限定筆數)",
+          "operationId": "findPrice",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "gasoline",
+              "description": "輸入汽油種類",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }  
+              }
+            },
+            {
+              "in": "path",
+              "name": "num",
+              "description": "輸入筆數",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }  
+              }
+            }
+
+          ],
+          "responses": {
+            "200": {
+              "description": "成功！"
+            },
+            "400": {
+              "description": "連線問題",
+              "content": {}
+            }
+          }
+        }
+      },
       "/crawler/price/history/all": {
         "get": {
           "tags": [
@@ -272,55 +321,6 @@
               "in": "path",
               "name": "gasoline",
               "description": "輸入汽油種類",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  }
-                }  
-              }
-            }
-
-          ],
-          "responses": {
-            "200": {
-              "description": "成功！"
-            },
-            "400": {
-              "description": "連線問題",
-              "content": {}
-            }
-          }
-        }
-      },
-      "/crawler/price/history/{gasoline}/{num}": {
-        "get": {
-          "tags": [
-            "PRICE"
-          ],
-          "summary": "列出特定汽油之油價歷史(限定比數)",
-          "operationId": "findPrice",
-          "parameters": [
-            {
-              "in": "path",
-              "name": "gasoline",
-              "description": "輸入汽油種類",
-              "required": true,
-              "schema": {
-                "type": "string",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  }
-                }  
-              }
-            },
-            {
-              "in": "path",
-              "name": "num",
-              "description": "輸入筆數",
               "required": true,
               "schema": {
                 "type": "string",
