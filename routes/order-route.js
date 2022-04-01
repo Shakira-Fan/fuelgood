@@ -88,6 +88,12 @@ router.patch("/deduct", async (req, res, next) => {
   let filter = email;
 
   let member = await User.findOne({ email: filter });
+
+  if (member === null) {
+    res.send("User not found");
+    return;
+  }
+
   let current92 = member.properties["92無鉛汽油"].liter;
   let current95 = member.properties["95無鉛汽油"].liter;
   let current98 = member.properties["98無鉛汽油"].liter;
