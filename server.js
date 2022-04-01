@@ -84,6 +84,6 @@ app.listen(process.env.PORT || 3000, () =>
   console.log("Server is running...Fuel Good Go! Go! GO!")
 );
 
-setInterval(crawRecentData, 300000);
+//setInterval(crawRecentData, 300000);
 //crawHistoryData();
 //crawRecentData()

@@ -15,10 +15,10 @@ router.get("/user/all", async (req, res) => {
   }
 });
 
-router.get("/user/:name", async (req, res) => {
-  let { name } = req.params;
+router.get("/user/:email", async (req, res) => {
+  let { email } = req.params;
   try {
-    await User.findOne({ name }, { __v: 0 }).then((data) => {
+    await User.findOne({ email }, { __v: 0 }).then((data) => {
       if (data) res.send(data);
       else res.send("User not found");
     });
@@ -27,10 +27,10 @@ router.get("/user/:name", async (req, res) => {
   }
 });
 
-router.delete("/user/:name", async (req, res) => {
-  let { name } = req.params;
+router.delete("/user/:email", async (req, res) => {
+  let { email } = req.params;
   try {
-    await User.deleteOne({ name }, { __v: 0 })
+    await User.deleteOne({ email }, { __v: 0 })
       .populate("email")
       .then((data) => {
         if (data) res.send("User has been deleted");
