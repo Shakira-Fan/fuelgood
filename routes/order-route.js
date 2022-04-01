@@ -86,52 +86,44 @@ router.post("/add", async (req, res, next) => {
 router.patch("/deduct", async (req, res, next) => {
   let { email, deducted92, deducted95, deducted98, deductedDiesel } = req.body;
   let filter = email;
-  //
 
-  try {
-    let member = await User.findOne({ email: filter });
-    let current92 = member.properties["92無鉛汽油"].liter;
-    let current95 = member.properties["95無鉛汽油"].liter;
-    let current98 = member.properties["98無鉛汽油"].liter;
-    let currentDiesel = member.properties.高級柴油.liter;
+  let member = await User.findOne({ email: filter });
+  let current92 = member.properties["92無鉛汽油"].liter;
+  let current95 = member.properties["95無鉛汽油"].liter;
+  let current98 = member.properties["98無鉛汽油"].liter;
+  let currentDiesel = member.properties.高級柴油.liter;
 
-    let update = {
-      properties: {
-        "92無鉛汽油": {
-          liter: current92 - deducted92,
-        },
-        "95無鉛汽油": {
-          liter: current95 - deducted95,
-        },
-        "98無鉛汽油": {
-          liter: current98 - deducted98,
-        },
-        高級柴油: {
-          liter: currentDiesel - deductedDiesel,
-        },
+  let update = {
+    properties: {
+      "92無鉛汽油": {
+        liter: current92 - deducted92,
       },
-    };
-    //
+      "95無鉛汽油": {
+        liter: current95 - deducted95,
+      },
+      "98無鉛汽油": {
+        liter: current98 - deducted98,
+      },
+      高級柴油: {
+        liter: currentDiesel - deductedDiesel,
+      },
+    },
+  };
+  try {
     await User.findOneAndUpdate(
       { email: filter },
       update,
       { new: true, runValidators: true },
       (err, doc) => {
-        if (err) res.send(err);
-        else res.send(doc);
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(doc);
+        }
       }
-    ).then((newStock) => {
-      newStock
-        .save()
-        .then((saved) => {
-          res.send(saved);
-        })
-        .catch((err) => {
-          res.status(422).send(err);
-        });
-    });
-  } catch (e) {
-    next(e);
+    );
+  } catch (err) {
+    console.log(err);
   }
 });
 
