@@ -1,20 +1,18 @@
 <template>
   <nav class="navbar">
-    <img src="../assets/images/wels.svg" alt="wels logo" />
-    <div class="navbar-items">
-      <router-link :to="{ name: 'home' }">首頁</router-link>
-      <router-link :to="{ name: 'news' }">優惠活動</router-link>
+    <router-link :to="{ name: 'home' }">
+      <img src="../assets/images/wels.svg" alt="wels logo" />
+    </router-link>
 
-      <router-link v-if="!user.length" :to="{ name: 'account' }"
-        >登入／註冊</router-link
+    <div class="navbar-items">
+      <router-link v-if="!username" :to="{ name: 'account' }"
+        >註冊/登入</router-link
       >
-      <div class="user-account" v-if="user.length">
+      <div class="user-account" v-if="username">
         <router-link :to="'/cart'">購物車</router-link>
       </div>
-      <div class="user-account" v-if="user.length">
-        <router-link :to="'/user/' + user[0].data.user._id">{{
-          `HI,${user[0].data.user.name}`
-        }}</router-link>
+      <div class="user-account" v-if="username">
+        <router-link :to="`/user/${id}`">Hi, {{ username }}</router-link>
         <span class="logout" @click="handleClick">登出</span>
       </div>
     </div>
@@ -23,16 +21,27 @@
 
 <script>
 export default {
+  props: ['id'],
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    logIn() {
+      return this.$store.state.logIn;
+    },
+    username() {
+      return this.$store.state.username;
     },
   },
   methods: {
     handleClick() {
       this.user.pop();
       localStorage.removeItem('token');
+      localStorage.removeItem('name');
+      localStorage.removeItem('email');
       alert('Logged out');
+      this.$store.commit('updateLogIn', false);
+      this.$store.commit('updateName', '');
       this.$router.push('/');
     },
   },
@@ -43,36 +52,37 @@ export default {
 .navbar {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 10rem;
   align-items: center;
   background-color: var(--color-primary);
   padding: 2rem;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-items {
-  width: 30%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 img {
-  width: 8rem;
+  width: 6rem;
+  margin-left: 3rem;
 }
 a {
-  font-size: 2.3rem;
+  font-size: 2rem;
   text-decoration: none;
   color: #000;
 }
-a.router-link-active {
-  border-bottom: 0.3rem solid var(--color-secondary);
-  padding-bottom: 4px;
-}
 .user-account {
-  display: flex;
-  align-items: center;
+  margin-right: 2rem;
 }
 .logout {
   margin: 0 2rem;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   cursor: pointer;
-  color: var(--color-secondary);
+  padding: 0.5rem;
+  color: #fff;
+  background-color: var(--color-secondary);
+  border-radius: 1rem;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <form class="signup-form" @submit.prevent="handleSubmit">
     <h1>登入會員</h1>
-    <div class="round" @click="handleGoogleAuth">
-      <div class="icon">G</div>
+    <div class="round">
+      <img class="logo" src="../assets/images/wels.svg" alt="" />
     </div>
     <label>Email:</label>
     <input type="text" name="email" v-model="email" required />
@@ -39,6 +39,14 @@ export default {
     user() {
       return this.$store.state.user;
     },
+    username() {
+      return this.$store.state.username;
+    },
+  },
+  mutations: {
+    updateLogIn(state, newState) {
+      state.logIn = newState;
+    },
   },
   methods: {
     async handleSubmit() {
@@ -53,8 +61,12 @@ export default {
         console.log(res);
         this.user.push(res);
         console.log(this.user);
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('token', JSON.stringify(this.user[0].data));
+        localStorage.setItem('name', this.user[0].data.user.name);
+        localStorage.setItem('email', this.user[0].data.user.email);
         this.$router.push('/user' + '/' + res.data.user._id);
+        this.$store.commit('updateLogIn', true);
+        this.$store.commit('updateName', localStorage.getItem('name'));
       } catch (err) {
         if (err.response) {
           this.error = err.response.data;
@@ -71,6 +83,9 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  width: 5rem;
+}
 h1 {
   font-size: 3rem;
   text-align: center;
@@ -86,6 +101,7 @@ p {
   text-align: left;
   padding: 3rem;
   border-radius: 8px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
 label {
   display: block;
