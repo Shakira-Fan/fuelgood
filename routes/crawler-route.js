@@ -9,8 +9,13 @@ router.get("/", async (req, res) => {
 //篩出現在油價
 router.get("/price/recent", async (req, res, next) => {
   try {
-    let data = await HistoryData.find({}, { _id: 0 }).limit(4);
+    let data = await HistoryData.find({}, { _id: 0 })
+      .sort({
+        appliedDate: -1,
+      })
+      .limit(4);
 
+    console.log(data);
     res.status(200).send(data);
   } catch (e) {
     console.log(e);
