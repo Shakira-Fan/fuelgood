@@ -62,7 +62,7 @@ a:hover {
 }
 .link {
   font-size: 2rem;
-  margin: 0.3rem auto;
+  margin: 0.2rem auto;
   display: flex;
 }
 .link:hover {
