@@ -60,10 +60,20 @@ export default {
         this.$router.push('/login');
       } catch (err) {
         if (err.response) {
-          this.error = err.response.data;
-          this.name = '';
-          this.email = '';
-          this.password = '';
+          if (
+            err.response.data ===
+            '"password" length must be at least 8 characters long'
+          ) {
+            this.error = '密碼長度需至少8字元';
+            this.password = '';
+          } else if (
+            err.response.data === 'Email has already been registered.'
+          ) {
+            this.error = 'Email已被註冊過';
+            this.password = '';
+            this.name = '';
+            this.email = '';
+          }
         } else {
           this.error = err.message;
         }
@@ -95,6 +105,7 @@ p {
   margin: 8rem auto;
   text-align: left;
   padding: 3rem;
+  padding-bottom: 5rem;
   border-radius: 8px;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -115,6 +126,11 @@ input {
   display: block;
   margin-top: 5rem;
   font-size: 1.8rem;
+  transition: all 0.2s ease-in-out;
+}
+.sign-up-btn:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
 }
 .register-btn {
   display: inline-block;
@@ -126,6 +142,10 @@ input {
   border-bottom: 1px solid var(--color-primary);
   padding: 0.3rem;
   cursor: pointer;
+}
+.register-btn:hover {
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
 }
 span {
   font-size: 1.8rem;
@@ -149,15 +169,12 @@ span {
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-color: var(--color-grey);
+  background-color: #eee;
   margin: 2rem auto;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
   font-weight: bold;
-  cursor: pointer;
 }
 .err {
   text-align: left;

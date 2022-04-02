@@ -61,20 +61,18 @@ export default {
         console.log(res);
         this.user.push(res);
         console.log(this.user);
-        localStorage.setItem('token', JSON.stringify(this.user[0].data));
         localStorage.setItem('name', this.user[0].data.user.name);
+        localStorage.setItem('id', this.user[0].data.user._id);
         localStorage.setItem('email', this.user[0].data.user.email);
         this.$router.push('/user' + '/' + res.data.user._id);
         this.$store.commit('updateLogIn', true);
         this.$store.commit('updateName', localStorage.getItem('name'));
       } catch (err) {
         if (err.response) {
-          this.error = err.response.data;
+          // this.error = err.response.data;
+          this.error = 'Invalid email or password';
           this.email = '';
           this.password = '';
-        } else {
-          // throw new Error('Invalid email or password');
-          this.error = err.message;
         }
       }
     },
@@ -100,6 +98,7 @@ p {
   margin: 8rem auto;
   text-align: left;
   padding: 3rem;
+  padding-bottom: 5rem;
   border-radius: 8px;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -120,6 +119,11 @@ input {
   display: block;
   margin-top: 5rem;
   font-size: 1.8rem;
+  transition: all 0.2s ease-in-out;
+}
+.sign-up-btn:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
 }
 .register-btn {
   display: inline-block;
@@ -131,6 +135,10 @@ input {
   border-bottom: 1px solid var(--color-primary);
   padding: 0.3rem;
   cursor: pointer;
+}
+.register-btn:hover {
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
 }
 span {
   font-size: 1.8rem;
@@ -156,13 +164,10 @@ span {
   border-radius: 50%;
   background-color: #eee;
   margin: 2rem auto;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
   font-weight: bold;
-  cursor: pointer;
 }
 .err {
   text-align: left;

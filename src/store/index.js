@@ -3,10 +3,10 @@ import { createStore } from 'vuex';
 export default createStore({
   state: {
     user: [],
-    token: null,
     logIn: false,
-    loginError: null,
     username: localStorage.getItem('name'),
+    email: localStorage.getItem('email'),
+    id: localStorage.getItem('id'),
     orders: [],
   },
   getters: {},
