@@ -6,7 +6,7 @@
 
     <div class="navbar-items">
       <router-link v-if="!username" :to="{ name: 'login' }">登入</router-link>
-      <span class="nav-span">|</span>
+      <span class="nav-span" v-if="!username">|</span>
       <router-link v-if="!username" :to="{ name: 'account' }">註冊</router-link>
       <div class="user-account" v-if="username">
         <router-link :to="'/cart'">購物車</router-link>
@@ -21,7 +21,6 @@
 
 <script>
 export default {
-  props: ['id'],
   computed: {
     user() {
       return this.$store.state.user;
@@ -32,14 +31,17 @@ export default {
     username() {
       return this.$store.state.username;
     },
+    id() {
+      return this.$store.state.id;
+    },
   },
   methods: {
     handleClick() {
       this.user.pop();
-      localStorage.removeItem('token');
       localStorage.removeItem('name');
       localStorage.removeItem('email');
-      alert('Logged out');
+      localStorage.removeItem('id');
+      alert('已登出');
       this.$store.commit('updateLogIn', false);
       this.$store.commit('updateName', '');
       this.$router.push('/');
@@ -91,5 +93,8 @@ a:hover {
   color: #fff;
   background-color: var(--color-secondary);
   border-radius: 1rem;
+}
+.logout:hover {
+  color: var(--color-primary);
 }
 </style>
