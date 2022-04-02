@@ -7,11 +7,11 @@
       <div class="contact-methods">
         <div class="link">
           <span class="material-icons"> email </span>
-          Email: <a href="mailto:contact@wels.com.tw">contact@wels.com.tw</a>
+          <a href="mailto:contact@wels.com.tw">contact@wels.com.tw</a>
         </div>
         <div class="link">
           <span class="material-icons"> smartphone </span>
-          電話:<a href="tel:0922000122">0922000122</a>
+          <a href="tel:0922000122">0922000122</a>
         </div>
         <div class="link">
           <span class="material-icons">
@@ -31,43 +31,43 @@ export default {};
 
 <style scoped>
 h2 {
-  max-width: 120rem;
-  margin: 2rem auto;
-  border-bottom: 3px solid var(--color-primary);
-  padding: 2rem;
+  font-size: 2.5rem;
+  max-width: 110rem;
+  margin: 1rem auto;
+  border-bottom: 2px solid var(--color-primary);
+  padding: 2.5rem;
 }
 
 a {
   text-decoration: none;
   color: #000;
 }
+a:hover {
+  color: var(--color-secondary);
+}
 .contact {
   background-color: var(--color-grey);
-  padding: 4rem 0;
+  padding: 1rem 0;
 }
 .contact-methods {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  padding: 3rem;
+  padding: 1.5rem;
 }
 .material-icons {
   font-size: 3rem;
   margin-right: 0.5rem;
 }
 .link {
-  font-size: 2.3rem;
+  font-size: 2rem;
+  margin: 0.3rem auto;
   display: flex;
 }
 .link:hover {
   cursor: pointer;
-}
-.subscribe {
-  display: flex;
-  flex-direction: column;
-}
-.subscribe-signup {
-  margin: 5rem 0;
+  color: var(--color-secondary);
 }
 label {
   width: 100%;
@@ -83,17 +83,13 @@ input {
   border-bottom: 2px solid var(--color-grey);
   outline: none;
 }
-button {
-  display: inline-block;
-  font-size: 1.8rem;
-}
 .legal {
   background-color: var(--color-primary);
   padding: 1.5rem;
   font-weight: bold;
 }
 .copyright {
-  color: var(--color-grey);
+  color: #fff;
   background-color: var(--color-secondary);
   padding: 2rem;
 }
