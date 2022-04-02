@@ -67,9 +67,9 @@ export default {
         localStorage.setItem('name', this.user[0].data.user.name);
         localStorage.setItem('id', this.user[0].data.user._id);
         localStorage.setItem('email', this.user[0].data.user.email);
-        this.$router.push('/user' + '/' + this.id);
         this.$store.commit('updateLogIn', true);
         this.$store.commit('updateName', localStorage.getItem('name'));
+        this.$router.push('/user' + '/' + this.id);
       } catch (err) {
         if (err.response) {
           // this.error = err.response.data;

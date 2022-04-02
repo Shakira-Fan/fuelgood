@@ -8,6 +8,7 @@ export default createStore({
     email: localStorage.getItem('email'),
     id: localStorage.getItem('id'),
     orders: [],
+    inventory: [],
   },
   getters: {},
   mutations: {
