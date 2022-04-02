@@ -40,7 +40,9 @@
         </p>
         <div class="spread">
           <span><strong>總計:</strong>${{ calculateTotal() }}</span>
-          <button class="btn btn-light">結帳</button>
+          <router-link :to="'/create-order'" :calculateTotal="calculateTotal"
+            ><button class="btn btn-light">結帳</button></router-link
+          >
         </div>
       </div>
     </div>
@@ -62,6 +64,7 @@ export default {
       const total = Object.entries(this.cart).reduce((acc, curr) => {
         return acc + curr[1] * this.getPrice(curr[0]);
       }, 0);
+      localStorage.total = total.toFixed(2);
       return total.toFixed(2);
     },
   },
@@ -74,7 +77,7 @@ export default {
   top: 55px;
   right: 0px;
   width: 410px;
-  height: 60%;
+  height: 70%;
 }
 .cart-container {
   position: fixed;
@@ -82,19 +85,22 @@ export default {
 }
 .cart {
   position: relative;
-  background: #084594;
-  color: #fff8ea;
+  background: #faf2c3;
+  color: black;
   transition: 1s ease right;
+  border: 2px #088682 solid;
+  border-radius: 5px;
 }
 
 .cart-title {
   align-items: center;
   min-height: 49px;
   max-height: 49px;
-  background: #335;
+  background: #088682;
   border-bottom: 1px solid #fff8ea;
   padding: 0px 15px;
   font-size: 26px;
+  color: white;
 }
 .cart-table {
   width: 398px;
@@ -102,6 +108,7 @@ export default {
   margin: 5px;
   font-size: 18px;
   justify-content: space-between;
+  line-height: 3;
 }
 .spread {
   display: flex;

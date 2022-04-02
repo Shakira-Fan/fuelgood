@@ -49,14 +49,20 @@ export default {
   },
   methods: {
     addToCart(name, quantity) {
+      if (!quantity) {
+        alert("請輸入數量");
+        return;
+      }
       if (!this.cart[name]) this.cart[name] = 0;
       this.cart[name] += quantity;
+      localStorage[name] = this.cart[name];
     },
     toggleSidebar() {
       this.showSidebar = !this.showSidebar;
     },
     removeItem(name) {
       delete this.cart[name];
+      localStorage[name] = 0;
     },
   },
 };
