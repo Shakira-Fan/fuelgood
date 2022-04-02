@@ -5,9 +5,9 @@
     </router-link>
 
     <div class="navbar-items">
-      <router-link v-if="!username" :to="{ name: 'account' }"
-        >註冊/登入</router-link
-      >
+      <router-link v-if="!username" :to="{ name: 'login' }">登入</router-link>
+      <span class="nav-span">|</span>
+      <router-link v-if="!username" :to="{ name: 'account' }">註冊</router-link>
       <div class="user-account" v-if="username">
         <router-link :to="'/cart'">購物車</router-link>
       </div>
@@ -64,6 +64,10 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
+.nav-span {
+  margin: 0 0.5rem;
+}
 img {
   width: 6rem;
   margin-left: 3rem;
@@ -72,6 +76,9 @@ a {
   font-size: 2rem;
   text-decoration: none;
   color: #000;
+}
+a:hover {
+  color: var(--color-secondary);
 }
 .user-account {
   margin-right: 2rem;
