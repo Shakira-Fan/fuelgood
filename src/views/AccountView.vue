@@ -1,9 +1,8 @@
 <template>
-  <p v-if="error.length">{{ error }}</p>
-  <form class="signup-form" v-else @submit.prevent="handleSignUp">
+  <form class="signup-form" @submit.prevent="handleSubmit">
     <h1>註冊會員</h1>
-    <div class="round" @click="handleGoogleAuth">
-      <div class="icon">G</div>
+    <div class="round">
+      <img class="logo" src="../assets/images/wels.svg" alt="" />
     </div>
     <label>姓名:</label>
     <input type="text" name="name" v-model="name" required />
@@ -11,65 +10,87 @@
     <input type="email" name="email" v-model="email" required />
     <label>密碼:</label>
     <input type="password" name="password" v-model="password" required />
-    <div>
-      <button class="sign-up-btn" type="submit">註冊</button>
 
-      <div class="alternative">
-        <span>已經有帳號了嗎?</span>
-        <button class="register-btn" @click="$router.push('/login')">
-          立刻登入
-        </button>
-      </div>
+    <p class="err" v-if="error.length">{{ error }}</p>
+    <button class="sign-up-btn">註冊</button>
+
+    <div class="alternative">
+      <span>已經有帳號了嗎?</span>
+      <button class="register-btn" @click="handleClick">立刻登入!</button>
     </div>
   </form>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
       name: null,
       email: null,
       password: null,
-      error: "",
+      error: '',
     };
   },
 
   methods: {
-    async handleSignUp() {
-      if (this.password.length < 8) {
-        alert("Password should be at least 8 characters");
-        return;
-      }
+    async handleGoogleAuth() {
       try {
-        const res = await fetch("https://fuel-good.herokuapp.com/auth/signup", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        const res = await axios.get(
+          'https://fuel-good.herokuapp.com/auth/google'
+        );
+      } catch (err) {
+        if (err.response) {
+          console.log(err.response.data);
+        }
+      }
+    },
+    async handleSubmit() {
+      try {
+        const res = await axios.post(
+          'https://fuel-good.herokuapp.com/auth/signup',
+          {
             name: this.name,
             email: this.email,
             password: this.password,
-          }),
-        });
-        const data = await res.json();
-        console.log(data);
-        // if(data.success)
-        // this.$router.push('/user' + '/' + data.savedObject._id);
-        alert("Account created! Please sign in");
-        this.$router.push("/login");
+          }
+        );
+        alert('Account created! Please sign in');
+        this.$router.push('/login');
       } catch (err) {
-        this.error = err.message;
-        console.log(err.message);
+        if (err.response) {
+          if (
+            err.response.data ===
+            '"password" length must be at least 8 characters long'
+          ) {
+            this.error = '密碼長度需至少8字元';
+            this.password = '';
+          } else if (
+            err.response.data === 'Email has already been registered.'
+          ) {
+            this.error = 'Email已被註冊過';
+            this.password = '';
+            this.name = '';
+            this.email = '';
+          }
+        } else {
+          this.error = err.message;
+        }
       }
-      console.log(this.name, this.email, this.password);
+    },
+    async handleClick() {
+      await this.$router.push('/login');
+      window.location.reload();
     },
   },
 };
 </script>
 
 <style scoped>
+.logo {
+  width: 5rem;
+}
 h1 {
   font-size: 3rem;
   text-align: center;
@@ -84,7 +105,9 @@ p {
   margin: 8rem auto;
   text-align: left;
   padding: 3rem;
+  padding-bottom: 5rem;
   border-radius: 8px;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
 label {
   display: block;
@@ -103,6 +126,11 @@ input {
   display: block;
   margin-top: 5rem;
   font-size: 1.8rem;
+  transition: all 0.2s ease-in-out;
+}
+.sign-up-btn:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
 }
 .register-btn {
   display: inline-block;
@@ -111,17 +139,22 @@ input {
   color: var(--color-primary);
   font-weight: bold;
   font-size: 1.8rem;
-  margin-top: 2rem;
   border-bottom: 1px solid var(--color-primary);
   padding: 0.3rem;
   cursor: pointer;
+}
+.register-btn:hover {
+  color: var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
 }
 span {
   font-size: 1.8rem;
   margin-right: 1rem;
 }
 .alternative {
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin-top: 3rem;
 }
 .sign-up-btn {
   font-size: 1.8rem;
@@ -136,14 +169,19 @@ span {
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
-  background-color: var(--color-grey);
+  background-color: #eee;
   margin: 2rem auto;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
   font-weight: bold;
-  cursor: pointer;
+}
+.err {
+  text-align: left;
+  font-weight: bold;
+  color: #cd1818;
+  padding-top: 2rem;
+  margin-left: 2rem;
+  font-size: 1.8rem;
 }
 </style>
