@@ -465,6 +465,40 @@
             }
           }
         }
+      },
+      "/order/delete/{orderNumber}": {
+        "delete": {
+          "tags": [
+            "ORDER"
+          ],
+          "summary": "使用{orderNumber}找出特定訂單並刪除",
+          "operationId": "deleteSpecificOrder",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "orderNumber",
+              "description": "輸入訂單編號",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                    }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "訂單刪除成功！"
+            },
+            "400": {
+              "description": "發生問題",
+              "content": {}
+            }
+          }
+        }
       }
 
     }
