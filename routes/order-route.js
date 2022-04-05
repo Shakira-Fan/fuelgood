@@ -45,7 +45,13 @@ router.post("/add", async (req, res, next) => {
 
     let filter = email;
     //
-    let member = await User.findOne({ email: filter });
+    let member = await User.findOne({ email: filter })
+      .then((meb) => {
+        console.log(meb);
+      })
+      .catch(() => {
+        res.send("email not correct");
+      });
     let current92 = member.properties["92無鉛汽油"].liter;
     let current95 = member.properties["95無鉛汽油"].liter;
     let current98 = member.properties["98無鉛汽油"].liter;
@@ -145,6 +151,17 @@ router.get("/all", async (req, res, next) => {
       });
   } catch (e) {
     next(e);
+  }
+});
+
+router.delete("/delete/:orderNumber", async (req, res, next) => {
+  let { orderNumber } = req.params;
+  try {
+    Order.deleteOne({ orderNumber }).then(() => {
+      res.send("Order has been deleted.");
+    });
+  } catch (err) {
+    next(err);
   }
 });
 
