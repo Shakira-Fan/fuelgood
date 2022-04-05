@@ -35,23 +35,18 @@ router.post("/add", async (req, res, next) => {
     await newOrder
       .save()
       .then(() => {
-        res.send(newOrder);
+        console.log(newOrder);
       })
       .catch((err) => {
         res.send(err);
+        return;
       });
 
     ///////////////////
 
     let filter = email;
-    //
-    let member = await User.findOne({ email: filter })
-      .then((meb) => {
-        console.log(meb);
-      })
-      .catch(() => {
-        res.send("email not correct");
-      });
+    let member = await User.findOne({ email: filter });
+
     let current92 = member.properties["92無鉛汽油"].liter;
     let current95 = member.properties["95無鉛汽油"].liter;
     let current98 = member.properties["98無鉛汽油"].liter;
@@ -74,15 +69,14 @@ router.post("/add", async (req, res, next) => {
       },
     };
 
-    await User.findOneAndUpdate(
-      { email: filter },
-      update,
-      { new: true, runValidators: true },
-      (err, doc) => {
-        if (err) res.send(err);
-        else res.send(doc);
-      }
-    );
+    //console.log(update);
+
+    await User.findOneAndUpdate({ email: filter }, update, {
+      new: true,
+      runValidators: true,
+    }).then((newStock) => {
+      res.send(newStock);
+    });
   } catch (e) {
     next(e);
   }
@@ -92,50 +86,39 @@ router.post("/add", async (req, res, next) => {
 router.patch("/deduct", async (req, res, next) => {
   let { email, deducted92, deducted95, deducted98, deductedDiesel } = req.body;
   let filter = email;
-
-  let member = await User.findOne({ email: filter });
-
-  if (member === null) {
-    res.send("User not found");
-    return;
-  }
-
-  let current92 = member.properties["92無鉛汽油"].liter;
-  let current95 = member.properties["95無鉛汽油"].liter;
-  let current98 = member.properties["98無鉛汽油"].liter;
-  let currentDiesel = member.properties.高級柴油.liter;
-
-  let update = {
-    properties: {
-      "92無鉛汽油": {
-        liter: current92 - deducted92,
-      },
-      "95無鉛汽油": {
-        liter: current95 - deducted95,
-      },
-      "98無鉛汽油": {
-        liter: current98 - deducted98,
-      },
-      高級柴油: {
-        liter: currentDiesel - deductedDiesel,
-      },
-    },
-  };
   try {
-    await User.findOneAndUpdate(
-      { email: filter },
-      update,
-      { new: true, runValidators: true },
-      (err, doc) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.send(doc);
-        }
-      }
-    );
+    let member = await User.find({ email: filter });
+    let current92 = member[0].properties["92無鉛汽油"].liter;
+    let current95 = member[0].properties["95無鉛汽油"].liter;
+    let current98 = member[0].properties["98無鉛汽油"].liter;
+    let currentDiesel = member[0].properties.高級柴油.liter;
+
+    let update = {
+      properties: {
+        "92無鉛汽油": {
+          liter: current92 - deducted92,
+        },
+        "95無鉛汽油": {
+          liter: current95 - deducted95,
+        },
+        "98無鉛汽油": {
+          liter: current98 - deducted98,
+        },
+        高級柴油: {
+          liter: currentDiesel - deductedDiesel,
+        },
+      },
+    };
+
+    await User.findOneAndUpdate({ email: filter }, update, {
+      new: true,
+      runValidators: true,
+    }).then((newStock) => {
+      res.send(newStock);
+    });
   } catch (err) {
-    console.log(err);
+    res.send(err);
+    return;
   }
 });
 
@@ -156,7 +139,46 @@ router.get("/all", async (req, res, next) => {
 
 router.delete("/delete/:orderNumber", async (req, res, next) => {
   let { orderNumber } = req.params;
+
   try {
+    let orderTobedeleted = await Order.findOne({ orderNumber });
+    let deleted92 = orderTobedeleted.orders["92無鉛汽油"].liter;
+    let deleted95 = orderTobedeleted.orders["95無鉛汽油"].liter;
+    let deleted98 = orderTobedeleted.orders["98無鉛汽油"].liter;
+    let deletedDiesel = orderTobedeleted.orders["高級柴油"].liter;
+
+    let filter = orderTobedeleted.email;
+
+    let currentStock = await User.find({ email: filter });
+    let current92 = currentStock[0].properties["92無鉛汽油"].liter;
+    let current95 = currentStock[0].properties["95無鉛汽油"].liter;
+    let current98 = currentStock[0].properties["98無鉛汽油"].liter;
+    let currentDiesel = currentStock[0].properties.高級柴油.liter;
+
+    let update = {
+      properties: {
+        "92無鉛汽油": {
+          liter: current92 - Number(deleted92),
+        },
+        "95無鉛汽油": {
+          liter: current95 - Number(deleted95),
+        },
+        "98無鉛汽油": {
+          liter: current98 - Number(deleted98),
+        },
+        高級柴油: {
+          liter: currentDiesel - Number(deletedDiesel),
+        },
+      },
+    };
+
+    await User.findOneAndUpdate({ email: filter }, update, {
+      new: true,
+      runValidators: true,
+    }).then((newStock) => {
+      console.log(newStock);
+    });
+
     Order.deleteOne({ orderNumber })
       .then((msg) => {
         if (msg.deletedCount === 0) res.send("Order not exists.");
