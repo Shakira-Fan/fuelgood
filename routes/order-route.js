@@ -157,9 +157,13 @@ router.get("/all", async (req, res, next) => {
 router.delete("/delete/:orderNumber", async (req, res, next) => {
   let { orderNumber } = req.params;
   try {
-    Order.deleteOne({ orderNumber }).then(() => {
-      res.send("Order has been deleted.");
-    });
+    Order.deleteOne({ orderNumber })
+      .then(() => {
+        res.send("Order has been deleted.");
+      })
+      .catch((msg) => {
+        res.send(msg);
+      });
   } catch (err) {
     next(err);
   }
