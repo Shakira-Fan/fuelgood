@@ -158,8 +158,9 @@ router.delete("/delete/:orderNumber", async (req, res, next) => {
   let { orderNumber } = req.params;
   try {
     Order.deleteOne({ orderNumber })
-      .then(() => {
-        res.send("Order has been deleted.");
+      .then((msg) => {
+        if (msg.deletedCount === 0) res.send("Order not exists.");
+        else res.send("Order has been deleted.");
       })
       .catch((msg) => {
         res.send(msg);
