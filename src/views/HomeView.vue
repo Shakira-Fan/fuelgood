@@ -1,12 +1,224 @@
 <template>
-  <h1>This is Home view</h1>
-  <div>即時油價(購買連結)</div>
-  <div>加油站據點</div>
+<div class="banner"><img src="../assets/images/banner.png" alt=""></div>
+  <div class="chart">
+    <div>
+          <div class="left">
+          <h4>今日油價</h4>
+          <div>
+            <div class="price">
+            <div><p >92無鉛汽油:</p><h5>{{price92}}</h5><p>元/公升</p></div>
+            <div><p >95無鉛汽油:</p><h5>{{price95}}</h5><p>元/公升</p></div>
+            <div><p >98無鉛汽油:</p><h5>{{price98}}</h5><p>元/公升</p></div>
+            <div><p class="fixPosition">超級柴油價格:</p><h5>{{priceSuper}}</h5><p>元/公升</p></div>
+          </div>
+          <div class="historyPrice">
+            <button @click="activeTab='Chart92'">92汽油歷史油價</button>
+            <button  @click="activeTab='Chart95'">95汽油歷史油價</button>
+            <button  @click="activeTab='Chart98'">98汽油歷史油價</button>
+            <button @click="activeTab='ChartSuper'">超級柴油歷史油價</button>
+          </div>
+          </div> 
+          <a class="buyIt" href="#">我要購買</a>
+       </div>
+      <component class="right" :is="activeTab" :getLabels="historyDate" :getDataValues="currentTabPrice" />
+    </div> 
+    </div>
+<Map />
 </template>
 
 <script>
+import Map from '../components/Map.vue'
+import Chart92 from '../components/Chart92.vue'
+import Chart95 from '../components/Chart95.vue'
+import Chart98 from '../components/Chart98.vue'
+import ChartSuper from '../components/ChartSuper.vue'
+// import Banner from '../components/Banner.vue'
+
+
+
+
 export default {
-  name: 'HomeView',
-  components: {},
-};
+components: {Map,Chart92,Chart95,Chart98,ChartSuper,Animation},
+data() {
+  return{
+    activeTab:'Chart92',
+    priceData:[],
+    price98:"",
+    price92:"",
+    price95:"",
+    priceSuper:"",
+    historyData98:[],
+    historyData95:[],
+    historyData92:[],
+    historyDataSuper:[],
+    historyPrice98:[],
+    historyPrice92:[],
+    historyPrice95:[],
+    historyPriceSuper:[],
+    historyDate:[],
+    lottie: {},  
+  }},
+  methods:{
+    async getPrice() {
+      const url =('https://fuel-good.herokuapp.com/crawler/price/recent/');
+      await this.axios.get(url).then((response) => {
+      console.log(response.data) //object
+      this.priceData = (response.data);
+      this.price98 = this.priceData[2].price;
+      this.price95 = this.priceData[3].price;
+      this.price92 = this.priceData[1].price;
+      this.priceSuper = this.priceData[0].price;
+      })
+    },
+    async history98() {
+      const url =('https://fuel-good.herokuapp.com/crawler/price/recent/98%E7%84%A1%E9%89%9B%E6%B1%BD%E6%B2%B9/14');
+      await this.axios.get(url).then((response) => {
+      console.log(response.data) //object
+      this.historyData98 = (response.data)   
+      this.historyPrice98=this.historyData98.map(i=>{
+        return i.price;})  
+      this.historyDate=this.historyData98.map(i=>{
+        return i.appliedDate;}) 
+      })
+
+      },
+    async history95() {
+      const url =('https://fuel-good.herokuapp.com/crawler/price/recent/95%E7%84%A1%E9%89%9B%E6%B1%BD%E6%B2%B9/14');
+      await this.axios.get(url).then((response) => {
+      console.log(response.data) //object
+      this.historyData95 = (response.data);
+      this.historyPrice95=this.historyData95.map(i=>{
+        return i.price;})  
+      })
+      },
+    async history92() {
+      const url =('https://fuel-good.herokuapp.com/crawler/price/recent/92%E7%84%A1%E9%89%9B%E6%B1%BD%E6%B2%B9/14');
+      await this.axios.get(url).then((response) => {
+      console.log(response.data) //object
+      this.historyData92 = (response.data);
+      this.historyPrice92=this.historyData92.map(i=>{
+        return i.price;})  
+      })
+      },
+    async historySuper() {
+      const url =('https://fuel-good.herokuapp.com/crawler/price/recent/%E9%AB%98%E7%B4%9A%E6%9F%B4%E6%B2%B9/14');
+      await this.axios.get(url).then((response) => {
+      console.log(response.data) //object
+      this.historyDataSuper = (response.data);
+      this.historyPriceSuper=this.historyDataSuper.map(i=>{
+        return i.price;})   
+      })
+      },
+  },
+  computed:{
+  currentTabPrice: function() {
+    if (this.activeTab === 'Chart92') {
+      return this.historyPrice92
+    }else if (this.activeTab === 'Chart95') {
+      return this.historyPrice95
+    }else if (this.activeTab === 'Chart98') {
+      return this.historyPrice98
+    }else {
+      return this.historyPriceSuper
+    }
+  }
+  },
+
+  mounted(){
+    this.getPrice();
+    this.history98();
+    this.history95();
+    this.history92();
+    this.historySuper();
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+
+* {
+  padding:0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+/* 動畫設置 */
+.banner{
+  width:100%;
+  height: 90vh;
+  background-color:var(--color-primary);
+  padding:0;
+  img{
+    margin: 0%;
+    padding:0%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+  
+  /* 圖表設置 */
+  .chart{
+    width:100%;
+    div{
+      background-color:#f9e366;
+    display: flex;
+    justify-content: space-around;
+      .left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    div{
+      display: flex;
+      justify-content: space-around;
+      .price{
+        display: flex;
+        flex-direction: column;
+      p{
+        display: inline;
+        margin: 0;
+        font-size: 1.5rem;
+      }
+      .fixPosition{
+        font-size: 1.3rem;
+      }
+    h5{
+      display: inline;
+      color: red;
+      }
+      }
+      .historyPrice{
+            display: flex;
+    flex-direction: column;
+    button{
+    width:10vw;
+    margin: .5rem;
+    padding: .5rem;
+    font-size: 0.5rem;
+    background-color:var(--color-secondary1);
+    border: none;
+    text-align: center;
+    &:hover{
+        background-color:var(--color-secondary);
+        color: white;
+      }
+  }
+      }
+    }
+    a{
+      width:10vw;
+      text-decoration: none;
+      padding: 1rem;
+      background-color:var(--color-secondary);
+      color: white;
+      font-size:1.5rem ;
+      &:hover{
+        background-color:var(--color-secondary1);
+        color: block;
+      }
+    }
+  }
+    }
+  }
+</style>
