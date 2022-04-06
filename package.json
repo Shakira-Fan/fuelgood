@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
-    "core-js": "^3.8.3",
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",
     "moment": "^2.29.1",
@@ -24,7 +23,9 @@
     "vue-chartjs": "^4.0.3",
     "vue-router": "^4.0.3",
     "vue3-lottie": "^2.1.0",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "vue-the-mask": "^0.11.1",
+    "sweetalert2": "^11.4.8"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.0",

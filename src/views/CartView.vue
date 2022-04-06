@@ -26,12 +26,12 @@
 <script>
 import ShoppingCar from "@/components/ShoppingCar.vue";
 import SidebarComponent from "@/components/SidebarComponent.vue";
-import fuel from "../fuel.json";
+import axios from "axios";
 
 export default {
   data() {
     return {
-      inventory: fuel,
+      inventory: [],
       cart: {},
       showSidebar: false,
     };
@@ -42,28 +42,31 @@ export default {
   },
   computed: {
     totalQuantity() {
-      return Object.values(this.cart).reduce((acc, curr) => {
-        return acc + curr;
-      }, 0);
+      return Object.values(this.cart).reduce((a, b) => a + b, 0);
     },
   },
   methods: {
-    addToCart(name, quantity) {
+    addToCart(gasoline, quantity) {
       if (!quantity) {
         alert("請輸入數量");
         return;
       }
-      if (!this.cart[name]) this.cart[name] = 0;
-      this.cart[name] += quantity;
-      localStorage[name] = this.cart[name];
+      if (!this.cart[gasoline]) this.cart[gasoline] = 0;
+      this.cart[gasoline] = quantity;
+      localStorage[gasoline] = this.cart[gasoline];
     },
     toggleSidebar() {
       this.showSidebar = !this.showSidebar;
     },
-    removeItem(name) {
-      delete this.cart[name];
-      localStorage[name] = 0;
+    removeItem(gasoline) {
+      delete this.cart[gasoline];
+      localStorage[gasoline] = 0;
     },
+  },
+  mounted() {
+    axios
+      .get(`https://fuel-good.herokuapp.com/crawler/price/recent/`)
+      .then((res) => (this.inventory = res.data));
   },
 };
 </script>
@@ -82,6 +85,7 @@ div button {
 }
 .card-container {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 5rem;
 }

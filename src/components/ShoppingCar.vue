@@ -1,21 +1,21 @@
 <template>
   <div class="card">
-    <div class="card-title">{{ product.name }}</div>
+    <div class="card-title">{{ product.gasoline }}</div>
     <div class="card-body">
       <form>
         <div class="row">
           <div class="cell">
-            <label>種類:</label>
+            <label>油價區間:</label>
           </div>
           <div class="cell">
-            <em>{{ product.type }}</em>
+            <em>{{ product.appliedDate }}</em>
           </div>
         </div>
         <div class="row">
           <div class="cell">
             <label>售價:</label>
           </div>
-          <div class="cell">${{ product.price.NTD }}</div>
+          <div class="cell">${{ product.price }}</div>
         </div>
         <div class="row">
           <div class="cell">
@@ -29,7 +29,10 @@
       </form>
     </div>
     <div class="card-footer">
-      <button @click="addToCart(product.name, quantity)" class="btn btn-light">
+      <button
+        @click="addToCart(product.gasoline, quantity)"
+        class="btn btn-light"
+      >
         加入購物車
       </button>
     </div>
@@ -38,11 +41,14 @@
 
 <script>
 export default {
-  props: ['product', 'index', 'addToCart'],
-  data() {
-    return {
-      quantity: 0,
-    };
+  props: ["product", "index", "addToCart"],
+  created() {
+    localStorage[this.product.gasoline] = 0;
+  },
+  methods: {
+    quantity() {
+      return localStorage[this.product.gasoline];
+    },
   },
 };
 </script>
@@ -50,7 +56,7 @@ export default {
 <style>
 .card {
   display: inline-block;
-  width: 300px;
+  width: 340px;
   background: #faf2c3;
   margin-bottom: 20px;
   color: #280d14;
@@ -62,7 +68,7 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 93%;
+  width: 100%;
   background: #ffd32d;
   padding: 10px;
   font-size: 22px;

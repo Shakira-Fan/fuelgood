@@ -1,16 +1,6 @@
 <template>
   <nav class="navbar">
-<<<<<<< HEAD
-    <router-link :to="{ name: 'home' }">
-      <img src="../assets/images/wels.svg" alt="wels logo" />
-    </router-link>
-=======
     <img src="../assets/images/nav2.png" alt="wels logo" />
-    <div class="navbar-items">
-      <router-link :to="{ name: 'home' }">首頁</router-link>
-      <router-link :to="{ name: 'news' }">優惠活動</router-link>
->>>>>>> 53c25ba8 (homepage)
-
     <div class="navbar-items">
       <router-link v-if="!username" :to="{ name: 'login' }">登入</router-link>
       <span class="nav-span" v-if="!username">|</span>
@@ -45,13 +35,13 @@ export default {
   methods: {
     handleClick() {
       this.user.pop();
-      localStorage.removeItem('name');
-      localStorage.removeItem('email');
-      localStorage.removeItem('id');
-      alert('已登出');
-      this.$store.commit('updateLogIn', false);
-      this.$store.commit('updateName', '');
-      this.$router.push('/');
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
+      localStorage.removeItem("id");
+      alert("已登出");
+      this.$store.commit("updateLogIn", false);
+      this.$store.commit("updateName", "");
+      this.$router.push("/");
     },
   },
 };
@@ -78,12 +68,8 @@ export default {
   margin: 0 0.5rem;
 }
 img {
-<<<<<<< HEAD
   width: 6rem;
   margin-left: 3rem;
-=======
-  width: 15rem;
->>>>>>> 53c25ba8 (homepage)
 }
 a {
   font-size: 2rem;

@@ -53,11 +53,11 @@
 export default {
   props: ["toggle", "cart", "inventory", "remove"],
   methods: {
-    getPrice(name) {
+    getPrice(gasoline) {
       const product = this.inventory.find((p) => {
-        return p.name === name;
+        return p.gasoline === gasoline;
       });
-      return product.price.NTD;
+      return product.price;
     },
     calculateTotal() {
       //[key,value]
