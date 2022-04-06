@@ -1,8 +1,10 @@
 <template>
   <div>
-    <p>歡迎回來, {{ username }}!</p>
-    <h2>目前未提取的數量</h2>
-    <div class="inventory-container">
+    <div class="loading" v-if="loading">載入中...</div>
+    <p v-if="!loading">歡迎回來, {{ username }}!</p>
+
+    <h2 v-if="!loading">目前未提取的數量</h2>
+    <div class="inventory-container" v-if="!loading">
       <div>
         <div class="inventory">
           <div>92無鉛汽油:</div>
@@ -40,13 +42,13 @@
       </div>
     </div>
   </div>
-  <div class="buttons">
-    <button>我要取貨</button>
-    <button>歷史訂單</button>
+  <div class="buttons" v-if="!loading">
+    <button @click="handleQr">我要取貨</button>
+    <button @click="handleOrder">歷史訂單</button>
   </div>
 
-  <h2>歷史訂單</h2>
-  <div class="container">
+  <h2 v-if="listOrder">歷史訂單</h2>
+  <div class="container" v-if="listOrder">
     <div>
       <div class="orders" v-for="order in orders.flat()" :key="order.email">
         <div class="order">
@@ -68,12 +70,9 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="qr-container" v-if="qr">
     <p>請於時效內，出示QR code 提取汽油</p>
-
-    <div class="img">
-      <!-- <img src="" alt="qrcode" /> -->
-    </div>
+    <div class="img"></div>
   </div>
 </template>
 
@@ -81,6 +80,13 @@
 import axios from 'axios';
 import moment from 'moment';
 export default {
+  data() {
+    return {
+      qr: false,
+      loading: true,
+      listOrder: false,
+    };
+  },
   computed: {
     user() {
       return this.$store.state.user;
@@ -105,8 +111,15 @@ export default {
     localDate(utcDate) {
       return moment.utc(utcDate).local().format('YYYY-MM-DD,h:mm:ss a');
     },
+    handleQr() {
+      this.qr = !this.qr;
+    },
+    handleOrder() {
+      this.listOrder = !this.listOrder;
+    },
   },
   async created() {
+    this.loading = true;
     const res = await axios.get('https://fuel-good.herokuapp.com/order/all');
     console.log(res);
     if (!this.orders.length) {
@@ -125,7 +138,7 @@ export default {
     if (!this.inventory.length) {
       this.inventory.push(res2.data);
     }
-    console.log(this.inventory);
+    this.loading = false;
   },
 };
 </script>
@@ -199,6 +212,14 @@ button:hover {
   /* background-color: #eee; */
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
+.qr-container {
+  max-width: 80rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  margin: 3rem auto;
+  padding-bottom: 8rem;
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+}
 .img {
   width: 10rem;
   height: 10rem;
@@ -212,5 +233,9 @@ button:hover {
 .order {
   display: flex;
   justify-content: space-around;
+}
+.loading {
+  padding: 20rem;
+  font-size: 3rem;
 }
 </style>
