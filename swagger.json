@@ -499,6 +499,40 @@
             }
           }
         }
+      },
+      "/order/{email}": {
+        "delete": {
+          "tags": [
+            "ORDER"
+          ],
+          "summary": "使用{email}找出特定用戶的訂單",
+          "operationId": "findSpecificOrder",
+          "parameters": [
+            {
+              "in": "path",
+              "name": "email",
+              "description": "輸入用戶email",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                    }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "訂單清單已列出！"
+            },
+            "400": {
+              "description": "發生問題",
+              "content": {}
+            }
+          }
+        }
       }
 
     }

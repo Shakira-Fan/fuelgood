@@ -137,6 +137,23 @@ router.get("/all", async (req, res, next) => {
   }
 });
 
+//Email查找訂單
+router.get("/:email", async (req, res, next) => {
+  let { email } = req.params;
+  try {
+    Order.find({ email })
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((e) => {
+        res.send(e);
+      });
+  } catch (e) {
+    next(e);
+  }
+});
+
+//Email刪除訂單
 router.delete("/delete/:orderNumber", async (req, res, next) => {
   let { orderNumber } = req.params;
 
