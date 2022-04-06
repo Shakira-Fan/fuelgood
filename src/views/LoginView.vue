@@ -69,11 +69,11 @@ export default {
         localStorage.setItem('email', this.user[0].data.user.email);
         this.$store.commit('updateLogIn', true);
         this.$store.commit('updateName', localStorage.getItem('name'));
-        this.$router.push('/user' + '/' + this.id);
+        await this.$router.push('/user' + '/' + this.id);
       } catch (err) {
         if (err.response) {
           // this.error = err.response.data;
-          this.error = 'Invalid email or password';
+          this.error = 'Email或密碼錯誤';
           this.email = '';
           this.password = '';
         }
