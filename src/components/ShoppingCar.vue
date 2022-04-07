@@ -58,6 +58,8 @@ export default {
   display: inline-block;
   max-width: 40rem;
   background: var(--color-grey);
+  /* background-color: #fff; */
+  box-shadow: 1px 2px 5px solid #000;
 
   margin-bottom: 20px;
   color: #280d14;
@@ -70,14 +72,14 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
-  background: #f8d556;
+  /* background: #f8d556; */
+  background-color: var(--color-primary);
   padding: 10px;
   font-size: 22px;
   font-weight: bold;
   border-radius: 10px 10px 0 0;
 }
 .card-body {
-  border: 1px solid #f6e57b;
   border-top: 0px;
   border-bottom: 0px;
   text-align: center;
@@ -115,7 +117,8 @@ export default {
   font-weight: bold;
 }
 .card-footer {
-  background: #5274a2;
+  /* background: #5274a2; */
+  background-color: var(--color-secondary);
 
   margin-top: 15px;
   padding: 10px;

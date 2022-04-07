@@ -162,7 +162,7 @@ h2 {
   font-weight: 700;
   border-radius: 1rem;
   margin: 1rem auto;
-  transform: rotateZ(-3deg);
+  /* transform: rotateZ(-3deg); */
 }
 .inventory-container {
   display: flex;
