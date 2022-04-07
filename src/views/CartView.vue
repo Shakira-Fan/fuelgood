@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import ShoppingCar from "@/components/ShoppingCar.vue";
-import SidebarComponent from "@/components/SidebarComponent.vue";
-import axios from "axios";
+import ShoppingCar from '@/components/ShoppingCar.vue';
+import SidebarComponent from '@/components/SidebarComponent.vue';
+import axios from 'axios';
 
 export default {
   data() {
@@ -36,7 +36,7 @@ export default {
       inventory: [],
       cart: {},
       showSidebar: false,
-      recentDate: "",
+      recentDate: '',
     };
   },
   components: {
@@ -55,7 +55,7 @@ export default {
   methods: {
     addToCart(gasoline, quantity) {
       if (!quantity) {
-        alert("請輸入數量");
+        alert('請輸入數量');
         return;
       }
       if (!this.cart[gasoline]) this.cart[gasoline] = 0;
@@ -73,7 +73,7 @@ export default {
   mounted() {
     axios
       .get(`https://fuel-good.herokuapp.com/crawler/price/recent/`)
-      .then((res) => {
+      .then(res => {
         this.inventory = res.data;
         this.recentDate = res.data[0].appliedDate;
       });
@@ -90,13 +90,13 @@ div button {
   background: var(--color-secondary);
   padding: 0.5rem 1rem;
   border-radius: 1.5rem;
-  color: white;
+  color: #fff;
   margin: 1.5rem;
   font-size: 2.5rem;
   cursor: pointer;
 }
 .card-container {
-  max-width: 100rem;
+  max-width: 80rem;
   margin: 0 auto;
   display: flex;
   justify-content: center;
