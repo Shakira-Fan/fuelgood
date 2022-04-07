@@ -5,14 +5,6 @@
       <form>
         <div class="row">
           <div class="cell">
-            <label>油價區間:</label>
-          </div>
-          <div class="cell">
-            <em>{{ product.appliedDate }}</em>
-          </div>
-        </div>
-        <div class="row">
-          <div class="cell">
             <label>售價:</label>
           </div>
           <div class="cell">${{ product.price }}</div>
@@ -56,7 +48,7 @@ export default {
 <style>
 .card {
   display: inline-block;
-  max-width: 40rem;
+  max-width: 32rem;
   background: var(--color-grey);
   /* background-color: #fff; */
   box-shadow: 1px 2px 5px solid #000;

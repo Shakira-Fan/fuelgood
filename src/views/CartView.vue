@@ -11,6 +11,12 @@
     :remove="removeItem"
   />
   <div class="card-container">
+    <!-- <div class="row">
+      <div class="cell">
+        <span>油價區間:</span> <span>{{ this.inventory[0].appliedDate }}</span>
+      </div>
+      <div class="cell"></div>
+    </div> -->
     <ShoppingCar
       v-for="(product, index) in inventory"
       :key="product.id"
