@@ -89,10 +89,10 @@ div a {
 div button {
   background: var(--color-secondary);
   padding: 0.5rem 1rem;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   color: #fff;
   margin: 1.5rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
   cursor: pointer;
 }
 .card-container {
@@ -114,5 +114,8 @@ div button {
   font-size: 2.2rem;
   font-weight: 500;
   font-style: italic;
+}
+.top-bar-cart-link:hover {
+  background-color: #0e3365;
 }
 </style>
