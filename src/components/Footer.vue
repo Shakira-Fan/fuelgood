@@ -46,7 +46,11 @@ a:hover {
   color: var(--color-secondary);
 }
 .contact {
-  background-color: var(--color-grey);
+  background-image: url('../assets/images/banner.png');
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: var(--color-grey); */
   padding: 1rem 0;
 }
 .contact-methods {
