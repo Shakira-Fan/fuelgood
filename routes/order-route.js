@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/user-model");
 const Order = require("../models/order-model");
 const mongoose = require("mongoose");
+const dayjs = require("dayjs");
 
 router.use((req, res, next) => {
   console.log("An order is passing to order middleware");
@@ -17,6 +18,7 @@ router.post("/add", async (req, res, next) => {
   let { email, adding92, adding95, adding98, addingDiesel } = req.body;
   let newOrder = new Order({
     email,
+    date: dayjs().format("YYYY/MM/DD HH:mm A"),
     orders: {
       "92無鉛汽油": {
         liter: Number(adding92),
