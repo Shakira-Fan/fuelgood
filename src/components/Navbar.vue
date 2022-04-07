@@ -9,7 +9,11 @@
       <span class="nav-span" v-if="!username">|</span>
       <router-link v-if="!username" :to="{ name: 'account' }">註冊</router-link>
       <div class="user-account" v-if="username">
-        <router-link :to="'/cart'">購物車</router-link>
+        <div class="shopping-cart">
+          <router-link :to="'/cart'"
+            ><span class="material-icons"> shopping_cart </span></router-link
+          >
+        </div>
       </div>
       <div class="user-account" v-if="username">
         <router-link :to="`/user/${id}`">Hi, {{ username }}</router-link>
@@ -54,6 +58,9 @@ export default {
 .icon {
   cursor: pointer;
 }
+.material-icons {
+  font-size: 3.5rem;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -78,7 +85,7 @@ img {
   margin-left: 3rem;
 }
 a {
-  font-size: 2rem;
+  font-size: 2.3rem;
   text-decoration: none;
   color: #000;
 }
@@ -90,7 +97,7 @@ a:hover {
 }
 .logout {
   margin: 0 2rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   cursor: pointer;
   padding: 0.5rem;
   color: #fff;
@@ -98,6 +105,6 @@ a:hover {
   border-radius: 1rem;
 }
 .logout:hover {
-  color: var(--color-primary);
+  background-color: #0e3365;
 }
 </style>
