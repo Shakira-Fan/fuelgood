@@ -105,7 +105,6 @@ router.post("/signup", async (req, res, next) => {
   // register the user
   const newUser = new User({
     name: req.body.name,
-    date: dayjs().format("YYYY/MM/DD HH:mm A"),
     email: req.body.email,
     password: req.body.password,
   });
