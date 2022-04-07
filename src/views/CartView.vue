@@ -3,6 +3,9 @@
     <a>購買{{ totalQuantity }}公升</a>
     <button @click="toggleSidebar" class="top-bar-cart-link">購買清單</button>
   </div>
+  <div class="date-style">
+    <span>油價區間:</span> <span>{{ recentDate }}</span>
+  </div>
   <SidebarComponent
     v-if="showSidebar"
     :toggle="toggleSidebar"
@@ -11,12 +14,6 @@
     :remove="removeItem"
   />
   <div class="card-container">
-    <!-- <div class="row">
-      <div class="cell">
-        <span>油價區間:</span> <span>{{ this.inventory[0].appliedDate }}</span>
-      </div>
-      <div class="cell"></div>
-    </div> -->
     <ShoppingCar
       v-for="(product, index) in inventory"
       :key="product.id"
@@ -39,6 +36,7 @@ export default {
       inventory: [],
       cart: {},
       showSidebar: false,
+      recentDate: "",
     };
   },
   components: {
@@ -49,6 +47,10 @@ export default {
     totalQuantity() {
       return Object.values(this.cart).reduce((a, b) => a + b, 0);
     },
+    // date() {
+    //   this.recentDate = this.inventory[0].appliedDate;
+    //   return this.recentDate;
+    // },
   },
   methods: {
     addToCart(gasoline, quantity) {
@@ -71,7 +73,10 @@ export default {
   mounted() {
     axios
       .get(`https://fuel-good.herokuapp.com/crawler/price/recent/`)
-      .then((res) => (this.inventory = res.data));
+      .then((res) => {
+        this.inventory = res.data;
+        this.recentDate = res.data[0].appliedDate;
+      });
   },
 };
 </script>
@@ -96,12 +101,18 @@ div button {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  padding: 5rem;
+  margin-bottom: 10rem;
 }
 .total-qty {
   padding-top: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.date-style {
+  margin-top: 3rem;
+  font-size: 2.2rem;
+  font-weight: 500;
+  font-style: italic;
 }
 </style>
