@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  props: ["product", "index", "addToCart"],
+  props: ['product', 'index', 'addToCart'],
   created() {
     localStorage[this.product.gasoline] = 0;
   },
@@ -50,7 +50,6 @@ export default {
   display: inline-block;
   max-width: 31rem;
   background: var(--color-grey);
-  /* background-color: #fff; */
   box-shadow: 1px 2px 5px solid #000;
 
   margin-bottom: 20px;
@@ -64,7 +63,6 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
-  /* background: #f8d556; */
   background-color: var(--color-primary);
   padding: 10px;
   font-size: 22px;
@@ -109,11 +107,9 @@ export default {
   font-weight: bold;
 }
 .card-footer {
-  /* background: #5274a2; */
   background-color: var(--color-secondary);
-
   margin-top: 15px;
-  padding: 10px;
+  padding: 1.2rem;
   text-align: right;
   border-radius: 0 0 10px 10px;
 }
@@ -129,16 +125,17 @@ button {
   padding: 5px 12px;
   font-weight: bold;
   vertical-align: middle;
-  /* font-size: medium; */
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   cursor: pointer;
+}
+button:hover {
+  background-color: #fac609;
 }
 .qty-input {
   border: none;
   background-color: #fff;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  /* border-bottom: 1px solid #000; */
+  padding: 0.2rem;
+  border-radius: 1.2rem;
   box-shadow: 1px 2px 5px rgb(211, 204, 204);
 }
 </style>
