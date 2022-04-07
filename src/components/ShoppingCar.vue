@@ -45,7 +45,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   display: inline-block;
   max-width: 31rem;

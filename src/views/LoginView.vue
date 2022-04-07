@@ -2,7 +2,7 @@
   <form class="signup-form" @submit.prevent="handleSubmit">
     <h1>登入會員</h1>
     <div class="round">
-      <img class="logo" src="../assets/images/wels.svg" alt="" />
+      <img class="logo" src="../assets/images/logo3.png" alt="" />
     </div>
     <label>Email:</label>
     <input type="text" name="email" v-model="email" required />
@@ -125,8 +125,7 @@ input {
   transition: all 0.2s ease-in-out;
 }
 .sign-up-btn:hover {
-  background-color: var(--color-secondary);
-  color: var(--color-primary);
+  background-color: #0e3365;
 }
 .register-btn {
   display: inline-block;
@@ -159,7 +158,8 @@ span {
   border: none;
   margin-top: 5rem;
   cursor: pointer;
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
+  color: #fff;
 }
 .round {
   width: 6rem;

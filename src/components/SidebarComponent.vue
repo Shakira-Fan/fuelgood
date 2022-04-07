@@ -125,8 +125,22 @@ export default {
   color: #fcf5d8;
   font-size: 32px;
   font-weight: bold;
+  cursor: pointer;
 }
 .cart-close:hover {
   background: rgb(28, 28, 46);
+}
+button {
+  border: 0px;
+  border-radius: 1rem;
+  padding: 5px 12px;
+  font-weight: bold;
+  vertical-align: middle;
+  font-size: 1.8rem;
+  cursor: pointer;
+  background-color: var(--color-primary);
+}
+button:hover {
+  background-color: #fac609;
 }
 </style>
