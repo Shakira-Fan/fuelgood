@@ -48,7 +48,7 @@ export default {
 <style>
 .card {
   display: inline-block;
-  max-width: 32rem;
+  max-width: 31rem;
   background: var(--color-grey);
   /* background-color: #fff; */
   box-shadow: 1px 2px 5px solid #000;
