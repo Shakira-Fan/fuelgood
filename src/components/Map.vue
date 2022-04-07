@@ -9,7 +9,7 @@
  <div class="toolbox">
  <div class="sticky-top bg-white shadow-sm p-2">
  <div class="form-group d-flex">
- <label for="cityName" class="mr-2 col-form-label text-right">縣市</label>
+ <label for="cityName" class="mr-2 col-form-label text-right"><p>縣市</p></label>
  <div class="flex-fill">
            <select id="cityName" class="form-control"
               v-model="select.city" @change="select.area = ''">
@@ -21,7 +21,7 @@
  </div>
  </div>
  <div class="form-group d-flex">
- <label for="area" class="mr-2 col-form-label text-right">地區</label>
+ <label for="area" class="mr-2 col-form-label text-right"><p>地區</p></label>
  <div class="flex-fill">
   <select id="area" class="form-control" v-if="select.city.length"
                 v-model="select.area" @change="updateSelect">
@@ -45,8 +45,19 @@
 </template>
 
 <script>
-import L from 'leaflet';
+import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
 import cityName from '../../public/cityName.json';
+
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow
+});
+L.Marker.prototype.options.icon = DefaultIcon;
+
+
 let osmMap ={};
 export default {
     name:'Map',
@@ -137,9 +148,9 @@ export default {
 <style lang="scss" scoped>
 @import 'bootstrap/scss/bootstrap';
 label{
-  font-size: 1rem;
-  margin:0 0.5rem;
+  margin:0.5rem 0.5rem;
   padding:0 ;
+  p{font-size: 1.5rem;}
 }
 select{
   margin-top: .7rem;
@@ -162,5 +173,17 @@ select{
  a {
  cursor: pointer;
  }
+}
+
+@media screen and (max-width:920px) { 
+  label{
+  margin:0rem 0.5rem;
+}
+}
+
+@media screen and (max-width:900px) { 
+ .store{
+  padding:0rem;
+}
 }
 </style>

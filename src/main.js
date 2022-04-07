@@ -11,13 +11,10 @@ import Vue3Lottie from "vue3-lottie";
 import "vue3-lottie/dist/style.css";
 import VueTheMask from "vue-the-mask";
 
-// import LottieAnimation from "lottie-web-vue";
-
 createApp(App)
   .use(store)
   .use(router)
   .use(VueAxios, axios)
   .use(Vue3Lottie)
   .use(VueTheMask)
-  // .use(LottieAnimation)
   .mount("#app");
