@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const dayjs = require("dayjs");
 
 const userSchema = new mongoose.Schema(
   {
@@ -10,19 +9,6 @@ const userSchema = new mongoose.Schema(
       minLength: 2,
       maxLength: 255,
     },
-    googleID: {
-      type: String,
-      default: "",
-    },
-    date: {
-      type: Date,
-      default: dayjs().format("YYYY/MM/DD HH:mm A"),
-    },
-    thumbnail: {
-      type: String,
-      default: "",
-    },
-    // local login
     email: {
       type: String,
     },
