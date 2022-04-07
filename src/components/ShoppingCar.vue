@@ -62,7 +62,7 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 100%;
+  width: 93.5%;
   background-color: var(--color-primary);
   padding: 10px;
   font-size: 22px;
