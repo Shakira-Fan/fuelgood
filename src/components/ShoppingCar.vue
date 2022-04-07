@@ -1,35 +1,38 @@
 <template>
   <div class="card">
-    <div class="card-title">{{ product.name }}</div>
+    <div class="card-title">{{ product.gasoline }}</div>
     <div class="card-body">
       <form>
         <div class="row">
           <div class="cell">
-            <label>種類:</label>
+            <label>油價區間:</label>
           </div>
           <div class="cell">
-            <em>{{ product.type }}</em>
+            <em>{{ product.appliedDate }}</em>
           </div>
         </div>
         <div class="row">
           <div class="cell">
             <label>售價:</label>
           </div>
-          <div class="cell">${{ product.price.NTD }}</div>
+          <div class="cell">${{ product.price }}</div>
         </div>
         <div class="row">
           <div class="cell">
             <label>數量:</label>
           </div>
           <div class="cell">
-            <input type="number" v-model.number="quantity" />
+            <input class="qty-input" type="number" v-model.number="quantity" />
           </div>
           <span class="cell">公升</span>
         </div>
       </form>
     </div>
     <div class="card-footer">
-      <button @click="addToCart(product.name, quantity)" class="btn btn-light">
+      <button
+        @click="addToCart(product.gasoline, quantity)"
+        class="btn btn-light"
+      >
         加入購物車
       </button>
     </div>
@@ -38,11 +41,14 @@
 
 <script>
 export default {
-  props: ['product', 'index', 'addToCart'],
-  data() {
-    return {
-      quantity: 0,
-    };
+  props: ["product", "index", "addToCart"],
+  created() {
+    localStorage[this.product.gasoline] = 0;
+  },
+  methods: {
+    quantity() {
+      return localStorage[this.product.gasoline];
+    },
   },
 };
 </script>
@@ -50,8 +56,11 @@ export default {
 <style>
 .card {
   display: inline-block;
-  width: 300px;
-  background: #faf2c3;
+  max-width: 40rem;
+  background: var(--color-grey);
+  /* background-color: #fff; */
+  box-shadow: 1px 2px 5px solid #000;
+
   margin-bottom: 20px;
   color: #280d14;
   margin: 10px;
@@ -62,18 +71,19 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  width: 93%;
-  background: #ffd32d;
+  width: 100%;
+  /* background: #f8d556; */
+  background-color: var(--color-primary);
   padding: 10px;
   font-size: 22px;
   font-weight: bold;
   border-radius: 10px 10px 0 0;
 }
 .card-body {
-  border: 1px solid #f6e57b;
   border-top: 0px;
   border-bottom: 0px;
   text-align: center;
+  padding: 2rem;
 }
 .row {
   display: flex;
@@ -107,7 +117,9 @@ export default {
   font-weight: bold;
 }
 .card-footer {
-  background: #088682;
+  /* background: #5274a2; */
+  background-color: var(--color-secondary);
+
   margin-top: 15px;
   padding: 10px;
   text-align: right;
@@ -115,15 +127,26 @@ export default {
 }
 .btn-light {
   background: #fff8ea;
-  color: #79a206;
+  background-color: var(--color-primary);
+  color: #000;
+  padding: 0.5rem;
 }
 button {
   border: 0px;
-  border-radius: 3px;
+  border-radius: 1rem;
   padding: 5px 12px;
   font-weight: bold;
   vertical-align: middle;
-  font-size: medium;
+  /* font-size: medium; */
+  font-size: 1.6rem;
   cursor: pointer;
+}
+.qty-input {
+  border: none;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  /* border-bottom: 1px solid #000; */
+  box-shadow: 1px 2px 5px rgb(211, 204, 204);
 }
 </style>
