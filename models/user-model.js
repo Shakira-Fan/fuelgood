@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const dayjs = require("dayjs");
 
 const userSchema = new mongoose.Schema(
   {
@@ -15,7 +16,7 @@ const userSchema = new mongoose.Schema(
     },
     date: {
       type: Date,
-      default: Date.now,
+      default: dayjs().format("YYYY/MM/DD HH:mm A"),
     },
     thumbnail: {
       type: String,

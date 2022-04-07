@@ -24,6 +24,9 @@ const swaggerDocument = require("./swagger.json");
 const crawHistoryData = require("./modules/crawler").crawHistoryData;
 const crawRecentData = require("./modules/crawler").crawRecentData;
 
+
+
+
 //Middlewares
 // CORS config here
 app.all("/*", function (req, res, next) {

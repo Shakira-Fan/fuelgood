@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 var AutoIncrement = require("mongoose-sequence")(mongoose);
+const dayjs = require("dayjs");
+
 
 const orderSchema = new mongoose.Schema(
   {
@@ -8,7 +10,7 @@ const orderSchema = new mongoose.Schema(
     },
     date: {
       type: String,
-      default: new Date(),
+      default: dayjs().format('YYYY/MM/DD HH:mm A'),
     },
     orders: {
       "92無鉛汽油": {
