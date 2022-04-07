@@ -1,6 +1,9 @@
 <template>
   <nav class="navbar">
-    <img src="../assets/images/nav2.png" alt="wels logo" />
+    <div class="icon" @click="$router.push('/')">
+      <img src="../assets/images/nav2.png" alt="wels logo" />
+    </div>
+
     <div class="navbar-items">
       <router-link v-if="!username" :to="{ name: 'login' }">登入</router-link>
       <span class="nav-span" v-if="!username">|</span>
@@ -35,19 +38,22 @@ export default {
   methods: {
     handleClick() {
       this.user.pop();
-      localStorage.removeItem("name");
-      localStorage.removeItem("email");
-      localStorage.removeItem("id");
-      alert("已登出");
-      this.$store.commit("updateLogIn", false);
-      this.$store.commit("updateName", "");
-      this.$router.push("/");
+      localStorage.removeItem('name');
+      localStorage.removeItem('email');
+      localStorage.removeItem('id');
+      alert('已登出');
+      this.$store.commit('updateLogIn', false);
+      this.$store.commit('updateName', '');
+      this.$router.push('/');
     },
   },
 };
 </script>
 
 <style scoped>
+.icon {
+  cursor: pointer;
+}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -68,7 +74,7 @@ export default {
   margin: 0 0.5rem;
 }
 img {
-  width: 6rem;
+  width: 13rem;
   margin-left: 3rem;
 }
 a {
