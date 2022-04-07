@@ -240,7 +240,7 @@
                 :disabled="n < minCardMonth"
                 :key="n"
               >
-                {{ n < 10 ? "0" + n : n }}
+                {{ n < 10 ? '0' + n : n }}
               </option>
             </select>
             <select
@@ -286,24 +286,24 @@
 </template>
 
 <script>
-import { mask } from "vue-the-mask";
-import axios from "axios";
-import Swal from "sweetalert2";
+import { mask } from 'vue-the-mask';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 export default {
   directives: { mask },
-  props: ["calculateTotal"],
+  props: ['calculateTotal'],
   data() {
     return {
       currentCardBackground: Math.floor(Math.random() * 25 + 1), // just for fun :D
-      cardName: "",
-      cardNumber: "",
-      cardMonth: "",
-      cardYear: "",
-      cardCvv: "",
+      cardName: '',
+      cardNumber: '',
+      cardMonth: '',
+      cardYear: '',
+      cardCvv: '',
       minCardYear: new Date().getFullYear(),
-      amexCardMask: "#### ###### #####",
-      otherCardMask: "#### #### #### ####",
-      cardNumberTemp: "",
+      amexCardMask: '#### ###### #####',
+      otherCardMask: '#### #### #### ####',
+      cardNumberTemp: '',
       isCardFlipped: false,
       focusElementStyle: null,
       isInputFocused: false,
@@ -313,30 +313,30 @@ export default {
   },
   mounted() {
     this.cardNumberTemp = this.otherCardMask;
-    document.getElementById("cardNumber").focus();
+    document.getElementById('cardNumber').focus();
   },
   computed: {
     getCardType() {
       let number = this.cardNumber;
-      let re = new RegExp("^4");
-      if (number.match(re) != null) return "visa";
+      let re = new RegExp('^4');
+      if (number.match(re) != null) return 'visa';
 
-      re = new RegExp("^(34|37)");
-      if (number.match(re) != null) return "amex";
+      re = new RegExp('^(34|37)');
+      if (number.match(re) != null) return 'amex';
 
-      re = new RegExp("^5[1-5]");
-      if (number.match(re) != null) return "mastercard";
+      re = new RegExp('^5[1-5]');
+      if (number.match(re) != null) return 'mastercard';
 
-      re = new RegExp("^6011");
-      if (number.match(re) != null) return "discover";
+      re = new RegExp('^6011');
+      if (number.match(re) != null) return 'discover';
 
-      re = new RegExp("^9792");
-      if (number.match(re) != null) return "troy";
+      re = new RegExp('^9792');
+      if (number.match(re) != null) return 'troy';
 
-      return "visa"; // default type
+      return 'visa'; // default type
     },
     generateCardNumberMask() {
-      return this.getCardType === "amex"
+      return this.getCardType === 'amex'
         ? this.amexCardMask
         : this.otherCardMask;
     },
@@ -348,7 +348,7 @@ export default {
   watch: {
     cardYear() {
       if (this.cardMonth < this.minCardMonth) {
-        this.cardMonth = "";
+        this.cardMonth = '';
       }
     },
   },
@@ -379,29 +379,29 @@ export default {
       //sweet alert
       const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
-          confirmButton: "btn btn-success",
-          cancelButton: "btn btn-danger",
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger',
         },
         buttonsStyling: false,
       });
 
       swalWithBootstrapButtons
         .fire({
-          title: "確認此筆交易?",
-          text: "請確認交易金額是否正確",
-          icon: "warning",
+          title: '確認此筆交易?',
+          text: '請確認交易金額是否正確',
+          icon: 'warning',
           showCancelButton: true,
-          confirmButtonText: "是的，進行結帳作業",
-          cancelButtonText: "不，重新進入購物車",
+          confirmButtonText: '是的，進行結帳作業',
+          cancelButtonText: '不，重新進入購物車',
           reverseButtons: true,
         })
-        .then(async (result) => {
+        .then(async result => {
           if (!result.isConfirmed) {
             {
               swalWithBootstrapButtons.fire(
-                "已經取消",
-                "正要跳轉到購物車頁面",
-                "error"
+                '已經取消',
+                '正要跳轉到購物車頁面',
+                'error'
               );
             }
             this.$router.push(`/cart`);
@@ -409,21 +409,21 @@ export default {
           }
           try {
             const result = await axios.post(
-              "https://fuel-good.herokuapp.com/order/add",
+              'https://fuel-good.herokuapp.com/order/add',
               {
                 email: this.email,
-                adding92: localStorage["92無鉛汽油"],
-                adding95: localStorage["95無鉛汽油"],
-                adding98: localStorage["98無鉛汽油"],
-                addingDiesel: localStorage["高級柴油"],
+                adding92: localStorage['92無鉛汽油'],
+                adding95: localStorage['95無鉛汽油'],
+                adding98: localStorage['98無鉛汽油'],
+                addingDiesel: localStorage['高級柴油'],
               }
             );
 
-            if (result.statusText === "OK") {
+            if (result.statusText === 'OK') {
               swalWithBootstrapButtons.fire(
-                "交易成功！！",
-                "請在會員頁面確認購買數量",
-                "success"
+                '交易成功！！',
+                '請在會員頁面確認購買數量',
+                'success'
               );
               this.$router.push(`/user/${localStorage.id}`);
             }
@@ -436,12 +436,12 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700|Source+Sans+Pro:400,600,700&display=swap");
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700|Source+Sans+Pro:400,600,700&display=swap');
 
 body {
   background: #ddeefc;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 16px;
 }
 * {
@@ -546,7 +546,7 @@ body {
     border-radius: 5px;
     font-size: 22px;
     font-weight: 500;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
     color: #fff;
     margin-top: 20px;
@@ -605,7 +605,7 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.65);
 
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
@@ -675,7 +675,7 @@ body {
     border-radius: 15px;
     overflow: hidden;
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       left: 0;
       top: 0;
@@ -761,7 +761,7 @@ body {
   }
 
   &__wrapper {
-    font-family: "Source Code Pro", monospace;
+    font-family: 'Source Code Pro', monospace;
     padding: 25px 15px;
     position: relative;
     z-index: 4;
@@ -996,7 +996,7 @@ label.card-item__dateTitle {
     padding: 5px 15px;
     background: none;
     color: #1a3b5d;
-    font-family: "Source Sans Pro", sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 
     &:hover,
     &:focus {
@@ -1008,7 +1008,7 @@ label.card-item__dateTitle {
     }
     &.-select {
       -webkit-appearance: none;
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAeCAYAAABuUU38AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUxJREFUeNrM1sEJwkAQBdCsngXPHsQO9O5FS7AAMVYgdqAd2IGCDWgFnryLFQiCZ8EGnJUNimiyM/tnk4HNEAg/8y6ZmMRVqz9eUJvRaSbvutCZ347bXVJy/ZnvTmdJ862Me+hAbZCTs6GHpyUi1tTSvPnqTpoWZPUa7W7ncT3vK4h4zVejy8QzM3WhVUO8ykI6jOxoGA4ig3BLHcNFSCGqGAkig2yqgpEiMsjSfY9LxYQg7L6r0X6wS29YJiYQYecemY+wHrXD1+bklGhpAhBDeu/JfIVGxaAQ9sb8CI+CQSJ+QmJg0Ii/EE2MBiIXooHRQhRCkBhNhBcEhLkwf05ZCG8ICCOpk0MULmvDSY2M8UawIRExLIQIEgHDRoghihgRIgiigBEjgiFATBACAgFgghEwSAAGgoBCBBgYAg5hYKAIFYgHBo6w9RRgAFfy160QuV8NAAAAAElFTkSuQmCC");
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAeCAYAAABuUU38AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUxJREFUeNrM1sEJwkAQBdCsngXPHsQO9O5FS7AAMVYgdqAd2IGCDWgFnryLFQiCZ8EGnJUNimiyM/tnk4HNEAg/8y6ZmMRVqz9eUJvRaSbvutCZ347bXVJy/ZnvTmdJ862Me+hAbZCTs6GHpyUi1tTSvPnqTpoWZPUa7W7ncT3vK4h4zVejy8QzM3WhVUO8ykI6jOxoGA4ig3BLHcNFSCGqGAkig2yqgpEiMsjSfY9LxYQg7L6r0X6wS29YJiYQYecemY+wHrXD1+bklGhpAhBDeu/JfIVGxaAQ9sb8CI+CQSJ+QmJg0Ii/EE2MBiIXooHRQhRCkBhNhBcEhLkwf05ZCG8ICCOpk0MULmvDSY2M8UawIRExLIQIEgHDRoghihgRIgiigBEjgiFATBACAgFgghEwSAAGgoBCBBgYAg5hYKAIFYgHBo6w9RRgAFfy160QuV8NAAAAAElFTkSuQmCC');
       background-size: 12px;
       background-position: 90% center;
       background-repeat: no-repeat;

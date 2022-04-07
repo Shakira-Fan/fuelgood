@@ -71,7 +71,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .cart-container,
 .cart {
   top: 55px;
