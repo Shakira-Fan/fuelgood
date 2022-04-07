@@ -85,22 +85,24 @@ export default {
 }
 .cart {
   position: relative;
-  background: #faf2c3;
+  background-color: rgb(255, 246, 227);
+  opacity: 90%;
   color: black;
   transition: 1s ease right;
-  border: 2px #088682 solid;
   border-radius: 5px;
+  border-radius: 2rem;
 }
 
 .cart-title {
   align-items: center;
   min-height: 49px;
   max-height: 49px;
-  background: #088682;
+  background: #2a599c;
   border-bottom: 1px solid #fff8ea;
   padding: 0px 15px;
   font-size: 26px;
   color: white;
+  border-radius: 1.3rem 1.3rem 0 0;
 }
 .cart-table {
   width: 398px;

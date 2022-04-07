@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <i class="icofont-cart-alt icofont-1x"></i>
+  <div class="total-qty">
     <a>購買{{ totalQuantity }}公升</a>
     <button @click="toggleSidebar" class="top-bar-cart-link">購買清單</button>
   </div>
@@ -73,20 +72,30 @@ export default {
 
 <style scoped>
 div a {
-  font-size: 22px;
+  font-size: 2.5rem;
   text-decoration: none;
 }
 div button {
-  background: #008e89;
+  background: var(--color-secondary);
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
   color: white;
   margin: 1.5rem;
-  font-size: 18px;
+  font-size: 2.5rem;
   cursor: pointer;
 }
 .card-container {
+  max-width: 100rem;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   padding: 5rem;
+}
+.total-qty {
+  padding-top: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
