@@ -68,7 +68,7 @@ export default {
   padding: 0 10rem;
   align-items: center;
   background-color: var(--color-primary);
-  padding: 2rem;
+  padding: 1rem;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-items {
@@ -81,7 +81,7 @@ export default {
   margin: 0 0.5rem;
 }
 img {
-  width: 15rem;
+  width: 12rem;
   margin-left: 3rem;
 }
 a {
