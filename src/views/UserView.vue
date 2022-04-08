@@ -6,7 +6,7 @@
     <h2 v-if="!loading">目前未提取的數量</h2>
     <div class="inventory-container" v-if="!loading">
       <div class="inventory">
-        <div>92無鉛汽油:</div>
+        <div class="gas-title">92無鉛汽油:</div>
         <div class="actual-inventory">
           {{ inventory[0].properties['92無鉛汽油'].liter }}
           <span class="unit">公升</span>
@@ -14,7 +14,7 @@
       </div>
 
       <div class="inventory">
-        <div>95無鉛汽油:</div>
+        <div class="gas-title">95無鉛汽油:</div>
         <div class="actual-inventory">
           {{ inventory[0].properties['95無鉛汽油'].liter }}
           <span class="unit">公升</span>
@@ -22,7 +22,7 @@
       </div>
 
       <div class="inventory">
-        <div>98無鉛汽油:</div>
+        <div class="gas-title">98無鉛汽油:</div>
         <div class="actual-inventory">
           {{ inventory[0].properties['98無鉛汽油'].liter }}
           <span class="unit">公升</span>
@@ -30,7 +30,7 @@
       </div>
 
       <div class="inventory">
-        <div>超級柴油:</div>
+        <div class="gas-title">超級柴油:</div>
         <div class="actual-inventory">
           {{ inventory[0].properties['高級柴油'].liter }}
           <span class="unit">公升</span>
@@ -152,7 +152,7 @@ h2 {
   font-size: 2.5rem;
   font-weight: 300;
   width: 30rem;
-  padding: 0.5rem;
+  padding: 1rem;
   background-color: var(--color-secondary);
   color: #fff;
   font-weight: 700;
@@ -172,16 +172,20 @@ h2 {
   max-width: 30rem;
   max-height: 30rem;
   margin: 1rem;
-  padding: 2rem;
+  padding: 3rem;
   background-color: var(--color-grey);
   border-radius: 2rem;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
 .unit {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
 }
 .actual-inventory {
-  font-size: 8rem;
+  font-size: 6rem;
+}
+.gas-title {
+  font-size: 2.5rem;
+  padding-bottom: 3rem;
 }
 .buttons {
   display: flex;
@@ -205,7 +209,7 @@ button:hover {
 
 .container {
   max-width: 80rem;
-  padding: 2rem;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
   border-radius: 1rem;
@@ -228,15 +232,15 @@ button:hover {
   margin: 0 auto;
 }
 .order-info {
-  display: block;
-  text-align: left;
+  margin-right: 0.5rem;
 }
 .order {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  /* justify-content: space-around; */
 }
 .loading {
-  padding: 20rem;
+  padding: 30rem;
   font-size: 3rem;
 }
 </style>
