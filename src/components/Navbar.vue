@@ -97,6 +97,7 @@ export default {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-items {
+  color:#fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -111,13 +112,19 @@ img {
   width: 12rem;
   margin-left: 3rem;
 }
+
+img:hover{
+  transform: scale(1.3);
+  transition: all 0.3s ease-out;
+}
+
 a {
   font-size: 2.3rem;
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 a:hover {
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 .user-account {
   margin-right: 2rem;
@@ -132,6 +139,6 @@ a:hover {
   border-radius: 1rem;
 }
 .logout:hover {
-  background-color: #0e3365;
+  background-color: var(--color-primary);
 }
 </style>

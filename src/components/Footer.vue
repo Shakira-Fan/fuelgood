@@ -88,12 +88,11 @@ input {
 }
 .legal {
   background-color: var(--color-primary);
-  padding: 1.5rem;
+  
   font-weight: bold;
 }
 .copyright {
   color: #fff;
   background-color: var(--color-secondary);
-  padding: 2rem;
 }
 </style>

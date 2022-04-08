@@ -1,6 +1,6 @@
 <template>
 <div class="store">
-    <h4 class="mb-5">據點查詢</h4>
+    <h2 class="mb-5">據點查詢</h2>
     <div class="container">
         <div class="row flex flex-column-reverse flex-md-row justify-content-center align-items-start no-gutters">
             <div class="col-12 col-md-6 mb-5">
@@ -160,19 +160,8 @@ label{
 select{
   margin-top: .7rem;
 }
-.store{
-  // width:100%;
-  // padding:10rem 15rem;
-  h4{
-    display: inline-block;
-    width:12vw;
-    padding: 0.5rem;
-    margin: 1rem;
-    background-color:var(--color-secondary);
-    color: white;
-    font-size:2.5rem ;
-    border-radius: 1rem;
-}
+h2{
+  font-size: 4rem;
 }
 #map {
  height: 50vh;
@@ -186,28 +175,29 @@ select{
  cursor: pointer;
  }
 }
-@media screen and (max-width: 768px) {
-   .store{
-  // width:100%;
-  // padding:10rem 15rem;
-  h4{
-    width:15vw;
-    padding: 0.5rem;
-    margin: 1rem;
-    font-size:2rem ;
-}
-}
-}
-@media screen and  (max-width: 576px){
-  .store{
-  // width:100%;
-  // padding:10rem 15rem;
-  h4{
-    width:20vw;
-    padding: 0.5rem;
-    margin: 1rem;
-    font-size:2rem ;
-}
-}
-}
+// @media screen and (max-width: 768px) {
+//    .store{
+//   width:100%;
+//   padding:10rem 15rem;
+//   h4{
+//     width:15vw;
+//     padding: 0.5rem;
+//     margin: 1rem;
+//     font-size:2rem ;
+// }
+// }
+// }
+
+// @media screen and  (max-width: 576px){
+//   .store{
+//   width:100%;
+//   padding:10rem 15rem;
+//   h4{
+//     width:20vw;
+//     padding: 0.5rem;
+//     margin: 1rem;
+//     font-size:2rem ;
+// }
+// }
+// }
 </style>
