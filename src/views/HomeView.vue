@@ -146,8 +146,6 @@ data() {
 
 /* 動畫設置 */
 .banner{
-  min-height: 70vh;
-  background-color:var(--color-primary);
   padding:0;
   img{
     margin: 0;
@@ -160,7 +158,8 @@ data() {
   /* 圖表設置 */
   .chart{
     width:100%;
-    padding:5rem 0;
+    //margin: 5rem;
+    padding: 5rem 0;
     div{
       display: flex;
       flex-wrap: wrap;

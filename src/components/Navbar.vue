@@ -47,18 +47,13 @@ export default {
       return this.$store.state.id;
     },
   },
+
   methods: {
     handleScroll(){
-        let scrollTop =
-          window.pageYOffset ||
-          document.documentElement.scrollTop||
-          document.body.scrollTop;
-      if (scrollTop){
-        this.style.backgroundColor=`(#ffd32d)`;
-        this.color =true;
-      }else if(scrollTop== 0){
+      if (window.scrollY > 5){
+        this.style.backgroundColor=`#ffd32d`;
+      }else{
         this.style.backgroundColor="transparent";
-        this.color=false;
       }
     },
     beforeDestroy(){
@@ -89,6 +84,7 @@ export default {
   font-size: 3.5rem;
 }
 .navbar {
+  transition: ease 0.5s all;
   z-index: 999;
   width: 100%;
   position: fixed;
@@ -97,7 +93,7 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
-  background-color: var(--color-primary);
+  /* background-color: var(--color-primary); */
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-items {
