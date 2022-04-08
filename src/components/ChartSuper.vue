@@ -79,7 +79,11 @@ const options = ref({
         display: false
     },
     title: {
-      text: "超級柴油歷史價格"
+      text: "超級柴油歷史價格",
+       font: {
+            size: 18,
+            fontColor: "purple",
+          }
     },
 
   }

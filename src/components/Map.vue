@@ -147,6 +147,7 @@ export default {
 
 <style lang="scss" scoped>
 @import 'bootstrap/scss/bootstrap';
+
 label{
   margin:0.5rem 0.5rem;
   padding:0 ;
@@ -157,9 +158,17 @@ select{
 }
 .store{
   width:100%;
-  padding:10rem 20rem;
-  h4{font-size: 2rem;
-     font-weight:bold;}
+  padding:10rem 15rem;
+  h4{
+    display: inline-block;
+    width:12vw;
+    padding: 0.5rem;
+    margin: 1rem;
+    background-color:var(--color-secondary);
+    color: white;
+    font-size:2.5rem ;
+    border-radius: 1rem;
+}
 }
 #map {
  height: 50vh;
@@ -181,9 +190,4 @@ select{
 }
 }
 
-@media screen and (max-width:900px) { 
- .store{
-  padding:0rem;
-}
-}
 </style>

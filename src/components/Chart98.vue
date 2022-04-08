@@ -80,7 +80,11 @@ const options = ref({
         display: false
     },
     title: {
-      text: "98汽油歷史價格"
+      text: "98汽油歷史價格",
+       font: {
+            size: 18,
+            fontColor: "purple",
+          }
     },
 
   }
