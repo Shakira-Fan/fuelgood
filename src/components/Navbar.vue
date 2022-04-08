@@ -62,19 +62,22 @@ export default {
   font-size: 3.5rem;
 }
 .navbar {
+  z-index: 1;
+  width: 100%;
+  position: fixed;
+  top:0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 0 10rem;
   align-items: center;
   background-color: var(--color-primary);
-  padding: 1rem;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-items {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 4rem;
 }
 
 .nav-span {

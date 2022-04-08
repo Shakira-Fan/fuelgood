@@ -1,47 +1,51 @@
 <template>
- <div class="store">
-   <h4>據點查詢</h4>
-     <div class="row no-gutters">
- <div class="col-sm-8">
- <div id="map"></div>
- </div>
- <div class="col-sm-4">
- <div class="toolbox">
- <div class="sticky-top bg-white shadow-sm p-2">
- <div class="form-group d-flex">
- <label for="cityName" class="mr-2 col-form-label text-right"><p>縣市</p></label>
- <div class="flex-fill">
-           <select id="cityName" class="form-control"
-              v-model="select.city" @change="select.area = ''">
-                <option value="">-- Select One --</option>
-                <option :value="c.CityName" v-for="c in cityName" :key="c.CityName">
-                  {{ c.CityName }}
-                </option>
-          </select>
- </div>
- </div>
- <div class="form-group d-flex">
- <label for="area" class="mr-2 col-form-label text-right"><p>地區</p></label>
- <div class="flex-fill">
-  <select id="area" class="form-control" v-if="select.city.length"
-                v-model="select.area" @change="updateSelect">
-                <option value="">-- Select One --</option>
-                <option :value="a.AreaName"
-                  v-for="a in cityName.find((city)=>city.CityName === select.city).AreaList"
-                  :key="a.AreaName">
-                  {{ a.AreaName }}
-                </option>
-              </select>
- </div>
- </div>
- <p class="mb-0 small text-muted text-right"></p>
- </div>
- </div>
- </div>
+<div class="store">
+    <h4 class="mb-5">據點查詢</h4>
+    <div class="container">
+        <div class="row flex flex-column-reverse flex-md-row justify-content-center align-items-start no-gutters">
+            <div class="col-12 col-md-6 mb-5">
+                <div id="map"></div>
+            </div>
+            <div class="col-12 col-md-3 mb-5">
+              <div class="toolbox">
+                  <div class="sticky-top bg-white shadow-sm p-2">
+                      <div class="form-group d-flex">
+                          <label for="cityName" class="mr-2 col-form-label text-right">
+                              <p>縣市</p>
+                          </label>
+                          <div class="flex-fill">
+                              <select id="cityName" class="form-control" v-model="select.city" @change="select.area = ''">
+                                  <option value="">-- Select One --</option>
+                                  <option :value="c.CityName" v-for="c in cityName" :key="c.CityName">
+                                      {{ c.CityName }}
+                                  </option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="form-group d-flex">
+                          <label for="area" class="mr-2 col-form-label text-right">
+                              <p>地區</p>
+                          </label>
+                          <div class="flex-fill">
+                              <select id="area" class="form-control" v-if="select.city.length" v-model="select.area"
+                                  @change="updateSelect">
+                                  <option value="">-- Select One --</option>
+                                  <option :value="a.AreaName"
+                                      v-for="a in cityName.find((city)=>city.CityName === select.city).AreaList"
+                                      :key="a.AreaName">
+                                      {{ a.AreaName }}
+                                  </option>
+                              </select>
+                          </div>
+                      </div>
+                      <p class="mb-0 small text-muted text-right"></p>
+                  </div>
+              </div>
+            </div>
+        </div>
 
+    </div>
 </div>
-     </div> 
-
 </template>
 
 <script>
@@ -157,8 +161,8 @@ select{
   margin-top: .7rem;
 }
 .store{
-  width:100%;
-  padding:10rem 15rem;
+  // width:100%;
+  // padding:10rem 15rem;
   h4{
     display: inline-block;
     width:12vw;
@@ -177,16 +181,15 @@ select{
  background: #e9ffe3;
 }
 .toolbox {
- height: 50vh;
  overflow-y: auto;
  a {
  cursor: pointer;
  }
 }
 @media screen and (max-width: 768px) {
-  .store{
-  width:100%;
-  padding:10rem 15rem;
+   .store{
+  // width:100%;
+  // padding:10rem 15rem;
   h4{
     width:15vw;
     padding: 0.5rem;
@@ -197,8 +200,8 @@ select{
 }
 @media screen and  (max-width: 576px){
   .store{
-  width:100%;
-  padding:10rem 15rem;
+  // width:100%;
+  // padding:10rem 15rem;
   h4{
     width:20vw;
     padding: 0.5rem;

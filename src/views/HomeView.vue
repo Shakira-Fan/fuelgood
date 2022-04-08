@@ -1,5 +1,7 @@
 <template>
-<div class="banner"><img src="../assets/images/animation.gif" alt=""></div>
+<div class="banner container-fluid">
+  <img class="" src="../assets/images/animation.gif" alt="">
+</div>
   <div class="chart">
     <div>
           <div class="left">
@@ -132,6 +134,8 @@ data() {
 </script>
 
 <style lang="scss" scoped>
+@import 'bootstrap/scss/bootstrap';
+
 
 * {
   padding:0;
@@ -142,15 +146,13 @@ data() {
 
 /* 動畫設置 */
 .banner{
-  width:100%;
-  height: 90vh;
+  min-height: 70vh;
   background-color:var(--color-primary);
   padding:0;
   img{
-    margin: 0%;
-    padding:0%;
+    margin: 0;
+    padding:0;
     width: 100%;
-    height: 100%;
   }
 }
 
