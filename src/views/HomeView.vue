@@ -1,27 +1,56 @@
 <template>
 <div class="banner container-fluid">
-  <img class="" src="../assets/images/animation.gif" alt="">
+  <img class="" src="../assets/images/animation.gif" alt="" />
 </div>
-  <div class="chart">
-    <div>
-          <div class="left">
-          <h2>今日油價</h2>
-            <div class="price">
-              <div>
-                <div class="info"><p class="oilName">92無鉛汽油:</p><span><h4>{{price92}}</h4><p>元/公升</p></span><button @click="activeTab='Chart92'">92汽油歷史油價</button></div>
-                <div class="info"><p class="oilName">95無鉛汽油:</p><span><h4>{{price95}}</h4><p>元/公升</p></span><button  @click="activeTab='Chart95'">95汽油歷史油價</button></div>
-              </div>
-              <div>
-                <div class="info"><p class="oilName">98無鉛汽油:</p><span><h4>{{price98}}</h4><p>元/公升</p></span><button  @click="activeTab='Chart98'">98汽油歷史油價</button></div>
-                <div class="info"><p class="oilName">超級柴油價格:</p><span><h4>{{priceSuper}}</h4><p>元/公升</p></span><button @click="activeTab='ChartSuper'">超級柴油歷史油價</button></div>
-              </div>
-            </div>
-          <a class="buyIt" href="/cart">我要購買</a>
-       </div>
-      <component class="right" :is="activeTab" :getLabels="historyDate" :getDataValues="currentTabPrice" />
-    </div> 
-    </div>
 <Card />
+<div class="chart">
+  <div class="flex justify-content-around align-items-center">
+    <div class="left">
+      <h2>今日油價</h2>
+      <div class="price">
+        <div>
+          <div class="info">
+            <p class="oilName">92無鉛汽油:</p>
+            <span>
+              <h4>{{price92}}</h4>
+              <p>元/公升</p> </span
+            ><button @click="activeTab='Chart92'">92汽油歷史油價</button>
+          </div>
+          <div class="info">
+            <p class="oilName">95無鉛汽油:</p>
+            <span>
+              <h4>{{price95}}</h4>
+              <p>元/公升</p> </span
+            ><button @click="activeTab='Chart95'">95汽油歷史油價</button>
+          </div>
+        </div>
+        <div>
+          <div class="info">
+            <p class="oilName">98無鉛汽油:</p>
+            <span>
+              <h4>{{price98}}</h4>
+              <p>元/公升</p> </span
+            ><button @click="activeTab='Chart98'">98汽油歷史油價</button>
+          </div>
+          <div class="info">
+            <p class="oilName">超級柴油價格:</p>
+            <span>
+              <h4>{{priceSuper}}</h4>
+              <p>元/公升</p> </span
+            ><button @click="activeTab='ChartSuper'">超級柴油歷史油價</button>
+          </div>
+        </div>
+      </div>
+      <a class="buyIt shadow" href="/cart">立即加油去！</a>
+    </div>
+    <component
+      class="right"
+      :is="activeTab"
+      :getLabels="historyDate"
+      :getDataValues="currentTabPrice"
+    />
+  </div>
+</div>
 <Map />
 </template>
 
@@ -171,13 +200,7 @@ data() {
         flex-wrap: wrap;
         align-items: center;
       h2{
-        width:12vw;
-        text-decoration: none;
-        padding: 0.5rem;
-        background-color:var(--color-secondary);
-        color: white;
-        font-size:2.5rem ;
-        border-radius: 1rem;
+        font-size:4rem ;
       }
       .price{
         display: flex;
@@ -191,6 +214,15 @@ data() {
             margin: 1rem;
             padding: 1.5rem;
             border-radius: 1rem;
+
+            &:hover{
+            transition: all ease-out 0.3s;
+            box-shadow:
+            0px 0px 2.7px rgba(0, 0, 0, 0.042),
+            0px 0px 7.5px rgba(0, 0, 0, 0.06),
+            0px 0px 18.1px rgba(0, 0, 0, 0.078),
+            0px 0px 60px rgba(0, 0, 0, 0.12)
+            }
 
           }
           span{
@@ -218,15 +250,14 @@ data() {
         }
       }
       a{
-      width:12vw;
       text-decoration: none;
-      padding: 0.5rem;
-      background-color:var(--color-secondary);
+      padding: 0 1rem;
+      background-color:#A9CC59;
       color: white;
-      font-size:2.5rem ;
-      border-radius: 1rem;
+      font-size:1.5rem ;
+      border-radius: 1.5rem;
       &:hover{
-        background-color: #0e3365;
+        background-color: #a9cc59c0;
       }
     }
   }

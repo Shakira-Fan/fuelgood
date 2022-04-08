@@ -53,6 +53,10 @@ export default {
 
 .cardComponent{
         min-height: 50vh;
+        
+        h2{
+        font-size:  4rem;
+    }
     .row{
         .card{
         padding: 2rem;
@@ -83,7 +87,7 @@ export default {
 
     h3{
         margin-top: 1.5rem;
-        font-size: 2rem;
+        font-size: 3rem;
     }
     p{
         font-size: 1.5rem;
