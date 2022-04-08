@@ -44,28 +44,30 @@
     <button @click="$router.push('/cart')">我要購買</button>
   </div>
 
-  <h2 v-if="listOrder">歷史訂單</h2>
   <div class="container" v-if="listOrder">
-    <div>
-      <div class="orders" v-for="order in orders.flat()" :key="order.email">
-        <div class="order">
-          <span class="order-info">訂單#{{ order.orderNumber }}</span>
-          <span class="order-info"
-            >92:{{ order.orders['92無鉛汽油'].liter }}公升</span
-          >
-          <span class="order-info"
-            >95:{{ order.orders['95無鉛汽油'].liter }}公升</span
-          >
-          <span class="order-info"
-            >98:{{ order.orders['98無鉛汽油'].liter }}公升</span
-          >
-          <span class="order-info"
-            >柴油:{{ order.orders['高級柴油'].liter }}公升</span
-          >
-          <span class="order-info">日期：{{ localDate(order.date) }}</span>
-        </div>
-      </div>
-    </div>
+    <h2 v-if="listOrder">歷史訂單</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">92</th>
+          <th scope="col">95</th>
+          <th scope="col">98</th>
+          <th scope="col">柴油</th>
+          <th scope="col">日期</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="order in orders.flat()" :key="order.email">
+          <th scope="row">{{ order.orderNumber }}</th>
+          <td>{{ order.orders['92無鉛汽油'].liter }}</td>
+          <td>{{ order.orders['95無鉛汽油'].liter }}</td>
+          <td>{{ order.orders['98無鉛汽油'].liter }}</td>
+          <td>{{ order.orders['高級柴油'].liter }}</td>
+          <td>{{ localDate(order.date) }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div class="qr-container" v-if="qr">
     <p>請於時效內，出示QR code 提取汽油</p>
@@ -140,7 +142,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import 'bootstrap/scss/bootstrap';
 p {
   font-size: 2.5rem;
   font-weight: 500;
@@ -214,7 +217,6 @@ button:hover {
   flex-direction: column;
   border-radius: 1rem;
   margin: 3rem auto;
-  /* background-color: #eee; */
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
 .qr-container {
