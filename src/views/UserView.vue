@@ -5,39 +5,35 @@
 
     <h2 v-if="!loading">目前未提取的數量</h2>
     <div class="inventory-container" v-if="!loading">
-      <div>
-        <div class="inventory">
-          <div>92無鉛汽油:</div>
-          <div class="actual-inventory">
-            {{ inventory[0].properties['92無鉛汽油'].liter }}
-            <span class="unit">公升</span>
-          </div>
-        </div>
-
-        <div class="inventory">
-          <div>95無鉛汽油:</div>
-          <div class="actual-inventory">
-            {{ inventory[0].properties['95無鉛汽油'].liter }}
-            <span class="unit">公升</span>
-          </div>
+      <div class="inventory">
+        <div>92無鉛汽油:</div>
+        <div class="actual-inventory">
+          {{ inventory[0].properties['92無鉛汽油'].liter }}
+          <span class="unit">公升</span>
         </div>
       </div>
 
-      <div>
-        <div class="inventory">
-          <div>98無鉛汽油:</div>
-          <div class="actual-inventory">
-            {{ inventory[0].properties['98無鉛汽油'].liter }}
-            <span class="unit">公升</span>
-          </div>
+      <div class="inventory">
+        <div>95無鉛汽油:</div>
+        <div class="actual-inventory">
+          {{ inventory[0].properties['95無鉛汽油'].liter }}
+          <span class="unit">公升</span>
         </div>
+      </div>
 
-        <div class="inventory">
-          <div>超級柴油:</div>
-          <div class="actual-inventory">
-            {{ inventory[0].properties['高級柴油'].liter }}
-            <span class="unit">公升</span>
-          </div>
+      <div class="inventory">
+        <div>98無鉛汽油:</div>
+        <div class="actual-inventory">
+          {{ inventory[0].properties['98無鉛汽油'].liter }}
+          <span class="unit">公升</span>
+        </div>
+      </div>
+
+      <div class="inventory">
+        <div>超級柴油:</div>
+        <div class="actual-inventory">
+          {{ inventory[0].properties['高級柴油'].liter }}
+          <span class="unit">公升</span>
         </div>
       </div>
     </div>
@@ -168,19 +164,21 @@ h2 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  max-width: 80rem;
+  max-width: 60rem;
   padding: 2rem;
   margin: 1rem auto;
 }
 .inventory {
-  margin: 2rem;
+  max-width: 30rem;
+  max-height: 30rem;
+  margin: 1rem;
   padding: 2rem;
   background-color: var(--color-grey);
   border-radius: 2rem;
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
 .unit {
-  font-size: 3rem;
+  font-size: 2.5rem;
 }
 .actual-inventory {
   font-size: 8rem;
