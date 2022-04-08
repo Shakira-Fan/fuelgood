@@ -34,7 +34,7 @@ h2 {
   font-size: 2.5rem;
   max-width: 110rem;
   margin: 1rem auto;
-  border-bottom: 2px solid var(--color-primary);
+  /* border-bottom: 2px solid var(--color-primary); */
   padding: 2.5rem;
 }
 
