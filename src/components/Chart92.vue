@@ -57,7 +57,6 @@ const data = computed(() => ({
       label: "92汽油歷史價格",
       data:getDataValues.value,
       borderColor: "#dc322f",
-      fontColor: "black",
     }
   ]
 }))
@@ -81,8 +80,10 @@ const options = ref({
     },
     title: {
       text: "92汽油歷史價格",
-      fontColor: "black",
-      fontSize:20,
+       font: {
+            size: 18,
+            fontColor: "purple",
+          }
     },
 
   }

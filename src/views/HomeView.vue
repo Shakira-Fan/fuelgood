@@ -226,9 +226,83 @@ data() {
         background-color: #0e3365;
       }
     }
-    
-    
   }
     }
   }
+
+  @media screen and (max-width: 768px) {
+  .chart{
+    div{
+      .left{
+      h2{
+        width:15vw;
+        padding: 0.5rem;
+        font-size:2rem ;
+      }
+      .price{
+        div{
+          span{
+            display: flex;
+            align-items: flex-end;
+            h4{
+              font-size: 5rem;
+              color: red;
+            }
+          }
+          button{
+            width:15vw;
+            margin: .5rem;
+            padding: .5rem;
+            font-size: 1rem;
+          }
+        }
+      }
+      a{
+      width:15vw;
+      padding: 0.5rem;
+      font-size:2rem ;
+      border-radius: 1rem;
+    }
+  }
+    }
+  }
+}
+@media screen and  (max-width: 576px) {
+  .chart{
+    div{
+      .left{
+      h2{
+        width:20vw;
+        padding: 0.5rem;
+        font-size:2rem ;
+      }
+      .price{
+        div{
+          span{
+            display: flex;
+            align-items: flex-end;
+            h4{
+              font-size: 5rem;
+              color: red;
+            }
+          }
+          button{
+            width:20vw;
+            margin: .5rem;
+            padding: .5rem;
+            font-size: 1rem;
+          }
+        }
+      }
+      a{
+      width:20vw;
+      padding: 0.5rem;
+      font-size:2rem ;
+      border-radius: 1rem;
+    }
+  }
+    }
+  }
+
+}
 </style>
