@@ -1,7 +1,7 @@
 <template>
-  <nav class="navbar">
+  <nav class="navbar" :style="style" :class="{color:color}">
     <div class="icon" @click="$router.push('/')">
-      <img src="../assets/images/nav2.png" alt="wels logo" />
+      <img src="../assets/images/nav.png" alt="wels logo" />
     </div>
 
     <div class="navbar-items">
@@ -25,6 +25,14 @@
 
 <script>
 export default {
+  data(){
+    return{
+      style:{
+        backgroundColor:"",
+      },
+      color:false,
+    };
+  },
   computed: {
     user() {
       return this.$store.state.user;
@@ -40,6 +48,22 @@ export default {
     },
   },
   methods: {
+    handleScroll(){
+        let scrollTop =
+          window.pageYOffset ||
+          document.documentElement.scrollTop||
+          document.body.scrollTop;
+      if (scrollTop){
+        this.style.backgroundColor=`(#ffd32d)`;
+        this.color =true;
+      }else if(scrollTop== 0){
+        this.style.backgroundColor="transparent";
+        this.color=false;
+      }
+    },
+    beforeDestroy(){
+        window.removeEventListener("scroll",this.handleScroll);
+      },
     handleClick() {
       this.user.pop();
       localStorage.removeItem('name');
@@ -51,6 +75,9 @@ export default {
       this.$router.push('/');
     },
   },
+  mounted(){
+    window.addEventListener("scroll",this.handleScroll);
+  }
 };
 </script>
 
@@ -84,6 +111,7 @@ export default {
   margin: 0 0.5rem;
 }
 img {
+  margin-top: 1rem;
   width: 12rem;
   margin-left: 3rem;
 }
