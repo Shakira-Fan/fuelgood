@@ -19,10 +19,12 @@
       <component class="right" :is="activeTab" :getLabels="historyDate" :getDataValues="currentTabPrice" />
     </div> 
     </div>
+<Card />
 <Map />
 </template>
 
 <script>
+import Card from '../components/Card.vue'
 import Map from '../components/Map.vue'
 import Chart92 from '../components/Chart92.vue'
 import Chart95 from '../components/Chart95.vue'
@@ -33,7 +35,7 @@ import ChartSuper from '../components/ChartSuper.vue'
 
 
 export default {
-components: {Map,Chart92,Chart95,Chart98,ChartSuper,Animation},
+components: {Map,Chart92,Chart95,Chart98,ChartSuper,Animation, Card},
 data() {
   return{
     activeTab:'Chart92',
