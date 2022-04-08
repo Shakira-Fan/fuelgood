@@ -82,6 +82,7 @@ const options = ref({
     title: {
       text: "92汽油歷史價格",
       fontColor: "black",
+      fontSize:20,
     },
 
   }
@@ -91,7 +92,7 @@ const options = ref({
 
 <style lang="scss" scoped>
 .demo{
-    width:300px;
-    height: 300px;
+    width:400px;
+    height: 400px;
 }
 </style>
