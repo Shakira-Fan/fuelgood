@@ -19,10 +19,12 @@
       <component class="right" :is="activeTab" :getLabels="historyDate" :getDataValues="currentTabPrice" />
     </div> 
     </div>
+<Card />
 <Map />
 </template>
 
 <script>
+import Card from '../components/Card.vue'
 import Map from '../components/Map.vue'
 import Chart92 from '../components/Chart92.vue'
 import Chart95 from '../components/Chart95.vue'
@@ -33,7 +35,7 @@ import ChartSuper from '../components/ChartSuper.vue'
 
 
 export default {
-components: {Map,Chart92,Chart95,Chart98,ChartSuper,Animation},
+components: {Map,Chart92,Chart95,Chart98,ChartSuper,Animation, Card},
 data() {
   return{
     activeTab:'Chart92',
@@ -226,9 +228,83 @@ data() {
         background-color: #0e3365;
       }
     }
-    
-    
   }
     }
   }
+
+  @media screen and (max-width: 768px) {
+  .chart{
+    div{
+      .left{
+      h2{
+        width:15vw;
+        padding: 0.5rem;
+        font-size:2rem ;
+      }
+      .price{
+        div{
+          span{
+            display: flex;
+            align-items: flex-end;
+            h4{
+              font-size: 5rem;
+              color: red;
+            }
+          }
+          button{
+            width:15vw;
+            margin: .5rem;
+            padding: .5rem;
+            font-size: 1rem;
+          }
+        }
+      }
+      a{
+      width:15vw;
+      padding: 0.5rem;
+      font-size:2rem ;
+      border-radius: 1rem;
+    }
+  }
+    }
+  }
+}
+@media screen and  (max-width: 576px) {
+  .chart{
+    div{
+      .left{
+      h2{
+        width:20vw;
+        padding: 0.5rem;
+        font-size:2rem ;
+      }
+      .price{
+        div{
+          span{
+            display: flex;
+            align-items: flex-end;
+            h4{
+              font-size: 5rem;
+              color: red;
+            }
+          }
+          button{
+            width:20vw;
+            margin: .5rem;
+            padding: .5rem;
+            font-size: 1rem;
+          }
+        }
+      }
+      a{
+      width:20vw;
+      padding: 0.5rem;
+      font-size:2rem ;
+      border-radius: 1rem;
+    }
+  }
+    }
+  }
+
+}
 </style>
