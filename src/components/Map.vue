@@ -150,7 +150,7 @@ export default {
 
 label{
   margin:0.5rem 0.5rem;
-  padding:0 ;
+  padding:0.5rem ;
   p{font-size: 1.5rem;}
 }
 select{
@@ -183,11 +183,28 @@ select{
  cursor: pointer;
  }
 }
-
-@media screen and (max-width:920px) { 
-  label{
-  margin:0rem 0.5rem;
+@media screen and (max-width: 768px) {
+  .store{
+  width:100%;
+  padding:10rem 15rem;
+  h4{
+    width:15vw;
+    padding: 0.5rem;
+    margin: 1rem;
+    font-size:2rem ;
 }
 }
-
+}
+@media screen and  (max-width: 576px){
+  .store{
+  width:100%;
+  padding:10rem 15rem;
+  h4{
+    width:20vw;
+    padding: 0.5rem;
+    margin: 1rem;
+    font-size:2rem ;
+}
+}
+}
 </style>
