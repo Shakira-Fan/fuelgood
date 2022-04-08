@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     localDate(utcDate) {
-      return moment.utc(utcDate).local().format('YYYY-MM-DD,h:mm:ss a');
+      // return moment.utc(utcDate).local().format('YYYY-MM-DD,h:mm:ss a');
     },
     handleQr() {
       this.qr = !this.qr;
