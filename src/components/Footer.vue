@@ -46,7 +46,7 @@ a:hover {
   color: var(--color-secondary);
 }
 .contact {
-  background-image: url('../assets/images/banner.png');
+  background-image: url('../assets/images/background1.png');
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
