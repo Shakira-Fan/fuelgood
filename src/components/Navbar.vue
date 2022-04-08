@@ -62,7 +62,7 @@ export default {
   font-size: 3.5rem;
 }
 .navbar {
-  z-index: 1;
+  z-index: 999;
   width: 100%;
   position: fixed;
   top:0;
