@@ -157,7 +157,7 @@ select{
 }
 .store{
   width:100%;
-  padding:2rem 15rem;
+  padding:10rem 20rem;
   h4{font-size: 2rem;
      font-weight:bold;}
 }

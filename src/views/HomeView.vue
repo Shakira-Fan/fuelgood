@@ -3,22 +3,18 @@
   <div class="chart">
     <div>
           <div class="left">
-          <h4>今日油價</h4>
-          <div>
+          <h2>今日油價</h2>
             <div class="price">
-            <div><p >92無鉛汽油:</p><h5>{{price92}}</h5><p>元/公升</p></div>
-            <div><p >95無鉛汽油:</p><h5>{{price95}}</h5><p>元/公升</p></div>
-            <div><p >98無鉛汽油:</p><h5>{{price98}}</h5><p>元/公升</p></div>
-            <div><p class="fixPosition">超級柴油價格:</p><h5>{{priceSuper}}</h5><p>元/公升</p></div>
-          </div>
-          <div class="historyPrice">
-            <button @click="activeTab='Chart92'">92汽油歷史油價</button>
-            <button  @click="activeTab='Chart95'">95汽油歷史油價</button>
-            <button  @click="activeTab='Chart98'">98汽油歷史油價</button>
-            <button @click="activeTab='ChartSuper'">超級柴油歷史油價</button>
-          </div>
-          </div> 
-          <a class="buyIt" href="#">我要購買</a>
+              <div>
+                <div class="info"><p class="oilName">92無鉛汽油:</p><span><h4>{{price92}}</h4><p>元/公升</p></span><button @click="activeTab='Chart92'">92汽油歷史油價</button></div>
+                <div class="info"><p class="oilName">95無鉛汽油:</p><span><h4>{{price95}}</h4><p>元/公升</p></span><button  @click="activeTab='Chart95'">95汽油歷史油價</button></div>
+              </div>
+              <div>
+                <div class="info"><p class="oilName">98無鉛汽油:</p><span><h4>{{price98}}</h4><p>元/公升</p></span><button  @click="activeTab='Chart98'">98汽油歷史油價</button></div>
+                <div class="info"><p class="oilName">超級柴油價格:</p><span><h4>{{priceSuper}}</h4><p>元/公升</p></span><button @click="activeTab='ChartSuper'">超級柴油歷史油價</button></div>
+              </div>
+            </div>
+          <a class="buyIt" href="/cart">我要購買</a>
        </div>
       <component class="right" :is="activeTab" :getLabels="historyDate" :getDataValues="currentTabPrice" />
     </div> 
@@ -32,7 +28,6 @@ import Chart92 from '../components/Chart92.vue'
 import Chart95 from '../components/Chart95.vue'
 import Chart98 from '../components/Chart98.vue'
 import ChartSuper from '../components/ChartSuper.vue'
-// import Banner from '../components/Banner.vue'
 
 
 
@@ -161,146 +156,79 @@ data() {
   /* 圖表設置 */
   .chart{
     width:100%;
-   
-    div{
-      background-color:#f9e366;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-      .left{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding:5rem 0;
     div{
       display: flex;
-      justify-content: space-around;
-      .price{
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      padding: 1rem 0;
+      .left{
         display: flex;
         flex-direction: column;
-      p{
-        display: inline;
-        margin: 0;
-        font-size: 1.5rem;
-      }
-      .fixPosition{
-        font-size: 1.3rem;
-      }
-    h5{
-      display: inline;
-      color: red;
-      }
-      }
-      .historyPrice{
-            display: flex;
-    flex-direction: column;
-    button{
-    width:12vw;
-    margin: .5rem;
-    padding: .5rem;
-    font-size: 0.5rem;
-    background-color:var(--color-secondary1);
-    border: none;
-    text-align: center;
-    &:hover{
+        flex-wrap: wrap;
+        align-items: center;
+      h2{
+        width:12vw;
+        text-decoration: none;
+        padding: 0.5rem;
         background-color:var(--color-secondary);
         color: white;
+        font-size:2.5rem ;
+        border-radius: 1rem;
       }
-  }
+      .price{
+        display: flex;
+        justify-content: space-around;
+        div{
+          display: flex;
+          flex-direction: column;
+          .info{
+            margin: 1rem ,0;
+            background-color: var(--color-grey);
+            margin: 1rem;
+            padding: 1.5rem;
+            border-radius: 1rem;
+
+          }
+          span{
+            display: flex;
+            align-items: flex-end;
+            h4{
+              font-size: 5rem;
+              color: red;
+            }
+          }
+          button{
+            width:12vw;
+            margin: .5rem;
+            padding: .5rem;
+            font-size: 1rem;
+            background-color: var(--color-secondary);
+            color: white;
+            border: none;
+            border-radius: 1rem;
+            text-align: center;
+            &:hover{
+                background-color: #0e3365;
+            }
+          }
+        }
       }
-    }
-    a{
+      a{
       width:12vw;
       text-decoration: none;
       padding: 0.5rem;
       background-color:var(--color-secondary);
       color: white;
-      font-size:1rem ;
+      font-size:2.5rem ;
+      border-radius: 1rem;
       &:hover{
-        background-color:var(--color-secondary1);
-        color: block;
+        background-color: #0e3365;
       }
     }
+    
+    
   }
     }
   }
-
-  @media screen and (max-width:620px) { 
-    .chart{
-    width:100%;
-    div{
-      .left{
-    div{
-      .price{
-      p{
-        display: inline;
-        margin: 0;
-        font-size: .8rem;
-      }
-      .fixPosition{
-        font-size: .8rem;
-      }
-      h5{
-      display: inline;
-      color: red;
-      font-size: 1rem;
-      }
-      }
-      .historyPrice{
-    button{
-    width:12vw;
-    margin: .5rem;
-    padding: .5rem;
-    font-size: 0.3rem;
-  }
-      }
-    }
-    a{
-      width:12vw;
-      text-decoration: none;
-      padding: 0.5rem;
-    }
-  }
-    }
-  }
-}
-
-  @media screen and (max-width:560px) { 
-    .chart{
-    width:100%;
-    div{
-      .left{
-    div{
-      .price{
-      p{
-        display: inline;
-        margin: 0;
-        font-size: .5rem;
-      }
-      .fixPosition{
-        font-size: .5rem;
-      }
-      h5{
-      display: inline;
-      color: red;
-      font-size: .5rem;
-      }
-      }
-      .historyPrice{
-    button{
-    width:12vw;
-    margin: .2rem;
-    padding: .2rem;
-    font-size: 0.2rem;
-  }
-      }
-    }
-    a{
-      width:12vw;
-      text-decoration: none;
-      padding: 0.2rem;
-    }
-  }
-    }
-  }
-}
 </style>

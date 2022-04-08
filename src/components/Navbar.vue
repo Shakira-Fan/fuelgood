@@ -81,7 +81,7 @@ export default {
   margin: 0 0.5rem;
 }
 img {
-  width: 13rem;
+  width: 15rem;
   margin-left: 3rem;
 }
 a {
