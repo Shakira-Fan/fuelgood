@@ -1,6 +1,8 @@
 <template>
+
 <div class="banner container-fluid">
-  <img class="" src="../assets/images/animation.gif" alt="" />
+  <!-- <img class="" src="../assets/images/1.gif" alt="" /> -->
+  <Banner />
 </div>
 <Card />
 <div class="chart">
@@ -55,6 +57,7 @@
 </template>
 
 <script>
+import Banner from '../components/Banner.vue'
 import Card from '../components/Card.vue'
 import Map from '../components/Map.vue'
 import Chart92 from '../components/Chart92.vue'
@@ -65,8 +68,10 @@ import ChartSuper from '../components/ChartSuper.vue'
 
 
 
+
+
 export default {
-components: {Map,Chart92,Chart95,Chart98,ChartSuper,Animation, Card},
+components: {Map,Chart92,Chart95,Chart98,ChartSuper,Animation,Card,Banner},
 data() {
   return{
     activeTab:'Chart92',
@@ -176,11 +181,8 @@ data() {
 /* 動畫設置 */
 .banner{
   padding:0;
-  img{
-    margin: 0;
-    padding:0;
-    width: 100%;
-  }
+  margin: 0;
+  width: 100vw;
 }
 
   
