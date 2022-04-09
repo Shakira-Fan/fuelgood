@@ -1,42 +1,57 @@
 <template>
-  <div>
-    <div class="loading" v-if="loading">載入中...</div>
-    <p v-if="!loading">歡迎回來, {{ username }}!</p>
+<div class="user-page container mt-5">
+    <div class="loading animate__animated animate__bounce animate__infinite" v-if="loading">載入中...</div>
 
-    <h2 v-if="!loading">目前未提取的數量</h2>
-    <div class="inventory-container" v-if="!loading">
-      <div class="inventory">
-        <div class="gas-title">92無鉛汽油:</div>
-        <div class="actual-inventory">
-          {{ inventory[0].properties['92無鉛汽油'].liter }}
-          <span class="unit">公升</span>
-        </div>
-      </div>
-
-      <div class="inventory">
-        <div class="gas-title">95無鉛汽油:</div>
-        <div class="actual-inventory">
-          {{ inventory[0].properties['95無鉛汽油'].liter }}
-          <span class="unit">公升</span>
-        </div>
-      </div>
-
-      <div class="inventory">
-        <div class="gas-title">98無鉛汽油:</div>
-        <div class="actual-inventory">
-          {{ inventory[0].properties['98無鉛汽油'].liter }}
-          <span class="unit">公升</span>
-        </div>
-      </div>
-
-      <div class="inventory">
-        <div class="gas-title">超級柴油:</div>
-        <div class="actual-inventory">
-          {{ inventory[0].properties['高級柴油'].liter }}
-          <span class="unit">公升</span>
-        </div>
-      </div>
+    <div class="profile">
+        <i class="bi bi-person-circle" v-if="!loading"></i>
+        <p class="mt-3" v-if="!loading"><strong>{{ username }}</strong>，歡迎回來！</p>
     </div>
+
+    <div class="row mt-5 flex align-items-center justify-content-center inventory-container" v-if="!loading">
+        <h2 class="mb-5" v-if="!loading">未提取庫存</h2>
+        <div class="row flex-wrap flex justify-content-center">
+            <div class="inventory col-9 col-sm-5 pt-5 p-md-4">
+                <i class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"></i>
+                <!-- 92無鉛汽油 -->
+                <h2 class="gas-title">無鉛汽油</h2>
+                <h3 class="actual-inventory">
+                    {{ inventory[0].properties['92無鉛汽油'].liter }}
+                </h3>
+                 <p class="unit">公升</p>
+            </div>
+
+            <div class="inventory col-9 col-sm-5 pt-5 px-sm-5">
+                <i class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"></i>
+                <!-- 95無鉛汽油 -->
+                <h2 class="gas-title">無鉛汽油:</h2>
+                <h3 class="actual-inventory">
+                    {{ inventory[0].properties['95無鉛汽油'].liter }}
+                </h3>
+                <p class="unit">公升</p>
+            </div>
+
+            <div class="inventory col-9 col-sm-5 pt-5 p-md-4">
+                <i class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"></i>
+                <!-- 98無鉛汽油 -->
+                <h2 class="gas-title">無鉛汽油</h2>
+                <h3 class="actual-inventory">
+                    {{ inventory[0].properties['98無鉛汽油'].liter }}
+                </h3>
+                <p class="unit">公升</p>
+            </div>
+
+            <div class="inventory col-9 col-sm-5 pt-5 p-md-4">
+                <i class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"></i>
+                <!-- 超級柴油 -->
+                <h2 class="gas-title">超級柴油</h2>
+                <h3 class="actual-inventory">
+                    {{ inventory[0].properties['高級柴油'].liter }}
+                </h3>
+                <p class="unit">公升</p>
+            </div>
+        </div>
+</div>
+
   </div>
   <div class="buttons" v-if="!loading">
     <button @click="handleQr">我要取貨</button>
@@ -44,7 +59,7 @@
     <button @click="$router.push('/cart')">我要購買</button>
   </div>
 
-  <div class="container" v-if="listOrder">
+  <div class="container2" v-if="listOrder">
     <h2 v-if="listOrder">歷史訂單</h2>
     <table class="table table-striped">
       <thead>
@@ -78,6 +93,7 @@
 <script>
 import axios from 'axios';
 import moment from 'moment';
+import 'animate.css';
 export default {
   data() {
     return {
@@ -144,58 +160,88 @@ export default {
 
 <style lang="scss" scoped>
 @import 'bootstrap/scss/bootstrap';
-p {
-  font-size: 2.5rem;
-  font-weight: 500;
-  margin-bottom: 5rem;
-  padding: 3rem;
-  font-style: italic;
-}
-h2 {
-  font-size: 2.5rem;
-  font-weight: 300;
-  width: 30rem;
-  padding: 1rem;
-  background-color: var(--color-secondary);
-  color: #fff;
-  font-weight: 700;
-  border-radius: 1rem;
-  margin: 1rem auto;
-}
-.inventory-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  max-width: 60rem;
-  padding: 2rem;
-  margin: 1rem auto;
-}
-.inventory {
-  max-width: 30rem;
-  max-height: 30rem;
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
+.user-page {
+  min-height: 100vh;
+
+  .inventory {
   margin: 1rem;
-  padding: 3rem;
-  background-color: var(--color-grey);
   border-radius: 2rem;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
+
+  &:hover{
+    transition: all ease-out 0.3s;
+    box-shadow:
+    0px 0px 2.7px rgba(0, 0, 0, 0.042),
+    0px 0px 7.5px rgba(0, 0, 0, 0.06),
+    0px 0px 18.1px rgba(0, 0, 0, 0.078),
+    0px 0px 60px rgba(0, 0, 0, 0.12)
+    }
+
+  i{
+    font-size: 10rem;
+    position: relative;
+    display: block;
+    color: #0e3365;
+    &::after{
+    font-size: 4rem;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 100%;
+    height: 100% ;
+    }
+  }
+    &:nth-child(1){
+      i::after{
+        content:"92";
+      }
+    }
+    &:nth-child(2){
+      i::after{
+        content:"95";
+      }
+    }
+    &:nth-child(3){
+      i::after{
+        content:"98";
+      }
+    }
+    &:nth-child(4){
+      i::after{
+        content:"柴";
+      }
+    }
+  }
+
+  .profile i {
+    font-size: 10rem;
+    color: #0e3365;
+  }
+
+  h2 {
+    font-size: 4rem;
+  }
 }
+
+
+
 .unit {
   font-size: 2.3rem;
 }
 .actual-inventory {
   font-size: 6rem;
 }
-.gas-title {
-  font-size: 2.5rem;
-  padding-bottom: 3rem;
-}
+
+
 .buttons {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 10rem;
 }
+
 button {
   font-size: 2.5rem;
   padding: 1rem;
@@ -210,7 +256,7 @@ button:hover {
   background-color: #0e3365;
 }
 
-.container {
+.container2 {
   max-width: 80rem;
   padding: 3rem;
   display: flex;
@@ -230,7 +276,7 @@ button:hover {
 .img {
   width: 10rem;
   height: 10rem;
-  background-image: url('https://images.unsplash.com/photo-1550482768-88b710a445fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80');
+  background-image: url("https://images.unsplash.com/photo-1550482768-88b710a445fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80");
   margin: 0 auto;
 }
 .order-info {
@@ -239,10 +285,10 @@ button:hover {
 .order {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: space-around; */
 }
 .loading {
   padding: 30rem;
   font-size: 3rem;
 }
+
 </style>

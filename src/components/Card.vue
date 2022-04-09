@@ -72,6 +72,7 @@ export default {
         0px 0px 7.5px rgba(0, 0, 0, 0.06),
         0px 0px 18.1px rgba(0, 0, 0, 0.078),
         0px 0px 60px rgba(0, 0, 0, 0.12)
+        
         }
 
         .img-container{
