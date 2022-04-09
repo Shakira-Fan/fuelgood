@@ -252,12 +252,12 @@ data() {
       a{
       text-decoration: none;
       padding: 0 1rem;
-      background-color:#A9CC59;
+      background-color: var(--color-button);
       color: white;
       font-size:1.5rem ;
       border-radius: 1.5rem;
       &:hover{
-        background-color: #a9cc59c0;
+        background-color: var(--color-button-hover);
       }
     }
   }
