@@ -69,6 +69,7 @@ export default {
       this.$store.commit('updateName', '');
       this.$store.commit('updateInv', []);
       this.$store.commit('updateUser', []);
+      this.$store.commit('updateOrders', []);
       this.$router.push('/');
     },
   },

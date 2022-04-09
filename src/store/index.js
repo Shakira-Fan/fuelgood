@@ -24,6 +24,9 @@ export default createStore({
     updateUser(state, newState) {
       state.user = newState;
     },
+    updateOrders(state, newState) {
+      state.orders = newState;
+    },
   },
   actions: {},
   modules: {},
