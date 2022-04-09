@@ -61,15 +61,18 @@ export default {
             password: this.password,
           }
         );
-        console.log(res);
-        this.user.push(res);
+
+        console.log(res.data);
+        this.user.push(res.data);
         console.log(this.user);
-        localStorage.setItem('name', this.user[0].data.user.name);
-        localStorage.setItem('id', this.user[0].data.user._id);
-        localStorage.setItem('email', this.user[0].data.user.email);
-        this.$store.commit('updateLogIn', true);
-        this.$store.commit('updateName', localStorage.getItem('name'));
-        await this.$router.push('/user' + '/' + this.id);
+        if (res.data.user.name) {
+          localStorage.setItem('name', this.user[0].user.name);
+          localStorage.setItem('id', this.user[0].user._id);
+          localStorage.setItem('email', this.user[0].user.email);
+          this.$store.commit('updateLogIn', true);
+          this.$store.commit('updateName', localStorage.getItem('name'));
+          await this.$router.push('/user' + '/' + this.id);
+        }
       } catch (err) {
         if (err.response) {
           // this.error = err.response.data;

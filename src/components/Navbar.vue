@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar" :style="style" :class="{color:color}">
+  <nav class="navbar" :style="style" :class="{ color: color }">
     <div class="icon" @click="$router.push('/')">
       <img src="../assets/images/nav.png" alt="wels logo" />
     </div>
@@ -25,12 +25,12 @@
 
 <script>
 export default {
-  data(){
-    return{
-      style:{
-        backgroundColor:"",
+  data() {
+    return {
+      style: {
+        backgroundColor: '',
       },
-      color:false,
+      color: false,
     };
   },
   computed: {
@@ -49,16 +49,16 @@ export default {
   },
 
   methods: {
-    handleScroll(){
-      if (window.scrollY > 5){
-        this.style.backgroundColor=`#ffd32d`;
-      }else{
-        this.style.backgroundColor="transparent";
+    handleScroll() {
+      if (window.scrollY > 5) {
+        this.style.backgroundColor = `#ffd32d`;
+      } else {
+        this.style.backgroundColor = 'transparent';
       }
     },
-    beforeDestroy(){
-        window.removeEventListener("scroll",this.handleScroll);
-      },
+    beforeDestroy() {
+      window.removeEventListener('scroll', this.handleScroll);
+    },
     handleClick() {
       this.user.pop();
       localStorage.removeItem('name');
@@ -67,12 +67,14 @@ export default {
       alert('已登出');
       this.$store.commit('updateLogIn', false);
       this.$store.commit('updateName', '');
+      this.$store.commit('updateInv', []);
+      this.$store.commit('updateUser', []);
       this.$router.push('/');
     },
   },
-  mounted(){
-    window.addEventListener("scroll",this.handleScroll);
-  }
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
 };
 </script>
 
@@ -88,7 +90,7 @@ export default {
   z-index: 999;
   width: 100%;
   position: fixed;
-  top:0;
+  top: 0;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -97,7 +99,7 @@ export default {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-items {
-  color:#fff;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -113,7 +115,7 @@ img {
   margin-left: 3rem;
 }
 
-img:hover{
+img:hover {
   transform: scale(1.3);
   transition: all 0.3s ease-out;
 }

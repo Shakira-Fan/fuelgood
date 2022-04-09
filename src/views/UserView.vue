@@ -272,12 +272,12 @@ export default {
     this.loading = true;
 
     try {
-      const res = await axios.get('https://fuel-good.herokuapp.com/order/all');
+      const res = await axios.get('https://fuel-good.herokuapp.com/order/');
       console.log(res);
       if (!this.orders.length) {
         await this.orders.push(
           res.data.filter(order => {
-            return order.email === localStorage.getItem('email');
+            return order.email === this.user[0].user.email;
           })
         );
       }
@@ -287,7 +287,7 @@ export default {
 
     try {
       const res2 = await axios.get(
-        `https://fuel-good.herokuapp.com/admin/user/${this.email}`
+        `https://fuel-good.herokuapp.com/admin/user/${this.user[0].user.email}`
       );
       console.log(res2);
       if (!this.inventory.length) {

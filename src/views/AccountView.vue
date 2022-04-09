@@ -35,17 +35,6 @@ export default {
   },
 
   methods: {
-    async handleGoogleAuth() {
-      try {
-        const res = await axios.get(
-          'https://fuel-good.herokuapp.com/auth/google'
-        );
-      } catch (err) {
-        if (err.response) {
-          console.log(err.response.data);
-        }
-      }
-    },
     async handleSubmit() {
       try {
         const res = await axios.post(
@@ -56,7 +45,7 @@ export default {
             password: this.password,
           }
         );
-        alert('Account created! Please sign in');
+        alert('註冊成功！請登入');
         this.$router.push('/login');
       } catch (err) {
         if (err.response) {
