@@ -1,0 +1,45 @@
+<div class="user-page container mt-5">
+    <div class="loading animate__animated animate__bounce animate__infinite" v-if="loading">載入中...</div>
+
+    <div class="col profile">
+        <i class="bi bi-person-circle" v-if="!loading"></i>
+        <p v-if="!loading"><strong>{{ username }}</strong>，歡迎回來！</p>
+    </div>
+
+    <div class="col flex align-items-center justify-content-center inventory-container" v-if="!loading">
+        <h2 class="mb-5" v-if="!loading">目前未提取的數量</h2>
+        <div class="row flex-wrap flex justify-content-center">
+            <div class="inventory col-4">
+                <h2 class="gas-title">92無鉛汽油:</h2>
+                <h3 class="actual-inventory">
+                    {{ inventory[0].properties['92無鉛汽油'].liter }}
+                    <p class="unit">公升</p>
+                </h3>
+            </div>
+
+            <div class="inventory col-4">
+                <h2 class="gas-title">95無鉛汽油:</h2>
+                <h3 class="actual-inventory">
+                    {{ inventory[0].properties['95無鉛汽油'].liter }}
+                    <p class="unit">公升</p>
+                </h3>
+            </div>
+
+            <div class="inventory col-4">
+                <h2 class="gas-title">98無鉛汽油:</h2>
+                <h3 class="actual-inventory">
+                    {{ inventory[0].properties['98無鉛汽油'].liter }}
+                    <p class="unit">公升</p>
+                </h3>
+            </div>
+
+            <div class="inventory col-4">
+                <h2 class="gas-title">超級柴油:</h2>
+                <h3 class="actual-inventory">
+                    {{ inventory[0].properties['高級柴油'].liter }}
+                    <p class="unit">公升</p>
+                </h3>
+
+            </div>
+        </div>
+</div>
