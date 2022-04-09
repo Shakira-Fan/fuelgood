@@ -9,8 +9,8 @@
 
     <div class="row mt-5 flex align-items-center justify-content-center inventory-container" v-if="!loading">
         <h2 class="mb-5" v-if="!loading">未提取庫存</h2>
-        <div class="row flex-wrap flex justify-content-center">
-            <div class="inventory col-9 col-sm-5 pt-5 p-md-4">
+        <div class="row flex-lg-nowrap flex-wrap flex justify-content-center">
+            <div class="inventory col-lg-3 col-10 col-md-5 flex-sm-fill py-5 flex-shrink-2">
                 <i class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"></i>
                 <!-- 92無鉛汽油 -->
                 <h2 class="gas-title">無鉛汽油</h2>
@@ -18,9 +18,11 @@
                     {{ inventory[0].properties['92無鉛汽油'].liter }}
                 </h3>
                  <p class="unit">公升</p>
+                 <button class="btn btn-deduct">領用−</button>
+                 <button class="btn btn-add">添購＋</button>
             </div>
 
-            <div class="inventory col-9 col-sm-5 pt-5 px-sm-5">
+            <div class="inventory col-lg-3 col-10 col-md-5 flex-fill py-5 flex-shrink-2">
                 <i class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"></i>
                 <!-- 95無鉛汽油 -->
                 <h2 class="gas-title">無鉛汽油:</h2>
@@ -28,9 +30,11 @@
                     {{ inventory[0].properties['95無鉛汽油'].liter }}
                 </h3>
                 <p class="unit">公升</p>
+                <button class="btn btn-deduct">領用−</button>
+                <button class="btn btn-add">添購＋</button>
             </div>
 
-            <div class="inventory col-9 col-sm-5 pt-5 p-md-4">
+            <div class="inventory col-lg-3 col-10 col-md-5 flex-fill py-5 flex-shrink-2">
                 <i class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"></i>
                 <!-- 98無鉛汽油 -->
                 <h2 class="gas-title">無鉛汽油</h2>
@@ -38,9 +42,11 @@
                     {{ inventory[0].properties['98無鉛汽油'].liter }}
                 </h3>
                 <p class="unit">公升</p>
+                <button class="btn btn-deduct">領用−</button>
+                <button class="btn btn-add">添購＋</button>
             </div>
 
-            <div class="inventory col-9 col-sm-5 pt-5 p-md-4">
+            <div class="inventory col-lg-3 col-10 col-md-5 flex-fill py-5 flex-shrink-2">
                 <i class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"></i>
                 <!-- 超級柴油 -->
                 <h2 class="gas-title">超級柴油</h2>
@@ -48,15 +54,15 @@
                     {{ inventory[0].properties['高級柴油'].liter }}
                 </h3>
                 <p class="unit">公升</p>
+                <button class="btn btn-deduct">領用−</button>
+                <button class="btn btn-add">添購＋</button>
             </div>
         </div>
 </div>
 
   </div>
   <div class="buttons" v-if="!loading">
-    <button @click="handleQr">我要取貨</button>
     <button @click="handleOrder">歷史訂單</button>
-    <button @click="$router.push('/cart')">我要購買</button>
   </div>
 
   <div class="container2" v-if="listOrder">
@@ -163,12 +169,35 @@ export default {
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
 
 .user-page {
-  min-height: 100vh;
+    min-height: 100vh;
 
-  .inventory {
-  margin: 1rem;
-  border-radius: 2rem;
-  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
+    .inventory {
+    margin: 1rem;
+    border-radius: 2rem;
+    box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
+
+    button {
+    padding: 0 0.5rem;
+    margin: 0.5rem;
+    border: none;
+    color: white;
+    font-size:1.5rem ;
+    border-radius: 1.5rem;
+
+    &.btn-add{
+        background-color: var(--color-button);
+        &:hover {
+        background-color: var(--color-button-hover);
+        }
+    }
+      &.btn-deduct{
+        background-color: #f28482;
+        &:hover {
+        background-color: #f28482c5;
+        }
+    }
+  }
+
 
   &:hover{
     transition: all ease-out 0.3s;
@@ -242,19 +271,7 @@ export default {
   margin-bottom: 10rem;
 }
 
-button {
-  font-size: 2.5rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  border-color: none;
-  margin: 2rem;
-  cursor: pointer;
-  background-color: var(--color-secondary);
-  color: #fff;
-}
-button:hover {
-  background-color: #0e3365;
-}
+
 
 .container2 {
   max-width: 80rem;
