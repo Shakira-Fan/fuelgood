@@ -1,4 +1,4 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex';
 
 export default createStore({
   state: {
@@ -17,6 +17,18 @@ export default createStore({
     },
     updateName(state, newState) {
       state.username = newState;
+    },
+    updateId(state, newState) {
+      state.id = newState;
+    },
+    updateInv(state, newState) {
+      state.inventory = newState;
+    },
+    updateUser(state, newState) {
+      state.user = newState;
+    },
+    updateOrders(state, newState) {
+      state.orders = newState;
     },
   },
   actions: {},

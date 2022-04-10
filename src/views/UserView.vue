@@ -270,32 +270,34 @@ export default {
   },
   async created() {
     this.loading = true;
-
-    try {
-      const res = await axios.get('https://fuel-good.herokuapp.com/order/all');
-      console.log(res);
-      if (!this.orders.length) {
-        await this.orders.push(
-          res.data.filter(order => {
-            return order.email === localStorage.getItem('email');
-          })
+    if (this.user[0].name !== null) {
+      //Get historic orders
+      try {
+        const res = await axios.get(
+          `https://fuel-good.herokuapp.com/order/${this.user[0].user.email}`
         );
+        console.log(res.data);
+        if (!this.orders.length) {
+          await this.orders.push(res.data);
+        }
+      } catch (err) {
+        console.log(err.message);
       }
-    } catch (err) {
-      console.log(err.message);
+
+      // Get inventories
+      try {
+        const res2 = await axios.get(
+          `https://fuel-good.herokuapp.com/admin/user/${this.user[0].user.email}`
+        );
+        console.log(res2);
+        if (!this.inventory.length) {
+          this.inventory.push(res2.data);
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
     }
 
-    try {
-      const res2 = await axios.get(
-        `https://fuel-good.herokuapp.com/admin/user/${this.email}`
-      );
-      console.log(res2);
-      if (!this.inventory.length) {
-        this.inventory.push(res2.data);
-      }
-    } catch (err) {
-      console.log(err.message);
-    }
     this.loading = false;
   },
 };
