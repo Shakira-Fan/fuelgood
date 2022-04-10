@@ -17,7 +17,7 @@
           <span class="material-icons">
             <span class="material-icons"> question_answer </span>
           </span>
-          線上客服
+          <a href="#">線上客服</a>
         </div>
       </div>
     </div>
@@ -31,16 +31,19 @@ export default {};
 
 <style scoped>
 h2 {
+  color: #fff;
   font-size: 2.5rem;
   max-width: 110rem;
   margin: 1rem auto;
   /* border-bottom: 2px solid var(--color-primary); */
   padding: 2.5rem;
 }
-
+span{
+  color: #fff;
+}
 a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
 }
 a:hover {
   color: var(--color-secondary);

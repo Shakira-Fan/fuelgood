@@ -26,6 +26,7 @@
 <script>
 export default {
   data() {
+
     return {
       style: {
         backgroundColor: '',
@@ -33,6 +34,7 @@ export default {
       color: false,
     };
   },
+
   computed: {
     user() {
       return this.$store.state.user;
@@ -49,11 +51,13 @@ export default {
   },
 
   methods: {
+
     handleScroll() {
       if (window.scrollY > 5) {
         this.style.backgroundColor = `#ffd32d`;
       } else {
         this.style.backgroundColor = 'transparent';
+
       }
     },
     beforeDestroy() {
@@ -112,7 +116,7 @@ export default {
 }
 img {
   margin-top: 1rem;
-  width: 12rem;
+  width: 15rem;
   margin-left: 3rem;
 }
 
@@ -127,7 +131,7 @@ a {
   color: #fff;
 }
 a:hover {
-  color: var(--color-primary);
+  color:black;
 }
 .user-account {
   margin-right: 2rem;
