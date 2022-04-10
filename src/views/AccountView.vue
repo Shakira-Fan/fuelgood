@@ -1,6 +1,6 @@
 <template>
   <form class="signup-form" @submit.prevent="handleSubmit">
-    <h1>註冊會員</h1>
+    <h1>註冊</h1>
     <div class="round">
       <img class="logo" src="../assets/images/logo3.png" alt="" />
     </div>
@@ -78,12 +78,13 @@ export default {
 
 <style scoped>
 .logo {
-  width: 5rem;
+  width: 6rem;
 }
 h1 {
   font-size: 3rem;
   text-align: center;
   padding: 2rem;
+  font-weight: 500;
 }
 p {
   text-align: center;
@@ -96,7 +97,7 @@ p {
   padding: 3rem;
   padding-bottom: 5rem;
   border-radius: 8px;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
 }
 label {
   display: block;
@@ -104,36 +105,41 @@ label {
   padding: 1.5rem;
 }
 input {
+  outline: none;
+  font-size: 1.8rem;
   box-sizing: border-box;
-  width: 100%;
-  padding: 2rem;
-  border-radius: 4px;
+  padding: 1rem;
+  width: 95%;
   border: none;
-  border-bottom: 2px solid var(--color-grey);
+  border-bottom: 0.5px solid var(--color-secondary);
+  line-height: 0rem;
 }
 .sign-up-btn {
   display: block;
   margin-top: 5rem;
-  font-size: 1.8rem;
-  transition: all 0.2s ease-in-out;
+  font-size: 2rem;
+  transition: all 0.1s ease-in-out;
+  line-height: 2.6rem;
 }
 .sign-up-btn:hover {
   background-color: #0e3365;
+  transform: scale(1.1);
 }
 .register-btn {
   display: inline-block;
   border: none;
   background: none;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   font-weight: bold;
   font-size: 1.8rem;
-  border-bottom: 1px solid var(--color-primary);
+  border-bottom: 1px solid var(--color-secondary);
   padding: 0.3rem;
   cursor: pointer;
+  line-height: 2.6rem;
+  transition: all 0.1s ease-in-out;
 }
 .register-btn:hover {
-  color: var(--color-secondary);
-  border-bottom: 1px solid var(--color-secondary);
+  transform: scale(1.1);
 }
 span {
   font-size: 1.8rem;
@@ -155,15 +161,18 @@ span {
   color: #fff;
 }
 .round {
-  width: 6rem;
-  height: 6rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
-  background-color: #eee;
+  background-color: var(--color-grey);
   margin: 2rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
+}
+.round:hover {
+  transform: scale(1.2);
 }
 .err {
   text-align: left;
