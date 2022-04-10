@@ -318,7 +318,7 @@ export default {
     li a {
       color: #0e3365;
       &:hover {
-        color: var(--color-primary);
+        transform: scale(1.1);
       }
     }
   }
@@ -438,5 +438,10 @@ h2 {
 .loading {
   padding: 30rem;
   font-size: 3rem;
+}
+
+.nav-item {
+  margin-top: 4rem;
+  padding: 2rem 0;
 }
 </style>
