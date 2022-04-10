@@ -70,7 +70,7 @@ export default {
     },
     async handleClick() {
       await this.$router.push('/login');
-      window.location.reload();
+      this.$router.go();
     },
   },
 };
