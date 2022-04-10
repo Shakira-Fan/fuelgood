@@ -1,56 +1,53 @@
 <template>
 
 <div class="banner container-fluid">
-  <!-- <img class="" src="../assets/images/1.gif" alt="" /> -->
   <Banner />
 </div>
 <Card />
 <div class="chart">
-  <div class="flex justify-content-around align-items-center">
-    <div class="left">
-      <h2>今日油價</h2>
-      <div class="price">
-        <div>
-          <div class="info">
+  <h2 class="mb-5">今日油價</h2>
+  <div class="row flex flex-column-reverse flex-md-row justify-content-center align-items-start no-gutters">
+    <div class="left col-12 col-md-5">
+      <div class="price">     
+          <div class="info flex flex-column">
             <p class="oilName">92無鉛汽油:</p>
             <span>
               <h4>{{price92}}</h4>
               <p>元/公升</p> </span
             ><button @click="activeTab='Chart92'">92汽油歷史油價</button>
           </div>
-          <div class="info">
+          <div class="info flex flex-column">
             <p class="oilName">95無鉛汽油:</p>
             <span>
               <h4>{{price95}}</h4>
               <p>元/公升</p> </span
             ><button @click="activeTab='Chart95'">95汽油歷史油價</button>
           </div>
-        </div>
-        <div>
-          <div class="info">
+          <div class="info flex flex-column">
             <p class="oilName">98無鉛汽油:</p>
             <span>
               <h4>{{price98}}</h4>
               <p>元/公升</p> </span
             ><button @click="activeTab='Chart98'">98汽油歷史油價</button>
           </div>
-          <div class="info">
+          <div class="info flex flex-column">
             <p class="oilName">超級柴油價格:</p>
             <span>
               <h4>{{priceSuper}}</h4>
               <p>元/公升</p> </span
             ><button @click="activeTab='ChartSuper'">超級柴油歷史油價</button>
-          </div>
-        </div>
+          </div>        
       </div>
       <a class="buyIt shadow" href="/cart">立即加油去！</a>
     </div>
-    <component
-      class="right"
+    <div class="right col-12 col-md-5">
+      <component
       :is="activeTab"
       :getLabels="historyDate"
       :getDataValues="currentTabPrice"
     />
+    </div>
+    
   </div>
 </div>
 <Map />
@@ -90,6 +87,10 @@ data() {
     historyPriceSuper:[],
     historyDate:[],
     lottie: {},  
+    style:{
+        backgroundColor:"",
+      },
+      color:false,
   }},
   methods:{
     async getPrice() {
@@ -142,6 +143,16 @@ data() {
         return i.price;})   
       })
       },
+    //   handleScroll(){
+    //   if (window.scrollY > 5){
+    //     this.style.backgroundColor=`#ffd32d`;
+    //   }else{
+    //     this.style.backgroundColor="transparent";
+    //   }
+    // },
+    // beforeDestroy(){
+    //     window.removeEventListener("scroll",this.handleScroll);
+    //   },
   },
   computed:{
   currentTabPrice: function() {
@@ -163,20 +174,13 @@ data() {
     this.history95();
     this.history92();
     this.historySuper();
+    // window.addEventListener("scroll",this.handleScroll);
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import 'bootstrap/scss/bootstrap';
-
-
-* {
-  padding:0;
-  margin: 0;
-  box-sizing: border-box;
-  list-style: none;
-}
 
 /* 動畫設置 */
 .banner{
@@ -189,31 +193,24 @@ data() {
   /* 圖表設置 */
   .chart{
     width:100%;
-    //margin: 5rem;
     padding: 5rem 0;
+    h2{
+        display: inline-block;
+        font-size:4rem ;
+        border-bottom: 5px solid var(--color-primary);
+      }
     div{
       display: flex;
       flex-wrap: wrap;
       justify-content: space-evenly;
-      padding: 1rem 0;
       .left{
-        display: flex;
-        flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
-      h2{
-        font-size:4rem ;
-      }
       .price{
-        display: flex;
-        justify-content: space-around;
-        div{
-          display: flex;
-          flex-direction: column;
+          padding:0;
           .info{
-            margin: 1rem ,0;
+            margin:1rem;
             background-color: var(--color-grey);
-            margin: 1rem;
             padding: 1.5rem;
             border-radius: 1rem;
 
@@ -225,8 +222,6 @@ data() {
             0px 0px 18.1px rgba(0, 0, 0, 0.078),
             0px 0px 60px rgba(0, 0, 0, 0.12)
             }
-
-          }
           span{
             display: flex;
             align-items: flex-end;
@@ -236,7 +231,7 @@ data() {
             }
           }
           button{
-            width:12vw;
+            width:15rem;
             margin: .5rem;
             padding: .5rem;
             font-size: 1rem;
@@ -253,92 +248,22 @@ data() {
       }
       a{
       text-decoration: none;
+      margin-top: 1.5rem;
       padding: 0 1rem;
-      background-color: var(--color-button);
+      background-color:var(--color-primary);
       color: white;
       font-size:1.5rem ;
       border-radius: 1.5rem;
       &:hover{
-        background-color: var(--color-button-hover);
-      }
-    }
-  }
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-  .chart{
-    div{
-      .left{
-      h2{
-        width:15vw;
-        padding: 0.5rem;
         font-size:2rem ;
       }
-      .price{
-        div{
-          span{
-            display: flex;
-            align-items: flex-end;
-            h4{
-              font-size: 5rem;
-              color: red;
-            }
-          }
-          button{
-            width:15vw;
-            margin: .5rem;
-            padding: .5rem;
-            font-size: 1rem;
-          }
-        }
-      }
-      a{
-      width:15vw;
-      padding: 0.5rem;
-      font-size:2rem ;
-      border-radius: 1rem;
     }
   }
     }
+  .right{
+    margin-top:1rem;
+    border-radius: 1.5rem;
+    box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
   }
-}
-@media screen and  (max-width: 576px) {
-  .chart{
-    div{
-      .left{
-      h2{
-        width:20vw;
-        padding: 0.5rem;
-        font-size:2rem ;
-      }
-      .price{
-        div{
-          span{
-            display: flex;
-            align-items: flex-end;
-            h4{
-              font-size: 5rem;
-              color: red;
-            }
-          }
-          button{
-            width:20vw;
-            margin: .5rem;
-            padding: .5rem;
-            font-size: 1rem;
-          }
-        }
-      }
-      a{
-      width:20vw;
-      padding: 0.5rem;
-      font-size:2rem ;
-      border-radius: 1rem;
-    }
   }
-    }
-  }
-
-}
 </style>

@@ -1,6 +1,6 @@
 <template>
 <div class="store">
-    <h2 class="mb-5">據點查詢</h2>
+    <h2 class="mb-5">附近據點</h2>
     <div class="container">
         <div class="row flex flex-column-reverse flex-md-row justify-content-center align-items-start no-gutters">
             <div class="col-12 col-md-6 mb-5">
@@ -151,6 +151,11 @@ export default {
 
 <style lang="scss" scoped>
 @import 'bootstrap/scss/bootstrap';
+#map{
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
+  border-radius: 1.5rem;
+  margin-bottom: 1rem;
+}
 
 label{
   margin:0.5rem 0.5rem;
@@ -161,7 +166,9 @@ select{
   margin-top: .7rem;
 }
 h2{
+  display: inline-block;
   font-size: 4rem;
+  border-bottom: 5px solid var(--color-primary);
 }
 #map {
  height: 50vh;
@@ -175,29 +182,4 @@ h2{
  cursor: pointer;
  }
 }
-// @media screen and (max-width: 768px) {
-//    .store{
-//   width:100%;
-//   padding:10rem 15rem;
-//   h4{
-//     width:15vw;
-//     padding: 0.5rem;
-//     margin: 1rem;
-//     font-size:2rem ;
-// }
-// }
-// }
-
-// @media screen and  (max-width: 576px){
-//   .store{
-//   width:100%;
-//   padding:10rem 15rem;
-//   h4{
-//     width:20vw;
-//     padding: 0.5rem;
-//     margin: 1rem;
-//     font-size:2rem ;
-// }
-// }
-// }
 </style>
