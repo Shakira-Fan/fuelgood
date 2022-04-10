@@ -114,6 +114,7 @@ label {
   display: block;
   width: 100%;
   padding: 1.5rem;
+  font-size: 2.3rem;
 }
 input {
   outline: none;
@@ -123,14 +124,15 @@ input {
   padding: 1rem;
   border: none;
   border-bottom: 0.5px solid var(--color-secondary);
-  line-height: 0rem;
+  line-height: 2.3rem;
 }
 .sign-up-btn {
   display: block;
   margin-top: 5rem;
-  font-size: 1.8rem;
+  width: 7rem;
+  font-size: 2.3rem;
   transition: all 0.1s ease-in-out;
-  line-height: 2.6rem;
+  line-height: 3.5rem;
 }
 .sign-up-btn:hover {
   background-color: #0e3365;
