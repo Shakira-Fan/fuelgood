@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  props: ['product', 'index', 'addToCart'],
+  props: ["product", "index", "addToCart"],
   created() {
     localStorage[this.product.gasoline] = 0;
   },
