@@ -26,7 +26,6 @@
 <script>
 export default {
   data() {
-
     return {
       style: {
         backgroundColor: '',
@@ -51,13 +50,11 @@ export default {
   },
 
   methods: {
-
     handleScroll() {
       if (window.scrollY > 5) {
         this.style.backgroundColor = `#ffd32d`;
       } else {
         this.style.backgroundColor = 'transparent';
-
       }
     },
     beforeDestroy() {
@@ -88,7 +85,7 @@ export default {
   cursor: pointer;
 }
 .material-icons {
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 .navbar {
   transition: ease 0.5s all;
@@ -104,11 +101,19 @@ export default {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
 }
 .navbar-items {
-  color: #fff;
+  color: var(--color-secondary);
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-right: 4rem;
+}
+.navbar-items a {
+  color: var(--color-secondary);
+}
+
+.user-account a :hover {
+  transform: scale(1.2);
+  transition: all 0.1s ease-in-out;
 }
 
 .nav-span {
@@ -131,7 +136,7 @@ a {
   color: #fff;
 }
 a:hover {
-  color:black;
+  transform: scale(1.2);
 }
 .user-account {
   margin-right: 2rem;
@@ -140,12 +145,14 @@ a:hover {
   margin: 0 2rem;
   font-size: 2rem;
   cursor: pointer;
-  padding: 0.5rem;
-  color: #fff;
-  background-color: var(--color-secondary);
+  padding: 0.7rem;
+  color: var(--color-secondary);
+  background-color: none;
+  border: 2px solid var(--color-secondary);
   border-radius: 1rem;
 }
 .logout:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
+  color: #fff;
 }
 </style>
