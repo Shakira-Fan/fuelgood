@@ -18,6 +18,9 @@ export default createStore({
     updateName(state, newState) {
       state.username = newState;
     },
+    updateId(state, newState) {
+      state.id = newState;
+    },
     updateInv(state, newState) {
       state.inventory = newState;
     },

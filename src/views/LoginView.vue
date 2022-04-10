@@ -67,10 +67,11 @@ export default {
         console.log(this.user);
         if (res.data.user.name) {
           localStorage.setItem('name', this.user[0].user.name);
-          localStorage.setItem('id', this.user[0].user._id);
+          await localStorage.setItem('id', this.user[0].user._id);
           localStorage.setItem('email', this.user[0].user.email);
           this.$store.commit('updateLogIn', true);
           this.$store.commit('updateName', localStorage.getItem('name'));
+          this.$store.commit('updateId', localStorage.getItem('id'));
           await this.$router.push('/user' + '/' + this.id);
         }
       } catch (err) {
