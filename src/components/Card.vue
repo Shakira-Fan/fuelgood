@@ -1,6 +1,6 @@
 <template>
     <div class="cardComponent flex justify-content-center align-items-center container my-5">
-        <h2 class="mb-5">Fuel Good 獨家特色</h2>
+        <h2 class="mb-5">就是要Fuelgood !</h2>
         <div class="row flex justify-content-center align-items-stretch">
             <div class="col-10 col-lg-3 col-sm-6 my-3">
                 <div class="card h-100">
@@ -56,6 +56,8 @@ export default {
         
         h2{
         font-size:  4rem;
+        display: inline-block;
+        border-bottom: 5px solid var(--color-primary);
     }
     .row{
         .card{
