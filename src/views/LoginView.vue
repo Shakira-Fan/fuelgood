@@ -175,12 +175,13 @@ span {
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
-  background-color: var(--color-grey);
+  border: 2px solid var(--color-secondary);
   margin: 2rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.17);
 }
 .round:hover {
   transform: scale(1.2);
