@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar" :style="style" :class="{ color: color }">
     <div class="icon" @click="$router.push('/')">
-      <img src="../assets/images/nav.png" alt="wels logo" />
+      <img src="../assets/images/nav3.png" alt="wels logo" />
     </div>
 
     <div class="navbar-items">
