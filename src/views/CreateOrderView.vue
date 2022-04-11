@@ -953,6 +953,7 @@ body {
 }
 .card-list {
   margin-bottom: -130px;
+  margin-top: 15rem;
 
   @media screen and (max-width: 480px) {
     margin-bottom: -120px;

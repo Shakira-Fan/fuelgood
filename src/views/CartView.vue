@@ -104,6 +104,7 @@ div button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 8rem;
 }
 .date-style {
   margin-top: 3rem;
