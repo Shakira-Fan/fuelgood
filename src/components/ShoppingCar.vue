@@ -1,37 +1,23 @@
 <template>
-  <div class="card">
-    <div class="card-title">
-      <i class="bi bi-droplet mb-3"></i>
-      {{ product.gasoline }}
-    </div>
-    <div class="card-body">
-      <form>
-        <div class="row">
-          <div class="cell">
-            <label>售價:</label>
-          </div>
-          <div class="cell">${{ product.price }}</div>
+  <div class="col-10 col-sm-6 com-md-5 col-lg-3">
+    <div class="card h-100">
+        <div class="card-title pt-5">
+            <i class="bi bi-droplet-half"></i>
+            {{ product.gasoline }}
         </div>
-        <div class="row">
-          <div class="cell">
-            <label>數量:</label>
-          </div>
-          <div class="cell">
-            <input class="qty-input" type="number" v-model.number="quantity" />
-          </div>
-          <span class="cell">公升</span>
+        <div class="card-body">
+            <form>
+                <h3 class="py-3 animate__animated animate__pulse animate__infinite animate__slow ">${{ product.price }}</h3>
+                <span><input class="qty-input py-2" type="number" v-model.number="quantity" /> 公升</span>
+            </form>
+            <button @click="addToCart(product.gasoline, quantity)" class="btn my-5">
+                加入汽油桶
+          </button>
         </div>
-      </form>
-    </div>
-    <div class="card-footer">
-      <button
-        @click="addToCart(product.gasoline, quantity)"
-        class="btn btn-light"
-      >
-        加入購物車
-      </button>
+        
     </div>
   </div>
+
 </template>
 
 <script>
@@ -49,100 +35,61 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+<style lang="scss" scoped>
+@import 'bootstrap/scss/bootstrap';
+
+
+
 .card {
-  display: inline-block;
-  max-width: 31rem;
-  background: var(--color-grey);
-  box-shadow: 1px 2px 5px solid #000;
+  
+  border-radius: 1.5rem;
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
+  border: none;
+  .card-title {
+    font-size: 3rem;
+  }
+  .qty-input {
+  border: 2px solid white;
+  padding: 0.2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
+  width: 30%;
+  &:hover{
+      border: 2px solid var(--color-primary);
+    }
+  }
 
-  margin-bottom: 20px;
-  color: #280d14;
-  margin: 10px;
-  border-radius: 20px;
-}
+  h3{
+    font-size: 5rem;
+    color: red;
+  }
 
-.card-title {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 93.5%;
-  background-color: var(--color-primary);
-  padding: 10px;
-  font-size: 22px;
-  font-weight: bold;
-  border-radius: 10px 10px 0 0;
-}
-.card-body {
-  border-top: 0px;
-  border-bottom: 0px;
-  text-align: center;
-  padding: 2rem;
-}
-.row {
-  display: flex;
-}
-.card-body .cell:first-of-type {
-  justify-content: center;
-  width: 20%;
-}
-.card-body .cell {
-  align-items: center;
-  width: 50%;
-  min-height: 2em;
-  padding: 3px 4px;
-}
-.cell {
-  display: inline-flex;
-}
-.cell input {
-  font-size: 20px;
-  width: 100%;
-}
-.cell span {
-  font-size: 20px;
-  font-weight: bold;
-}
-.card-body label:first-of-type {
-  margin-top: 0px;
-}
-.card-body label {
-  display: inline-block;
-  font-weight: bold;
-}
-.card-footer {
-  background-color: var(--color-secondary);
-  margin-top: 15px;
-  padding: 1.2rem;
-  text-align: right;
-  border-radius: 0 0 10px 10px;
-}
-.btn-light {
-  background: #fff8ea;
-  background-color: var(--color-primary);
-  color: #000;
-  padding: 0.5rem;
+  &:hover{
+  transition: all ease-out 0.3s;
+  box-shadow:
+  0px 0px 2.7px rgba(0, 0, 0, 0.042),
+  0px 0px 7.5px rgba(0, 0, 0, 0.06),
+  0px 0px 18.1px rgba(0, 0, 0, 0.078),
+  0px 0px 60px rgba(0, 0, 0, 0.12)
+  }
+
+
 }
 button {
+  background-color: #fac609 !important;
+  color: #000;
+  padding: 0.5rem;
   border: 0px;
-  border-radius: 1rem;
+  border-radius: 1.5rem !important;
   padding: 5px 12px;
-  font-weight: bold;
-  vertical-align: middle;
   font-size: 1.8rem;
   cursor: pointer;
 }
 button:hover {
-  background-color: #fac609;
+  opacity: 0.8;
+  transition: 0.3s all ease;
 }
-.qty-input {
-  border: none;
-  background-color: #fff;
-  padding: 0.2rem;
-  border-radius: 1.2rem;
-  box-shadow: 1px 2px 5px rgb(211, 204, 204);
-}
+
 
 .swal2-styled.swal2-confirm {
   background-color: var(--color-secondary);

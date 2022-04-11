@@ -1,28 +1,28 @@
 <template>
-  <div class="total-qty">
-    <a>購買{{ totalQuantity }}公升</a>
-    <button @click="toggleSidebar" class="top-bar-cart-link">購買清單</button>
-  </div>
-  <div class="date-style">
-    <span>油價區間:</span> <span>{{ recentDate }}</span>
-  </div>
-  <SidebarComponent
-    v-if="showSidebar"
-    :toggle="toggleSidebar"
-    :cart="cart"
-    :inventory="inventory"
-    :remove="removeItem"
-  />
-  <div class="card-container">
-    <ShoppingCar
-      v-for="(product, index) in inventory"
-      :key="product.id"
-      class="card"
-      :index="index"
-      :product="product"
-      :addToCart="addToCart"
-    />
-  </div>
+
+<div class="container d-flex flex-column justify-content-end cart">
+
+    <div class="date-style my-5">
+        <span>目前油價區間: {{ recentDate }}</span>
+    </div>
+    <SidebarComponent v-if="showSidebar" :toggle="toggleSidebar" :cart="cart" :inventory="inventory"
+        :remove="removeItem" />
+
+    <div class="container">
+        <div class="row d-flex g-3 justify-content-center align-items-stretch">
+            <ShoppingCar v-for="(product, index) in inventory" :key="product.id" :index="index" :product="product"
+                :addToCart="addToCart" />
+        </div>
+    </div>
+
+    <div class="total-qty">
+        <a>共計{{ totalQuantity }}公升</a>
+        <button @click="toggleSidebar" class="top-bar-cart-link">購買清單</button>
+    </div>
+
+
+</div>
+
 </template>
 
 <script>
@@ -78,7 +78,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import 'bootstrap/scss/bootstrap';
+
+.cart{
+  min-height: 100vh;
+}
+
 div a {
   font-size: 2.5rem;
   text-decoration: none;
@@ -92,26 +98,21 @@ div button {
   font-size: 2rem;
   cursor: pointer;
 }
-.card-container {
-  max-width: 80rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 10rem;
-}
+
 .total-qty {
-  padding-top: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 8rem;
+  margin-top: 5rem;
 }
 .date-style {
-  margin-top: 3rem;
   font-size: 2.2rem;
   font-weight: 500;
   font-style: italic;
+  span{
+  border-bottom: 5px solid var(--color-primary);
+
+  }
 }
 .top-bar-cart-link:hover {
   background-color: #0e3365;
