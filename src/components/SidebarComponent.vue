@@ -51,10 +51,10 @@
 
 <script>
 export default {
-  props: ['toggle', 'cart', 'inventory', 'remove'],
+  props: ["toggle", "cart", "inventory", "remove"],
   methods: {
     getPrice(gasoline) {
-      const product = this.inventory.find(p => {
+      const product = this.inventory.find((p) => {
         return p.gasoline === gasoline;
       });
       return product.price;
@@ -85,7 +85,7 @@ export default {
 }
 .cart {
   position: relative;
-  background-color: rgb(255, 246, 227);
+  background-color: var(--color-grey);
   opacity: 95%;
   color: black;
   transition: 1s ease right;
@@ -116,6 +116,7 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 0 10px 0 10px;
+  margin-top: 2rem;
 }
 .cart-close {
   background: transparent;

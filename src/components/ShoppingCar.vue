@@ -1,6 +1,9 @@
 <template>
   <div class="card">
-    <div class="card-title">{{ product.gasoline }}</div>
+    <div class="card-title">
+      <i class="bi bi-droplet mb-3"></i>
+      {{ product.gasoline }}
+    </div>
     <div class="card-body">
       <form>
         <div class="row">
@@ -32,6 +35,7 @@
 </template>
 
 <script>
+import "animate.css";
 export default {
   props: ["product", "index", "addToCart"],
   created() {
@@ -46,6 +50,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
 .card {
   display: inline-block;
   max-width: 31rem;
@@ -137,5 +142,9 @@ button:hover {
   padding: 0.2rem;
   border-radius: 1.2rem;
   box-shadow: 1px 2px 5px rgb(211, 204, 204);
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: var(--color-secondary);
 }
 </style>

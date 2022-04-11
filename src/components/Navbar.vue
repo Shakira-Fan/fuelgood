@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       style: {
-        backgroundColor: '',
+        backgroundColor: "",
       },
       color: false,
     };
@@ -54,28 +54,31 @@ export default {
       if (window.scrollY > 5) {
         this.style.backgroundColor = `#ffd32d`;
       } else {
-        this.style.backgroundColor = 'transparent';
+        this.style.backgroundColor = "transparent";
       }
     },
     beforeDestroy() {
-      window.removeEventListener('scroll', this.handleScroll);
+      window.removeEventListener("scroll", this.handleScroll);
     },
     handleClick() {
       this.user.pop();
-      localStorage.removeItem('name');
-      localStorage.removeItem('email');
-      localStorage.removeItem('id');
-      alert('已登出');
-      this.$store.commit('updateLogIn', false);
-      this.$store.commit('updateName', '');
-      this.$store.commit('updateInv', []);
-      this.$store.commit('updateUser', []);
-      this.$store.commit('updateOrders', []);
-      this.$router.push('/');
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
+      localStorage.removeItem("id");
+      this.$swal({
+        confirmButtonColor: "#084594",
+        title: "已登出，歡迎您再次回來～",
+      });
+      this.$store.commit("updateLogIn", false);
+      this.$store.commit("updateName", "");
+      this.$store.commit("updateInv", []);
+      this.$store.commit("updateUser", []);
+      this.$store.commit("updateOrders", []);
+      this.$router.push("/");
     },
   },
   mounted() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener("scroll", this.handleScroll);
   },
 };
 </script>
@@ -154,5 +157,14 @@ a:hover {
 .logout:hover {
   background-color: var(--color-secondary);
   color: #fff;
+}
+.swal2-styled.swal2-confirm {
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: var(--color-secondary);
+  color: #fff;
+  font-size: 1em;
+  line-height: 1.5;
 }
 </style>
