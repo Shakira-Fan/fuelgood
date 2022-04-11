@@ -231,48 +231,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Modal -->
-    <!-- <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title" id="staticBackdropLabel">領用汽油</h2>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <img
-              class="img-fluid"
-              src="https://images.pexels.com/photos/278430/pexels-photo-278430.jpeg?cs=srgb&dl=pexels-pixabay-278430.jpg&fm=jpg"
-              alt=""
-            />
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">完成</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -314,14 +272,12 @@ export default {
       return moment.utc(utcDate).local().format("YYYY/MM/DD,HH:mm");
     },
     handleQr() {
-      // this.qr = !this.qr;
       this.$swal({
-        title: "Sweet!",
-        text: "Modal with a custom image.",
-        imageUrl: "https://unsplash.it/400/200",
+        title: "領用汽油",
+        imageUrl: require("../assets/images/qr-code.png"),
         imageWidth: 400,
-        imageHeight: 200,
         imageAlt: "Custom image",
+        confirmButtonColor: "#084594",
       });
     },
     handleOrder() {
