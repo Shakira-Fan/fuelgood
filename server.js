@@ -97,4 +97,4 @@ app.listen(process.env.PORT || 3000, () =>
 
 //setInterval(crawRecentData, 300000);
 //crawHistoryData();
-//crawRecentData();
+crawRecentData();
