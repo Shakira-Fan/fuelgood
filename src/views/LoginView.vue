@@ -101,12 +101,13 @@ p {
   text-align: center;
 }
 .signup-form {
-  max-width: 60rem;
+  max-width: 50rem;
   background: #fff;
-  margin: 8rem auto;
+  margin: 5rem auto;
   text-align: left;
   padding: 3rem;
   padding-bottom: 5rem;
+  margin-top: 15rem;
   border-radius: 8px;
   box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
 }
@@ -123,7 +124,7 @@ input {
   width: 95%;
   padding: 1rem;
   border: none;
-  border-bottom: 0.5px solid var(--color-secondary);
+  border-bottom: 1px solid var(--color-secondary);
   line-height: 2.3rem;
 }
 .sign-up-btn {
