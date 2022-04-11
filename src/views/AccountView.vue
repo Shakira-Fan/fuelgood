@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
@@ -30,7 +30,7 @@ export default {
       name: null,
       email: null,
       password: null,
-      error: '',
+      error: "",
     };
   },
 
@@ -38,30 +38,33 @@ export default {
     async handleSubmit() {
       try {
         const res = await axios.post(
-          'https://fuel-good.herokuapp.com/auth/signup',
+          "https://fuel-good.herokuapp.com/auth/signup",
           {
             name: this.name,
             email: this.email,
             password: this.password,
           }
         );
-        alert('註冊成功！請登入');
-        this.$router.push('/login');
+        this.$swal({
+          confirmButtonColor: "#084594",
+          title: "註冊成功！請登入",
+        });
+        this.$router.push("/login");
       } catch (err) {
         if (err.response) {
           if (
             err.response.data ===
             '"password" length must be at least 8 characters long'
           ) {
-            this.error = '密碼長度需至少8字元';
-            this.password = '';
+            this.error = "密碼長度需至少8字元";
+            this.password = "";
           } else if (
-            err.response.data === 'Email has already been registered.'
+            err.response.data === "Email has already been registered."
           ) {
-            this.error = 'Email已被註冊過';
-            this.password = '';
-            this.name = '';
-            this.email = '';
+            this.error = "Email已被註冊過";
+            this.password = "";
+            this.name = "";
+            this.email = "";
           }
         } else {
           this.error = err.message;
@@ -69,7 +72,7 @@ export default {
       }
     },
     async handleClick() {
-      await this.$router.push('/login');
+      await this.$router.push("/login");
       this.$router.go();
     },
   },
@@ -185,5 +188,14 @@ span {
   padding-top: 2rem;
   margin-left: 2rem;
   font-size: 1.8rem;
+}
+.swal2-styled.swal2-confirm {
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: var(--color-secondary);
+  color: #fff;
+  font-size: 1em;
+  line-height: 1.5;
 }
 </style>

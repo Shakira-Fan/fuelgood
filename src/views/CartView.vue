@@ -51,12 +51,13 @@ export default {
   methods: {
     addToCart(gasoline, quantity) {
       if (!quantity) {
-        alert("請輸入數量");
+        this.$swal("請輸入數量");
         return;
       }
       if (!this.cart[gasoline]) this.cart[gasoline] = 0;
       this.cart[gasoline] = quantity;
       localStorage[gasoline] = this.cart[gasoline];
+      this.$swal({ confirmButtonColor: "#084594", title: "已加入購物車" });
     },
     toggleSidebar() {
       this.showSidebar = !this.showSidebar;

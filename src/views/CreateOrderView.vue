@@ -382,9 +382,9 @@ export default {
         icon: "warning",
         showCancelButton: true,
         confirmButtonText: "是的，進行結帳作業",
-        confirmButtonColor: "green",
+        confirmButtonColor: "#1b935bed",
         cancelButtonText: "不，重新進入購物車",
-        cancelButtonColor: "red",
+        cancelButtonColor: "rgb(205 24 24 / 86%)",
         reverseButtons: true,
         className: "swal-back",
       }).then(async (result) => {
@@ -408,27 +408,18 @@ export default {
           );
 
           if (result.statusText === "OK") {
-            this.$swal("交易成功！！", "請在會員頁面確認購買數量", "success");
+            this.$swal({
+              title: "交易成功！！",
+              text: "請在會員頁面確認購買數量",
+              icon: "success",
+              confirmButtonColor: "#084594",
+            });
             this.$router.push(`/user/${localStorage.id}`);
           }
         } catch (error) {
           console.log(error);
         }
       });
-
-      // swalWithBootstrapButtons
-      //   .fire({
-      //     title: "確認此筆交易?",
-      //     text: "請確認交易金額是否正確",
-      //     icon: "warning",
-      //     showCancelButton: true,
-      //     confirmButtonText: "是的，進行結帳作業",
-      //     confirmButtonColor: "#DD6B55",
-      //     cancelButtonText: "不，重新進入購物車",
-      //     reverseButtons: true,
-      //     className: "swal-back",
-      //   })
-      //   .
     },
   },
 };
@@ -545,7 +536,7 @@ body {
   &__button {
     width: 100%;
     height: 55px;
-    background: #2364d2;
+    background: var(--color-secondary);
     border: none;
     border-radius: 5px;
     font-size: 22px;
@@ -1041,9 +1032,5 @@ body {
   opacity: 0;
   transform: translateX(-10px) rotate(45deg);
   pointer-events: none;
-}
-.btn.btn-success {
-  background-color: green;
-  color: white;
 }
 </style>
