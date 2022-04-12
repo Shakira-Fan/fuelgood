@@ -7,17 +7,19 @@
         </div>
         <div class="card-body">
             <form>
-                <h3 class="py-3 animate__animated animate__pulse animate__infinite animate__slow ">${{ product.price }}</h3>
+                <h3 class="py-3 ">${{ product.price }}</h3>
                 <span><input class="qty-input py-2" type="number" v-model.number="quantity" /> 公升</span>
             </form>
-            <button @click="addToCart(product.gasoline, quantity)" class="btn my-5">
-                加入汽油桶
-          </button>
-        </div>
-        
+            <p class="my-3 animate__animated animate__pulse animate__infinite animate__slow total">50</p>
+            <button @click="addToCart(product.gasoline, quantity)" class="btn btn-add mb-3">
+                加入油桶
+            </button>
+            <button @click="addToCart(product.gasoline, quantity)" class="btn btn-deduct mb-3">
+                清除全部
+            </button>
+        </div>        
     </div>
   </div>
-
 </template>
 
 <script>
@@ -37,7 +39,6 @@ export default {
 
 <style lang="scss" scoped>
 @import 'bootstrap/scss/bootstrap';
-
 
 
 .card {
@@ -75,20 +76,35 @@ export default {
 
 
 }
-button {
-  background-color: #fac609 !important;
-  color: #000;
-  padding: 0.5rem;
-  border: 0px;
-  border-radius: 1.5rem !important;
-  padding: 5px 12px;
-  font-size: 1.8rem;
-  cursor: pointer;
-}
-button:hover {
-  opacity: 0.8;
-  transition: 0.3s all ease;
-}
+  .total{
+    font-size: 3rem;
+
+    &::after{
+    content:"TWD";
+    }
+  }
+
+  button {
+    padding: 0 0.5rem;
+    margin: 0.5rem;
+    border: none;
+    color: white !important;
+    font-size: 1.5rem !important;
+    border-radius: 1.5rem !important;
+
+    &.btn-add {
+      background-color: var(--color-button);
+      &:hover {
+        background-color: var(--color-button-hover);
+      }
+    }
+    &.btn-deduct {
+      background-color: #f28482;
+      &:hover {
+        background-color: #f28482c5;
+      }
+    }
+  }
 
 
 .swal2-styled.swal2-confirm {

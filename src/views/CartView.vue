@@ -1,6 +1,6 @@
 <template>
 
-<div class="container d-flex flex-column justify-content-end cart">
+<div class="container d-flex flex-column align-items-center justify-content-end cart">
 
     <div class="date-style my-5">
         <span>目前油價區間: {{ recentDate }}</span>
@@ -8,19 +8,24 @@
     <SidebarComponent v-if="showSidebar" :toggle="toggleSidebar" :cart="cart" :inventory="inventory"
         :remove="removeItem" />
 
-    <div class="container">
+    <div class="container mb-5">
         <div class="row d-flex g-3 justify-content-center align-items-stretch">
             <ShoppingCar v-for="(product, index) in inventory" :key="product.id" :index="index" :product="product"
                 :addToCart="addToCart" />
         </div>
     </div>
 
-    <div class="total-qty">
-        <a>共計{{ totalQuantity }}公升</a>
-        <button @click="toggleSidebar" class="top-bar-cart-link">購買清單</button>
+
+    <div class="total-qty d-flex mb-5 flex-column col-6">
+      <ul class="d-flex flex-column align-items-center">
+        <li>共計 <span class="total">{{ totalQuantity }}</span> 公升</li>
+        <li>共計 <span class="total">{{ totalQuantity }}</span> 元整</li>
+      </ul>
+      <div class="col d-flex justify-content-center">
+        <button class="btn mb-3 btn-confirm">確定訂單</button>
+        <button class="btn mb-3 btn-cancel">放棄訂單</button>
+      </div>
     </div>
-
-
 </div>
 
 </template>
@@ -85,28 +90,47 @@ export default {
   min-height: 100vh;
 }
 
-div a {
-  font-size: 2.5rem;
-  text-decoration: none;
-}
-div button {
-  background: var(--color-secondary);
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  color: #fff;
-  margin: 1.5rem;
-  font-size: 2rem;
-  cursor: pointer;
+.total-qty{
+  text-align: center;
+  li{
+    font-size: 2rem;
+    color: black;
+    list-style-type: none;
+
+  }
+  .total{
+    font-size: 3rem;
+    color: red;
+    
+  }
 }
 
-.total-qty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5rem;
-}
+button {
+    padding: 0 0.5rem;
+    margin: 0.5rem;
+    font-size: 2rem !important;
+    border-radius: 1.5rem !important;
+    background-color: var(--color-primary) !important;
+    border: 2px solid white !important;
+
+    &.btn-confirm{
+      &:hover{
+      border: 2px solid var(--color-secondary) !important;
+      color: var(--color-secondary);
+      }
+    }
+
+    &.btn-cancel{
+      &:hover{
+      border: 2px solid red !important;
+      color: red;
+      }
+    }
+   }
+
+
 .date-style {
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 500;
   font-style: italic;
   span{
@@ -114,9 +138,7 @@ div button {
 
   }
 }
-.top-bar-cart-link:hover {
-  background-color: #0e3365;
-}
+
 .loading {
   padding: 30rem;
   font-size: 3rem;
