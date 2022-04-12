@@ -8,7 +8,7 @@
     </div>
 
     <div>
-      <ul v-if="!loading" id="navbar-example2">
+      <ul v-if="!loading" id="navbar-example2" class="nav-container">
         <li class="nav-item">
           <a class="nav-link" @click="handleOrder" href="#order">歷史訂單</a>
         </li>
@@ -162,7 +162,7 @@
                   <th scope="col">95無鉛汽油</th>
                   <th scope="col">98無鉛汽油</th>
                   <th scope="col">高級柴油</th>
-                  <th scope="col">購買日期</th>
+                  <th class="date-hidden" scope="col">購買日期</th>
                 </tr>
               </thead>
               <tbody>
@@ -172,7 +172,7 @@
                   <td>{{ order.orders['95無鉛汽油'].liter }}</td>
                   <td>{{ order.orders['98無鉛汽油'].liter }}</td>
                   <td>{{ order.orders['高級柴油'].liter }}</td>
-                  <td>{{ localDate(order.date) }}</td>
+                  <td class="date-hidden">{{ localDate(order.date) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -402,11 +402,24 @@ h2 {
 }
 .loading {
   padding: 30rem;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .nav-item {
   margin-top: 4rem;
   padding: 2rem 0;
+}
+
+@media only screen and (max-width: 31.25em) {
+  .order-table {
+    font-size: 1.8rem;
+  }
+  .date-hidden {
+    display: none;
+  }
+  .nav-container {
+    padding-top: 2rem;
+    font-size: 1.7rem;
+  }
 }
 </style>
