@@ -43,39 +43,21 @@
       </div>
 
       <div
-        class="
-          row
-          m-5
-          flex
-          align-items-center
-          justify-content-center
-          inventory-container
-        "
+        class="row m-5 flex align-items-center justify-content-center inventory-container"
         v-if="!loading"
       >
         <h2 class="mb-5" v-if="!loading">未提取庫存</h2>
         <div class="row flex-lg-nowrap flex-wrap flex justify-content-center">
           <div
-            class="
-              inventory
-              col-lg-3 col-10 col-md-5
-              flex-sm-fill
-              py-5
-              flex-shrink-2
-            "
+            class="inventory col-lg-3 col-10 col-md-5 flex-fill py-5 flex-shrink-2"
           >
             <i
-              class="
-                bi
-                animate__animated animate__pulse animate__infinite
-                bi-droplet
-                mb-3
-              "
+              class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"
             ></i>
             <!-- 92無鉛汽油 -->
             <h2 class="gas-title">無鉛汽油</h2>
             <h3 class="actual-inventory">
-              {{ inventory[0].properties["92無鉛汽油"].liter }}
+              {{ inventory[0].properties['92無鉛汽油'].liter }}
             </h3>
             <p class="unit">公升</p>
             <button
@@ -92,26 +74,15 @@
           </div>
 
           <div
-            class="
-              inventory
-              col-lg-3 col-10 col-md-5
-              flex-fill
-              py-5
-              flex-shrink-2
-            "
+            class="inventory col-lg-3 col-10 col-md-5 flex-fill py-5 flex-shrink-2"
           >
             <i
-              class="
-                bi
-                animate__animated animate__pulse animate__infinite
-                bi-droplet
-                mb-3
-              "
+              class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"
             ></i>
             <!-- 95無鉛汽油 -->
             <h2 class="gas-title">無鉛汽油:</h2>
             <h3 class="actual-inventory">
-              {{ inventory[0].properties["95無鉛汽油"].liter }}
+              {{ inventory[0].properties['95無鉛汽油'].liter }}
             </h3>
             <p class="unit">公升</p>
             <button
@@ -128,26 +99,15 @@
           </div>
 
           <div
-            class="
-              inventory
-              col-lg-3 col-10 col-md-5
-              flex-fill
-              py-5
-              flex-shrink-2
-            "
+            class="inventory col-lg-3 col-10 col-md-5 flex-fill py-5 flex-shrink-2"
           >
             <i
-              class="
-                bi
-                animate__animated animate__pulse animate__infinite
-                bi-droplet
-                mb-3
-              "
+              class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"
             ></i>
             <!-- 98無鉛汽油 -->
             <h2 class="gas-title">無鉛汽油</h2>
             <h3 class="actual-inventory">
-              {{ inventory[0].properties["98無鉛汽油"].liter }}
+              {{ inventory[0].properties['98無鉛汽油'].liter }}
             </h3>
             <p class="unit">公升</p>
             <button
@@ -164,26 +124,15 @@
           </div>
 
           <div
-            class="
-              inventory
-              col-lg-3 col-10 col-md-5
-              flex-fill
-              py-5
-              flex-shrink-2
-            "
+            class="inventory col-lg-3 col-10 col-md-5 flex-fill py-5 flex-shrink-2"
           >
             <i
-              class="
-                bi
-                animate__animated animate__pulse animate__infinite
-                bi-droplet
-                mb-3
-              "
+              class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"
             ></i>
             <!-- 超級柴油 -->
             <h2 class="gas-title">超級柴油</h2>
             <h3 class="actual-inventory">
-              {{ inventory[0].properties["高級柴油"].liter }}
+              {{ inventory[0].properties['高級柴油'].liter }}
             </h3>
             <p class="unit">公升</p>
             <button
@@ -219,10 +168,10 @@
               <tbody>
                 <tr v-for="order in orders.flat()" :key="order.email">
                   <th scope="row">{{ order.orderNumber }}</th>
-                  <td>{{ order.orders["92無鉛汽油"].liter }}</td>
-                  <td>{{ order.orders["95無鉛汽油"].liter }}</td>
-                  <td>{{ order.orders["98無鉛汽油"].liter }}</td>
-                  <td>{{ order.orders["高級柴油"].liter }}</td>
+                  <td>{{ order.orders['92無鉛汽油'].liter }}</td>
+                  <td>{{ order.orders['95無鉛汽油'].liter }}</td>
+                  <td>{{ order.orders['98無鉛汽油'].liter }}</td>
+                  <td>{{ order.orders['高級柴油'].liter }}</td>
                   <td>{{ localDate(order.date) }}</td>
                 </tr>
               </tbody>
@@ -235,9 +184,9 @@
 </template>
 
 <script>
-import axios from "axios";
-import moment from "moment";
-import "animate.css";
+import axios from 'axios';
+import moment from 'moment';
+import 'animate.css';
 
 export default {
   data() {
@@ -269,15 +218,15 @@ export default {
   },
   methods: {
     localDate(utcDate) {
-      return moment.utc(utcDate).local().format("YYYY/MM/DD,HH:mm");
+      return moment.utc(utcDate).local().format('YYYY/MM/DD,HH:mm');
     },
     handleQr() {
       this.$swal({
-        title: "領用汽油",
-        imageUrl: require("../assets/images/qr-code.png"),
+        title: '領用汽油',
+        imageUrl: require('../assets/images/qr-code.png'),
         imageWidth: 400,
-        imageAlt: "Custom image",
-        confirmButtonColor: "#084594",
+        imageAlt: 'Custom image',
+        confirmButtonColor: '#084594',
       });
     },
     handleOrder() {
@@ -320,8 +269,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "bootstrap/scss/bootstrap";
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+@import 'bootstrap/scss/bootstrap';
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css');
 
 .user-page {
   min-height: 100vh;
@@ -389,22 +338,22 @@ export default {
     }
     &:nth-child(1) {
       i::after {
-        content: "92";
+        content: '92';
       }
     }
     &:nth-child(2) {
       i::after {
-        content: "95";
+        content: '95';
       }
     }
     &:nth-child(3) {
       i::after {
-        content: "98";
+        content: '98';
       }
     }
     &:nth-child(4) {
       i::after {
-        content: "柴";
+        content: '柴';
       }
     }
   }
