@@ -402,7 +402,7 @@ h2 {
 }
 .loading {
   padding: 30rem;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .nav-item {
