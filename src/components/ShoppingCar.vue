@@ -1,35 +1,23 @@
 <template>
-  <div class="card">
-    <div class="card-title">
-      <i class="bi bi-droplet mb-3"></i>
-      {{ product.gasoline }}
-    </div>
-    <div class="card-body">
-      <form>
-        <div class="row">
-          <div class="cell">
-            <label>售價:</label>
-          </div>
-          <div class="cell">${{ product.price }}</div>
+  <div class="col-10 col-sm-6 com-md-5 col-lg-3">
+    <div class="card h-100">
+        <div class="card-title pt-5">
+            <i class="bi bi-droplet-half"></i>
+            {{ product.gasoline }}
         </div>
-        <div class="row">
-          <div class="cell">
-            <label>數量:</label>
-          </div>
-          <div class="cell">
-            <input class="qty-input" type="number" v-model.number="quantity" />
-          </div>
-          <span class="cell">公升</span>
-        </div>
-      </form>
-    </div>
-    <div class="card-footer">
-      <button
-        @click="addToCart(product.gasoline, quantity)"
-        class="btn btn-light"
-      >
-        加入購物車
-      </button>
+        <div class="card-body">
+            <form>
+                <h3 class="py-3 ">${{ product.price }}</h3>
+                <span><input class="qty-input py-2" type="number" v-model.number="quantity" /> 公升</span>
+            </form>
+            <p class="my-3 animate__animated animate__pulse animate__infinite animate__slow total">50</p>
+            <button @click="addToCart(product.gasoline, quantity)" class="btn btn-add mb-3">
+                加入油桶
+            </button>
+            <button @click="addToCart(product.gasoline, quantity)" class="btn btn-deduct mb-3">
+                清除全部
+            </button>
+        </div>        
     </div>
   </div>
 </template>
@@ -49,100 +37,75 @@ export default {
 };
 </script>
 
-<style scoped>
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+<style lang="scss" scoped>
+@import 'bootstrap/scss/bootstrap';
+
+
 .card {
-  display: inline-block;
-  max-width: 31rem;
-  background: var(--color-grey);
-  box-shadow: 1px 2px 5px solid #000;
-
-  margin-bottom: 20px;
-  color: #280d14;
-  margin: 10px;
-  border-radius: 20px;
-}
-
-.card-title {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 93.5%;
-  background-color: var(--color-primary);
-  padding: 10px;
-  font-size: 22px;
-  font-weight: bold;
-  border-radius: 10px 10px 0 0;
-}
-.card-body {
-  border-top: 0px;
-  border-bottom: 0px;
-  text-align: center;
-  padding: 2rem;
-}
-.row {
-  display: flex;
-}
-.card-body .cell:first-of-type {
-  justify-content: center;
-  width: 20%;
-}
-.card-body .cell {
-  align-items: center;
-  width: 50%;
-  min-height: 2em;
-  padding: 3px 4px;
-}
-.cell {
-  display: inline-flex;
-}
-.cell input {
-  font-size: 20px;
-  width: 100%;
-}
-.cell span {
-  font-size: 20px;
-  font-weight: bold;
-}
-.card-body label:first-of-type {
-  margin-top: 0px;
-}
-.card-body label {
-  display: inline-block;
-  font-weight: bold;
-}
-.card-footer {
-  background-color: var(--color-secondary);
-  margin-top: 15px;
-  padding: 1.2rem;
-  text-align: right;
-  border-radius: 0 0 10px 10px;
-}
-.btn-light {
-  background: #fff8ea;
-  background-color: var(--color-primary);
-  color: #000;
-  padding: 0.5rem;
-}
-button {
-  border: 0px;
-  border-radius: 1rem;
-  padding: 5px 12px;
-  font-weight: bold;
-  vertical-align: middle;
-  font-size: 1.8rem;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #fac609;
-}
-.qty-input {
+  
+  border-radius: 1.5rem;
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
   border: none;
-  background-color: #fff;
+  .card-title {
+    font-size: 3rem;
+  }
+  .qty-input {
+  border: 2px solid white;
   padding: 0.2rem;
-  border-radius: 1.2rem;
-  box-shadow: 1px 2px 5px rgb(211, 204, 204);
+  border-radius: 1rem;
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
+  width: 30%;
+  &:hover{
+      border: 2px solid var(--color-primary);
+    }
+  }
+
+  h3{
+    font-size: 5rem;
+    color: red;
+  }
+
+  &:hover{
+  transition: all ease-out 0.3s;
+  box-shadow:
+  0px 0px 2.7px rgba(0, 0, 0, 0.042),
+  0px 0px 7.5px rgba(0, 0, 0, 0.06),
+  0px 0px 18.1px rgba(0, 0, 0, 0.078),
+  0px 0px 60px rgba(0, 0, 0, 0.12)
+  }
+
+
 }
+  .total{
+    font-size: 3rem;
+
+    &::after{
+    content:"TWD";
+    }
+  }
+
+  button {
+    padding: 0 0.5rem;
+    margin: 0.5rem;
+    border: none;
+    color: white !important;
+    font-size: 1.5rem !important;
+    border-radius: 1.5rem !important;
+
+    &.btn-add {
+      background-color: var(--color-button);
+      &:hover {
+        background-color: var(--color-button-hover);
+      }
+    }
+    &.btn-deduct {
+      background-color: #f28482;
+      &:hover {
+        background-color: #f28482c5;
+      }
+    }
+  }
+
 
 .swal2-styled.swal2-confirm {
   background-color: var(--color-secondary);
