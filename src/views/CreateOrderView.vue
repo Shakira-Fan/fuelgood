@@ -240,7 +240,7 @@
                 :disabled="n < minCardMonth"
                 :key="n"
               >
-                {{ n < 10 ? '0' + n : n }}
+                {{ n < 10 ? "0" + n : n }}
               </option>
             </select>
             <select
@@ -286,24 +286,23 @@
 </template>
 
 <script>
-import { mask } from 'vue-the-mask';
-import axios from 'axios';
-import Swal from 'sweetalert2';
+import { mask } from "vue-the-mask";
+import axios from "axios";
 export default {
   directives: { mask },
-  props: ['calculateTotal'],
+  props: ["calculateTotal"],
   data() {
     return {
       currentCardBackground: Math.floor(Math.random() * 25 + 1), // just for fun :D
-      cardName: '',
-      cardNumber: '',
-      cardMonth: '',
-      cardYear: '',
-      cardCvv: '',
+      cardName: "",
+      cardNumber: "",
+      cardMonth: "",
+      cardYear: "",
+      cardCvv: "",
       minCardYear: new Date().getFullYear(),
-      amexCardMask: '#### ###### #####',
-      otherCardMask: '#### #### #### ####',
-      cardNumberTemp: '',
+      amexCardMask: "#### ###### #####",
+      otherCardMask: "#### #### #### ####",
+      cardNumberTemp: "",
       isCardFlipped: false,
       focusElementStyle: null,
       isInputFocused: false,
@@ -313,30 +312,30 @@ export default {
   },
   mounted() {
     this.cardNumberTemp = this.otherCardMask;
-    document.getElementById('cardNumber').focus();
+    document.getElementById("cardNumber").focus();
   },
   computed: {
     getCardType() {
       let number = this.cardNumber;
-      let re = new RegExp('^4');
-      if (number.match(re) != null) return 'visa';
+      let re = new RegExp("^4");
+      if (number.match(re) != null) return "visa";
 
-      re = new RegExp('^(34|37)');
-      if (number.match(re) != null) return 'amex';
+      re = new RegExp("^(34|37)");
+      if (number.match(re) != null) return "amex";
 
-      re = new RegExp('^5[1-5]');
-      if (number.match(re) != null) return 'mastercard';
+      re = new RegExp("^5[1-5]");
+      if (number.match(re) != null) return "mastercard";
 
-      re = new RegExp('^6011');
-      if (number.match(re) != null) return 'discover';
+      re = new RegExp("^6011");
+      if (number.match(re) != null) return "discover";
 
-      re = new RegExp('^9792');
-      if (number.match(re) != null) return 'troy';
+      re = new RegExp("^9792");
+      if (number.match(re) != null) return "troy";
 
-      return 'visa'; // default type
+      return "visa"; // default type
     },
     generateCardNumberMask() {
-      return this.getCardType === 'amex'
+      return this.getCardType === "amex"
         ? this.amexCardMask
         : this.otherCardMask;
     },
@@ -348,7 +347,7 @@ export default {
   watch: {
     cardYear() {
       if (this.cardMonth < this.minCardMonth) {
-        this.cardMonth = '';
+        this.cardMonth = "";
       }
     },
   },
@@ -377,77 +376,73 @@ export default {
     },
     async payTheOrder() {
       //sweet alert
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger',
-        },
-        buttonsStyling: false,
-      });
-
-      swalWithBootstrapButtons
-        .fire({
-          title: '確認此筆交易?',
-          text: '請確認交易金額是否正確',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: '是的，進行結帳作業',
-          cancelButtonText: '不，重新進入購物車',
-          reverseButtons: true,
-        })
-        .then(async result => {
-          if (!result.isConfirmed) {
+      this.$swal({
+        title: "確認此筆交易?",
+        text: "請確認交易金額是否正確",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "是的，進行結帳作業",
+        confirmButtonColor: "#1b935bed",
+        cancelButtonText: "不，重新進入購物車",
+        cancelButtonColor: "rgb(205 24 24 / 86%)",
+        reverseButtons: true,
+        className: "swal-back",
+      }).then(async (result) => {
+        if (!result.isConfirmed) {
+          {
+            this.$swal("已經取消", "正要跳轉到購物車頁面", "error");
+          }
+          this.$router.push(`/cart`);
+          return;
+        }
+        try {
+          const result = await axios.post(
+            "https://fuel-good.herokuapp.com/order/add",
             {
-              swalWithBootstrapButtons.fire(
-                '已經取消',
-                '正要跳轉到購物車頁面',
-                'error'
-              );
+              email: this.email,
+              adding92: localStorage["92無鉛汽油"],
+              adding95: localStorage["95無鉛汽油"],
+              adding98: localStorage["98無鉛汽油"],
+              addingDiesel: localStorage["高級柴油"],
             }
-            this.$router.push(`/cart`);
-            return;
-          }
-          try {
-            const result = await axios.post(
-              'https://fuel-good.herokuapp.com/order/add',
-              {
-                email: this.email,
-                adding92: localStorage['92無鉛汽油'],
-                adding95: localStorage['95無鉛汽油'],
-                adding98: localStorage['98無鉛汽油'],
-                addingDiesel: localStorage['高級柴油'],
-              }
-            );
+          );
 
-            if (result.statusText === 'OK') {
-              swalWithBootstrapButtons.fire(
-                '交易成功！！',
-                '請在會員頁面確認購買數量',
-                'success'
-              );
-              this.$router.push(`/user/${localStorage.id}`);
-            }
-          } catch (error) {
-            console.log(error);
+          if (result.statusText === "OK") {
+            this.$swal({
+              title: "交易成功！！",
+              text: "請在會員頁面確認購買數量",
+              icon: "success",
+              confirmButtonColor: "#084594",
+            });
+            this.$router.push(`/user/${localStorage.id}`);
           }
-        });
+        } catch (error) {
+          console.log(error);
+        }
+      });
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700|Source+Sans+Pro:400,600,700&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:400,500,600,700|Source+Sans+Pro:400,600,700&display=swap");
 
 body {
   background: #ddeefc;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-size: 16px;
 }
 * {
   box-sizing: border-box;
+  line-height: 1;
   &:focus {
     outline: none;
+  }
+  .swal2-cancel.btn.btn-danger {
+    background: red;
+    color: white;
+    margin-bottom: 1.5rem;
   }
 }
 .wrapper {
@@ -541,12 +536,12 @@ body {
   &__button {
     width: 100%;
     height: 55px;
-    background: #2364d2;
+    background: var(--color-secondary);
     border: none;
     border-radius: 5px;
     font-size: 22px;
     font-weight: 500;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
     box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
     color: #fff;
     margin-top: 20px;
@@ -605,7 +600,7 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.65);
 
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
@@ -675,7 +670,7 @@ body {
     border-radius: 15px;
     overflow: hidden;
     &:after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       top: 0;
@@ -737,11 +732,11 @@ body {
 
   &__info {
     color: #fff;
-    width: 100%;
-    max-width: calc(60% - 30px);
+    max-width: calc(100% - 85px);
     padding: 10px 15px;
     font-weight: 500;
     display: block;
+    width: 100%;
 
     cursor: pointer;
 
@@ -753,7 +748,7 @@ body {
   &__holder {
     opacity: 0.7;
     font-size: 13px;
-    margin-bottom: 6px;
+    padding-bottom: 6px;
     @media screen and (max-width: 480px) {
       font-size: 12px;
       margin-bottom: 5px;
@@ -761,7 +756,7 @@ body {
   }
 
   &__wrapper {
-    font-family: 'Source Code Pro', monospace;
+    font-family: "Source Code Pro", monospace;
     padding: 25px 15px;
     position: relative;
     z-index: 4;
@@ -796,10 +791,10 @@ body {
     line-height: 1;
     color: #fff;
     font-size: 27px;
-    margin-bottom: 15px;
     display: inline-block;
     padding: 10px 15px;
     cursor: pointer;
+    margin-bottom: 28px;
 
     @media screen and (max-width: 480px) {
       font-size: 21px;
@@ -842,19 +837,20 @@ body {
     color: #fff;
     display: flex;
     align-items: flex-start;
+    text-align: start;
   }
 
   &__date {
     flex-wrap: wrap;
     font-size: 18px;
     margin-left: auto;
-    padding: 10px;
     display: inline-flex;
-    width: 125px;
+    width: 80px;
     white-space: nowrap;
     flex-shrink: 0;
     cursor: pointer;
     align-items: center;
+    padding: 10px 5px;
 
     @media screen and (max-width: 480px) {
       font-size: 16px;
@@ -864,17 +860,13 @@ body {
   &__dateItem {
     position: relative;
     span {
-      width: 19px;
       display: inline-block;
     }
     label {
       color: #eee;
-      margin-bottom: 2px;
       display: inline-block;
       max-width: 100%;
-      margin-bottom: 4px;
       font-weight: 700;
-      margin: 2px;
       padding-left: 0.5rem;
     }
   }
@@ -884,10 +876,10 @@ body {
     font-size: 13px;
     padding-bottom: 6px;
     width: 100%;
+    line-height: 1;
 
     @media screen and (max-width: 480px) {
       font-size: 12px;
-      padding-bottom: 5px;
     }
   }
   &__band {
@@ -950,24 +942,9 @@ body {
     }
   }
 }
-label.card-item__dateItem {
-  color: #fff8ea;
-  margin-bottom: 2px;
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: 700;
-}
-label.card-item__dateTitle {
-  color: #fff8ea;
-  margin-bottom: 2px;
-  display: inline-block;
-  max-width: 100%;
-  margin-bottom: 5px;
-  font-weight: 700;
-}
 .card-list {
   margin-bottom: -130px;
+  margin-top: 15rem;
 
   @media screen and (max-width: 480px) {
     margin-bottom: -120px;
@@ -996,7 +973,7 @@ label.card-item__dateTitle {
     padding: 5px 15px;
     background: none;
     color: #1a3b5d;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: "Source Sans Pro", sans-serif;
 
     &:hover,
     &:focus {
@@ -1008,7 +985,7 @@ label.card-item__dateTitle {
     }
     &.-select {
       -webkit-appearance: none;
-      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAeCAYAAABuUU38AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUxJREFUeNrM1sEJwkAQBdCsngXPHsQO9O5FS7AAMVYgdqAd2IGCDWgFnryLFQiCZ8EGnJUNimiyM/tnk4HNEAg/8y6ZmMRVqz9eUJvRaSbvutCZ347bXVJy/ZnvTmdJ862Me+hAbZCTs6GHpyUi1tTSvPnqTpoWZPUa7W7ncT3vK4h4zVejy8QzM3WhVUO8ykI6jOxoGA4ig3BLHcNFSCGqGAkig2yqgpEiMsjSfY9LxYQg7L6r0X6wS29YJiYQYecemY+wHrXD1+bklGhpAhBDeu/JfIVGxaAQ9sb8CI+CQSJ+QmJg0Ii/EE2MBiIXooHRQhRCkBhNhBcEhLkwf05ZCG8ICCOpk0MULmvDSY2M8UawIRExLIQIEgHDRoghihgRIgiigBEjgiFATBACAgFgghEwSAAGgoBCBBgYAg5hYKAIFYgHBo6w9RRgAFfy160QuV8NAAAAAElFTkSuQmCC');
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAeCAYAAABuUU38AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUxJREFUeNrM1sEJwkAQBdCsngXPHsQO9O5FS7AAMVYgdqAd2IGCDWgFnryLFQiCZ8EGnJUNimiyM/tnk4HNEAg/8y6ZmMRVqz9eUJvRaSbvutCZ347bXVJy/ZnvTmdJ862Me+hAbZCTs6GHpyUi1tTSvPnqTpoWZPUa7W7ncT3vK4h4zVejy8QzM3WhVUO8ykI6jOxoGA4ig3BLHcNFSCGqGAkig2yqgpEiMsjSfY9LxYQg7L6r0X6wS29YJiYQYecemY+wHrXD1+bklGhpAhBDeu/JfIVGxaAQ9sb8CI+CQSJ+QmJg0Ii/EE2MBiIXooHRQhRCkBhNhBcEhLkwf05ZCG8ICCOpk0MULmvDSY2M8UawIRExLIQIEgHDRoghihgRIgiigBEjgiFATBACAgFgghEwSAAGgoBCBBgYAg5hYKAIFYgHBo6w9RRgAFfy160QuV8NAAAAAElFTkSuQmCC");
       background-size: 12px;
       background-position: 90% center;
       background-repeat: no-repeat;
@@ -1055,14 +1032,5 @@ label.card-item__dateTitle {
   opacity: 0;
   transform: translateX(-10px) rotate(45deg);
   pointer-events: none;
-}
-.btn.btn-success {
-  background: green;
-  color: white;
-}
-.btn.btn-danger {
-  background: red;
-  color: white;
-  margin-bottom: 1.5rem;
 }
 </style>

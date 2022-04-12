@@ -1,6 +1,6 @@
 <template>
   <form class="signup-form" @submit.prevent="handleSubmit">
-    <h1>登入會員</h1>
+    <h1>登入</h1>
     <div class="round">
       <img class="logo" src="../assets/images/logo3.png" alt="" />
     </div>
@@ -61,15 +61,19 @@ export default {
             password: this.password,
           }
         );
-        console.log(res);
-        this.user.push(res);
+
+        console.log(res.data);
+        this.user.push(res.data);
         console.log(this.user);
-        localStorage.setItem('name', this.user[0].data.user.name);
-        localStorage.setItem('id', this.user[0].data.user._id);
-        localStorage.setItem('email', this.user[0].data.user.email);
-        this.$store.commit('updateLogIn', true);
-        this.$store.commit('updateName', localStorage.getItem('name'));
-        await this.$router.push('/user' + '/' + this.id);
+        if (res.data.user.name) {
+          localStorage.setItem('name', this.user[0].user.name);
+          await localStorage.setItem('id', this.user[0].user._id);
+          localStorage.setItem('email', this.user[0].user.email);
+          this.$store.commit('updateLogIn', true);
+          this.$store.commit('updateName', localStorage.getItem('name'));
+          this.$store.commit('updateId', localStorage.getItem('id'));
+          await this.$router.push('/user' + '/' + this.id);
+        }
       } catch (err) {
         if (err.response) {
           // this.error = err.response.data;
@@ -85,62 +89,71 @@ export default {
 
 <style scoped>
 .logo {
-  width: 5rem;
+  width: 6rem;
 }
 h1 {
   font-size: 3rem;
   text-align: center;
   padding: 2rem;
+  font-weight: 500;
 }
 p {
   text-align: center;
 }
 .signup-form {
-  max-width: 60rem;
+  max-width: 50rem;
   background: #fff;
-  margin: 8rem auto;
+  margin: 5rem auto;
   text-align: left;
   padding: 3rem;
   padding-bottom: 5rem;
+  margin-top: 15rem;
   border-radius: 8px;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
 }
 label {
   display: block;
   width: 100%;
   padding: 1.5rem;
+  font-size: 2.3rem;
 }
 input {
+  outline: none;
+  font-size: 1.8rem;
   box-sizing: border-box;
-  width: 100%;
-  padding: 2rem;
-  border-radius: 4px;
+  width: 95%;
+  padding: 1rem;
   border: none;
-  border-bottom: 2px solid #eee;
+  border-bottom: 1px solid var(--color-secondary);
+  line-height: 2.3rem;
 }
 .sign-up-btn {
   display: block;
   margin-top: 5rem;
-  font-size: 1.8rem;
-  transition: all 0.2s ease-in-out;
+  width: 7rem;
+  font-size: 2.3rem;
+  transition: all 0.1s ease-in-out;
+  line-height: 3.5rem;
 }
 .sign-up-btn:hover {
   background-color: #0e3365;
+  transform: scale(1.1);
 }
 .register-btn {
   display: inline-block;
   border: none;
   background: none;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   font-weight: bold;
   font-size: 1.8rem;
-  border-bottom: 1px solid var(--color-primary);
+  border-bottom: 1px solid var(--color-secondary);
   padding: 0.3rem;
   cursor: pointer;
+  line-height: 2.6rem;
+  transition: all 0.1s ease-in-out;
 }
 .register-btn:hover {
-  color: var(--color-secondary);
-  border-bottom: 1px solid var(--color-secondary);
+  transform: scale(1.1);
 }
 span {
   font-size: 1.8rem;
@@ -162,15 +175,19 @@ span {
   color: #fff;
 }
 .round {
-  width: 6rem;
-  height: 6rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
-  background-color: #eee;
+  border: 2px solid var(--color-secondary);
   margin: 2rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.17);
+}
+.round:hover {
+  transform: scale(1.2);
 }
 .err {
   text-align: left;

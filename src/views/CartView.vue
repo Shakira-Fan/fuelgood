@@ -1,34 +1,39 @@
 <template>
-  <div class="total-qty">
-    <a>購買{{ totalQuantity }}公升</a>
-    <button @click="toggleSidebar" class="top-bar-cart-link">購買清單</button>
-  </div>
-  <div class="date-style">
-    <span>油價區間:</span> <span>{{ recentDate }}</span>
-  </div>
-  <SidebarComponent
-    v-if="showSidebar"
-    :toggle="toggleSidebar"
-    :cart="cart"
-    :inventory="inventory"
-    :remove="removeItem"
-  />
-  <div class="card-container">
-    <ShoppingCar
-      v-for="(product, index) in inventory"
-      :key="product.id"
-      class="card"
-      :index="index"
-      :product="product"
-      :addToCart="addToCart"
-    />
-  </div>
+
+<div class="container d-flex flex-column align-items-center justify-content-end cart">
+
+    <div class="date-style my-5">
+        <span>目前油價區間: {{ recentDate }}</span>
+    </div>
+    <SidebarComponent v-if="showSidebar" :toggle="toggleSidebar" :cart="cart" :inventory="inventory"
+        :remove="removeItem" />
+
+    <div class="container mb-5">
+        <div class="row d-flex g-3 justify-content-center align-items-stretch">
+            <ShoppingCar v-for="(product, index) in inventory" :key="product.id" :index="index" :product="product"
+                :addToCart="addToCart" />
+        </div>
+    </div>
+
+
+    <div class="total-qty d-flex mb-5 flex-column col-6">
+      <ul class="d-flex flex-column align-items-center">
+        <li>共計 <span class="total">{{ totalQuantity }}</span> 公升</li>
+        <li>共計 <span class="total">{{ totalQuantity }}</span> 元整</li>
+      </ul>
+      <div class="col d-flex justify-content-center">
+        <button class="btn mb-3 btn-confirm">確定訂單</button>
+        <button class="btn mb-3 btn-cancel">放棄訂單</button>
+      </div>
+    </div>
+</div>
+
 </template>
 
 <script>
-import ShoppingCar from '@/components/ShoppingCar.vue';
-import SidebarComponent from '@/components/SidebarComponent.vue';
-import axios from 'axios';
+import ShoppingCar from "@/components/ShoppingCar.vue";
+import SidebarComponent from "@/components/SidebarComponent.vue";
+import axios from "axios";
 
 export default {
   data() {
@@ -36,7 +41,7 @@ export default {
       inventory: [],
       cart: {},
       showSidebar: false,
-      recentDate: '',
+      recentDate: "",
     };
   },
   components: {
@@ -47,20 +52,17 @@ export default {
     totalQuantity() {
       return Object.values(this.cart).reduce((a, b) => a + b, 0);
     },
-    // date() {
-    //   this.recentDate = this.inventory[0].appliedDate;
-    //   return this.recentDate;
-    // },
   },
   methods: {
     addToCart(gasoline, quantity) {
       if (!quantity) {
-        alert('請輸入數量');
+        this.$swal("請輸入數量");
         return;
       }
       if (!this.cart[gasoline]) this.cart[gasoline] = 0;
       this.cart[gasoline] = quantity;
       localStorage[gasoline] = this.cart[gasoline];
+      this.$swal({ confirmButtonColor: "#084594", title: "已加入購物車" });
     },
     toggleSidebar() {
       this.showSidebar = !this.showSidebar;
@@ -73,7 +75,7 @@ export default {
   mounted() {
     axios
       .get(`https://fuel-good.herokuapp.com/crawler/price/recent/`)
-      .then(res => {
+      .then((res) => {
         this.inventory = res.data;
         this.recentDate = res.data[0].appliedDate;
       });
@@ -81,41 +83,64 @@ export default {
 };
 </script>
 
-<style scoped>
-div a {
-  font-size: 2.5rem;
-  text-decoration: none;
+<style lang="scss" scoped>
+@import 'bootstrap/scss/bootstrap';
+
+.cart{
+  min-height: 100vh;
 }
-div button {
-  background: var(--color-secondary);
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  color: #fff;
-  margin: 1.5rem;
-  font-size: 2rem;
-  cursor: pointer;
+
+.total-qty{
+  text-align: center;
+  li{
+    font-size: 2rem;
+    color: black;
+    list-style-type: none;
+
+  }
+  .total{
+    font-size: 3rem;
+    color: red;
+    
+  }
 }
-.card-container {
-  max-width: 80rem;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 10rem;
-}
-.total-qty {
-  padding-top: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+button {
+    padding: 0 0.5rem;
+    margin: 0.5rem;
+    font-size: 2rem !important;
+    border-radius: 1.5rem !important;
+    background-color: var(--color-primary) !important;
+    border: 2px solid white !important;
+
+    &.btn-confirm{
+      &:hover{
+      border: 2px solid var(--color-secondary) !important;
+      color: var(--color-secondary);
+      }
+    }
+
+    &.btn-cancel{
+      &:hover{
+      border: 2px solid red !important;
+      color: red;
+      }
+    }
+   }
+
+
 .date-style {
-  margin-top: 3rem;
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 500;
   font-style: italic;
+  span{
+  border-bottom: 5px solid var(--color-primary);
+
+  }
 }
-.top-bar-cart-link:hover {
-  background-color: #0e3365;
+
+.loading {
+  padding: 30rem;
+  font-size: 3rem;
 }
 </style>

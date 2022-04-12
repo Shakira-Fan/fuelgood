@@ -1,6 +1,6 @@
 <template>
   <form class="signup-form" @submit.prevent="handleSubmit">
-    <h1>註冊會員</h1>
+    <h1>註冊</h1>
     <div class="round">
       <img class="logo" src="../assets/images/logo3.png" alt="" />
     </div>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
@@ -30,49 +30,41 @@ export default {
       name: null,
       email: null,
       password: null,
-      error: '',
+      error: "",
     };
   },
 
   methods: {
-    async handleGoogleAuth() {
-      try {
-        const res = await axios.get(
-          'https://fuel-good.herokuapp.com/auth/google'
-        );
-      } catch (err) {
-        if (err.response) {
-          console.log(err.response.data);
-        }
-      }
-    },
     async handleSubmit() {
       try {
         const res = await axios.post(
-          'https://fuel-good.herokuapp.com/auth/signup',
+          "https://fuel-good.herokuapp.com/auth/signup",
           {
             name: this.name,
             email: this.email,
             password: this.password,
           }
         );
-        alert('Account created! Please sign in');
-        this.$router.push('/login');
+        this.$swal({
+          confirmButtonColor: "#084594",
+          title: "註冊成功！請登入",
+        });
+        this.$router.push("/login");
       } catch (err) {
         if (err.response) {
           if (
             err.response.data ===
             '"password" length must be at least 8 characters long'
           ) {
-            this.error = '密碼長度需至少8字元';
-            this.password = '';
+            this.error = "密碼長度需至少8字元";
+            this.password = "";
           } else if (
-            err.response.data === 'Email has already been registered.'
+            err.response.data === "Email has already been registered."
           ) {
-            this.error = 'Email已被註冊過';
-            this.password = '';
-            this.name = '';
-            this.email = '';
+            this.error = "Email已被註冊過";
+            this.password = "";
+            this.name = "";
+            this.email = "";
           }
         } else {
           this.error = err.message;
@@ -80,8 +72,8 @@ export default {
       }
     },
     async handleClick() {
-      await this.$router.push('/login');
-      window.location.reload();
+      await this.$router.push("/login");
+      this.$router.go();
     },
   },
 };
@@ -89,62 +81,71 @@ export default {
 
 <style scoped>
 .logo {
-  width: 5rem;
+  width: 6rem;
 }
 h1 {
   font-size: 3rem;
   text-align: center;
   padding: 2rem;
+  font-weight: 500;
 }
 p {
   text-align: center;
 }
 .signup-form {
-  max-width: 60rem;
+  max-width: 50rem;
   background: #fff;
-  margin: 8rem auto;
+  margin: 5rem auto;
   text-align: left;
   padding: 3rem;
   padding-bottom: 5rem;
+  margin-top: 15rem;
   border-radius: 8px;
-  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 30px -5px rgba(0, 0, 0, 0.17);
 }
 label {
   display: block;
   width: 100%;
   padding: 1.5rem;
+  font-size: 2.3rem;
 }
 input {
+  outline: none;
+  font-size: 1.8rem;
   box-sizing: border-box;
-  width: 100%;
-  padding: 2rem;
-  border-radius: 4px;
+  padding: 1rem;
+  width: 95%;
   border: none;
-  border-bottom: 2px solid var(--color-grey);
+  border-bottom: 1px solid var(--color-secondary);
+  line-height: 2.3rem;
 }
 .sign-up-btn {
   display: block;
   margin-top: 5rem;
-  font-size: 1.8rem;
-  transition: all 0.2s ease-in-out;
+  width: 7rem;
+  font-size: 2.3rem;
+  transition: all 0.1s ease-in-out;
+  line-height: 3.5rem;
 }
 .sign-up-btn:hover {
   background-color: #0e3365;
+  transform: scale(1.1);
 }
 .register-btn {
   display: inline-block;
   border: none;
   background: none;
-  color: var(--color-primary);
+  color: var(--color-secondary);
   font-weight: bold;
   font-size: 1.8rem;
-  border-bottom: 1px solid var(--color-primary);
+  border-bottom: 1px solid var(--color-secondary);
   padding: 0.3rem;
   cursor: pointer;
+  line-height: 2.6rem;
+  transition: all 0.1s ease-in-out;
 }
 .register-btn:hover {
-  color: var(--color-secondary);
-  border-bottom: 1px solid var(--color-secondary);
+  transform: scale(1.1);
 }
 span {
   font-size: 1.8rem;
@@ -166,15 +167,19 @@ span {
   color: #fff;
 }
 .round {
-  width: 6rem;
-  height: 6rem;
+  width: 7rem;
+  height: 7rem;
   border-radius: 50%;
-  background-color: #eee;
+  border: 2px solid var(--color-secondary);
   margin: 2rem auto;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.17);
+}
+.round:hover {
+  transform: scale(1.2);
 }
 .err {
   text-align: left;
@@ -183,5 +188,14 @@ span {
   padding-top: 2rem;
   margin-left: 2rem;
   font-size: 1.8rem;
+}
+.swal2-styled.swal2-confirm {
+  border: 0;
+  border-radius: 0.25em;
+  background: initial;
+  background-color: var(--color-secondary);
+  color: #fff;
+  font-size: 1em;
+  line-height: 1.5;
 }
 </style>
