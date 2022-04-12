@@ -1,6 +1,6 @@
 <template>
 <div class="store">
-    <h2 class="mb-5">附近據點</h2>
+    <h2 class="mb-5">據點查詢</h2>
     <div class="container">
         <div class="row flex flex-column-reverse flex-md-row justify-content-center align-items-start no-gutters">
             <div class="col-12 col-md-6 mb-5">
@@ -169,6 +169,7 @@ h2{
   display: inline-block;
   font-size: 4rem;
   border-bottom: 5px solid var(--color-primary);
+  padding:5px
 }
 #map {
  height: 50vh;

@@ -1,53 +1,50 @@
 <template>
-  <div class="banner container-fluid">
-    <Banner />
-  </div>
-  <Card />
-  <div class="chart">
-    <h2 class="mb-5">今日油價</h2>
-    <div
-      class="row flex flex-column-reverse flex-md-row justify-content-center align-items-start no-gutters"
-    >
-      <div class="left col-12 col-md-5">
-        <div class="price">
-          <div class="info flex flex-column">
+<div class="banner container-fluid">
+  <Banner />
+</div>
+<Card />
+<div class="chart">
+  <h2 class="mb-5">今日油價</h2>
+  <div class="row flex flex-column-reverse flex-md-row justify-content-center align-items-start no-gutters">
+    <div class="left col-12 col-md-5 flex justify-content-around">
+      <div class="price">     
+          <div class="info flex flex-column col-8 col-md-5 align-items-center">
             <p class="oilName">92無鉛汽油:</p>
             <span>
               <h4>{{ price92 }}</h4>
               <p>元/公升</p> </span
-            ><button @click="activeTab = 'Chart92'">92汽油歷史油價</button>
+            ><button class="d-none d-md-block" @click="activeTab='Chart92'">92汽油歷史油價</button>
           </div>
-          <div class="info flex flex-column">
+          <div class="info flex flex-column col-8 col-md-5 align-items-center">
             <p class="oilName">95無鉛汽油:</p>
             <span>
               <h4>{{ price95 }}</h4>
               <p>元/公升</p> </span
-            ><button @click="activeTab = 'Chart95'">95汽油歷史油價</button>
+            ><button class="d-none d-md-block" @click="activeTab='Chart95'">95汽油歷史油價</button>
           </div>
-          <div class="info flex flex-column">
+          <div class="info flex flex-column col-8 col-md-5 align-items-center">
             <p class="oilName">98無鉛汽油:</p>
             <span>
               <h4>{{ price98 }}</h4>
               <p>元/公升</p> </span
-            ><button @click="activeTab = 'Chart98'">98汽油歷史油價</button>
+            ><button class="d-none d-md-block" @click="activeTab='Chart98'">98汽油歷史油價</button>
           </div>
-          <div class="info flex flex-column">
-            <p class="oilName">超級柴油價格:</p>
+          <div class="info flex flex-column col-8 col-md-5 align-items-center">
+            <p class="oilName">超級柴油:</p>
             <span>
               <h4>{{ priceSuper }}</h4>
               <p>元/公升</p> </span
-            ><button @click="activeTab = 'ChartSuper'">超級柴油歷史油價</button>
-          </div>
-        </div>
-        <a class="buyIt shadow" href="/login">立即加油去！</a>
+            ><button class="d-none d-md-block" @click="activeTab='ChartSuper'">超級柴油歷史油價</button>
+          </div>        
       </div>
-      <div class="right col-12 col-md-5">
-        <component
-          :is="activeTab"
-          :getLabels="historyDate"
-          :getDataValues="currentTabPrice"
-        />
-      </div>
+      <a class="buyIt shadow" href="/cart">立即加油去！</a>
+    </div>
+    <div class="right d-none d-md-block col-md-5 ">
+      <component
+      :is="activeTab"
+      :getLabels="historyDate"
+      :getDataValues="currentTabPrice"
+    />
     </div>
   </div>
   <Map />
@@ -146,26 +143,14 @@ export default {
       });
     },
     async historySuper() {
-      const url =
-        'https://fuel-good.herokuapp.com/crawler/price/recent/%E9%AB%98%E7%B4%9A%E6%9F%B4%E6%B2%B9/14';
-      await this.axios.get(url).then(response => {
-        console.log(response.data); //object
-        this.historyDataSuper = response.data;
-        this.historyPriceSuper = this.historyDataSuper.map(i => {
-          return i.price;
-        });
-      });
-    },
-    //   handleScroll(){
-    //   if (window.scrollY > 5){
-    //     this.style.backgroundColor=`#ffd32d`;
-    //   }else{
-    //     this.style.backgroundColor="transparent";
-    //   }
-    // },
-    // beforeDestroy(){
-    //     window.removeEventListener("scroll",this.handleScroll);
-    //   },
+      const url =('https://fuel-good.herokuapp.com/crawler/price/recent/%E9%AB%98%E7%B4%9A%E6%9F%B4%E6%B2%B9/14');
+      await this.axios.get(url).then((response) => {
+      console.log(response.data) //object
+      this.historyDataSuper = (response.data);
+      this.historyPriceSuper=this.historyDataSuper.map(i=>{
+        return i.price;})   
+      })
+      },
   },
   computed: {
     currentTabPrice: function () {
@@ -187,9 +172,8 @@ export default {
     this.history95();
     this.history92();
     this.historySuper();
-    // window.addEventListener("scroll",this.handleScroll);
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -201,21 +185,19 @@ export default {
   margin: 0;
   width: 100vw;
 }
-
-/* 圖表設置 */
-.chart {
-  width: 100%;
-  padding: 5rem 0;
-  h2 {
-    display: inline-block;
-    font-size: 4rem;
-    border-bottom: 5px solid var(--color-primary);
-  }
-  div {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    .left {
+  
+  /* 圖表設置 */
+  .chart{
+    width:100%;
+    padding: 5rem 0;
+    h2{
+        display: inline-block;
+        font-size:4rem ;
+        border-bottom: 5px solid var(--color-primary);
+        padding:5px
+      }
+    div{
+      display: flex;
       flex-wrap: wrap;
       align-items: center;
       .price {

@@ -1,5 +1,5 @@
 <template>
-    <Vue3Lottie :animationData="DogJSON"/>
+    <Vue3Lottie :animationData="DogJSON" />
 </template>
 
 <script>
