@@ -58,6 +58,7 @@ export default {
         font-size:  4rem;
         display: inline-block;
         border-bottom: 5px solid var(--color-primary);
+        padding:5px
     }
     .row{
         .card{
