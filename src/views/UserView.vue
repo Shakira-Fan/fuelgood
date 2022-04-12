@@ -401,8 +401,9 @@ h2 {
   flex-wrap: wrap;
 }
 .loading {
-  padding: 30rem;
-  font-size: 2rem;
+  padding: 30rem 10rem;
+  color: var(--color-secondary);
+  font-size: 3rem;
 }
 
 .nav-item {
@@ -420,6 +421,10 @@ h2 {
   .nav-container {
     padding-top: 2rem;
     font-size: 1.7rem;
+  }
+  .loading {
+    color: var(--color-secondary);
+    font-size: 2.5rem;
   }
 }
 </style>
