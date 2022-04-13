@@ -11,15 +11,10 @@
           ></div>
           <div class="card-item__cover">
             <img
-              :src="
-                'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' +
-                currentCardBackground +
-                '.jpeg'
-              "
+              :src="'https://images.pexels.com/photos/4100716/pexels-photo-4100716.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'"
               class="card-item__bg"
             />
           </div>
-
           <div class="card-item__wrapper">
             <div class="card-item__top">
               <img
@@ -157,11 +152,7 @@
         <div class="card-item__side -back">
           <div class="card-item__cover">
             <img
-              :src="
-                'https://raw.githubusercontent.com/muhammederdem/credit-card-form/master/src/assets/images/' +
-                currentCardBackground +
-                '.jpeg'
-              "
+              :src="'https://images.pexels.com/photos/2080187/pexels-photo-2080187.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'"
               class="card-item__bg"
             />
           </div>

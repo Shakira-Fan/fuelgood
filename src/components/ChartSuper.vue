@@ -54,7 +54,7 @@ const data = computed(() => ({
 
   datasets: [
     {
-      label: "超級柴油歷史價格",
+      label: "高級柴油歷史價格",
       data:getDataValues.value,
       borderColor: "#dc322f"
     }
@@ -79,7 +79,7 @@ const options = ref({
         display: false
     },
     title: {
-      text: "超級柴油歷史價格",
+      text: "高級柴油歷史價格",
        font: {
             size: 20,
             fontColor: "purple",

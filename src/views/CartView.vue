@@ -1,8 +1,8 @@
 <template>
   <div
-    class="container d-flex flex-column align-items-center justify-content-end cart"
+    class="container d-flex flex-column align-items-center justify-content-center mt-5 cart"
   >
-    <div class="date-style my-5">
+    <div class="date-style my-5 ">
       <span>目前油價區間: {{ recentDate }}</span>
     </div>
 
@@ -18,15 +18,7 @@
       </div>
     </div>
 
-    <div class="total-qty d-flex mb-5 flex-column col-6">
-      <ul class="d-flex flex-column align-items-center">
-        <li>
-          共計 <span class="total">{{ totalQuantity }}</span> 公升
-        </li>
-        <!-- <li>
-          共計 <span class="total">{{ totalQuantity }}</span> 元整
-        </li> -->
-      </ul>
+    <div class="d-flex mb-5 flex-column col-6">
       <div class="cart-container">
         <SidebarComponent
           :toggle="toggleSidebar"
@@ -95,21 +87,9 @@ export default {
 <style lang="scss" scoped>
 @import 'bootstrap/scss/bootstrap';
 
-.cart {
+.cart{
+  padding-top: 10vh;
   min-height: 100vh;
-}
-
-.total-qty {
-  text-align: center;
-  li {
-    font-size: 2rem;
-    color: black;
-    list-style-type: none;
-  }
-  .total {
-    font-size: 3rem;
-    color: red;
-  }
 }
 
 button {
@@ -144,7 +124,5 @@ button {
     border-bottom: 5px solid var(--color-primary);
   }
 }
-.cart-container {
-  max-width: 120rem;
-}
+
 </style>
