@@ -130,7 +130,7 @@
               class="bi animate__animated animate__pulse animate__infinite bi-droplet mb-3"
             ></i>
             <!-- 超級柴油 -->
-            <h2 class="gas-title">超級柴油</h2>
+            <h2 class="gas-title">高級柴油</h2>
             <h3 class="actual-inventory">
               {{ inventory[0].properties['高級柴油'].liter }}
             </h3>

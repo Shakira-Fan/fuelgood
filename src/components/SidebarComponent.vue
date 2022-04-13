@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-container" v-if="Object.keys(cart).length">
+  <div class="cart-container" v-show="Object.keys(cart).length">
     <table class="table">
       <thead>
         <tr>
@@ -15,7 +15,7 @@
           <th scope="row">{{ key }}</th>
           <td>{{ getPrice(key) }}</td>
           <td>{{ quantity }}</td>
-          <td>{{ (quantity * getPrice(key)).toFixed(2) }}</td>
+          <td>{{ Math.round((quantity * getPrice(key))) }}</td>
           <td>
             <button @click="remove(key)" class="btn btn-light cart-remove">
               &times;
@@ -26,7 +26,15 @@
     </table>
 
     <div class="spread">
-      <span>共計 {{ calculateTotal() }} 元整</span>
+      <ul class="total-qty">
+        <li>
+          共計 <span class="total">{{ literTotal() }}</span> 公升
+        </li>
+        <li>
+          共計 <span class="total">{{ calculateTotal() }}</span> 元整
+        </li>
+      </ul>
+
       <router-link :to="'/create-order'" :calculateTotal="calculateTotal">
         <button class="confirm-btn">確定訂單</button>
       </router-link>
@@ -49,8 +57,15 @@ export default {
       const total = Object.entries(this.cart).reduce((acc, curr) => {
         return acc + curr[1] * this.getPrice(curr[0]);
       }, 0);
-      localStorage.total = total.toFixed(2);
-      return total.toFixed(2);
+      localStorage.total = Math.round(total);
+      return Math.round(total);
+    },
+    literTotal() {
+      //[key,value]
+      const total = Object.entries(this.cart).reduce((acc, curr) => {
+        return acc + curr[1]}, 0);
+      localStorage.totalLiter = total;
+      return total;
     },
   },
 };
@@ -81,4 +96,19 @@ export default {
   border-radius: 1rem;
   margin-top: 2rem;
 }
+
+.total-qty {
+  text-align: center;
+  li {
+    font-size: 2rem;
+    color: black;
+    list-style-type: none;
+  }
+  .total {
+    font-size: 3rem;
+    color: red;
+  }
+}
+
+
 </style>

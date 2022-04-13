@@ -32,11 +32,11 @@
             ><button @click="activeTab = 'Chart98'">98汽油歷史油價</button>
           </div>
           <div class="info flex flex-column">
-            <p class="oilName">超級柴油價格:</p>
+            <p class="oilName">高級柴油價格:</p>
             <span>
               <h4>{{ priceSuper }}</h4>
               <p>元/公升</p> </span
-            ><button @click="activeTab = 'ChartSuper'">超級柴油歷史油價</button>
+            ><button @click="activeTab = 'ChartSuper'">高級柴油歷史油價</button>
           </div>
         </div>
         <a class="buyIt shadow" href="/login">立即加油去！</a>

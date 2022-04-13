@@ -1,7 +1,7 @@
 <template>
   <div class="col-10 col-sm-6 com-md-5 col-lg-3">
     <div class="card h-100">
-      <div class="card-title pt-5">
+      <div class="card-title pt-5 animate__animated animate__pulse animate__infinite">
         <i class="bi bi-droplet-half"></i>
         {{ product.gasoline }}
       </div>
