@@ -9,7 +9,9 @@
     <label>密碼:</label>
     <input type="password" name="password" v-model="password" required />
 
-    <p class="err" v-if="error.length">{{ error }}</p>
+    <p class="err" v-if="error.length">
+      <span class="material-icons"> warning </span>{{ error }}
+    </p>
     <button class="sign-up-btn">登入</button>
 
     <div class="alternative">
@@ -194,7 +196,10 @@ span {
   font-weight: bold;
   color: #cd1818;
   padding-top: 2rem;
-  margin-left: 2rem;
-  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+}
+.material-icon {
+  font-size: 2rem;
 }
 </style>
