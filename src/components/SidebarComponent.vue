@@ -15,11 +15,9 @@
           <th scope="row">{{ key }}</th>
           <td>{{ getPrice(key) }}</td>
           <td>{{ quantity }}</td>
-          <td>{{ Math.round((quantity * getPrice(key))) }}</td>
+          <td>{{ Math.round(quantity * getPrice(key)) }}</td>
           <td>
-            <button @click="remove(key)" class="btn btn-light cart-remove">
-              &times;
-            </button>
+            <button @click="remove(key)" class="cart-remove">&times;</button>
           </td>
         </tr>
       </tbody>
@@ -63,7 +61,8 @@ export default {
     literTotal() {
       //[key,value]
       const total = Object.entries(this.cart).reduce((acc, curr) => {
-        return acc + curr[1]}, 0);
+        return acc + curr[1];
+      }, 0);
       localStorage.totalLiter = total;
       return total;
     },
@@ -88,6 +87,11 @@ export default {
   line-height: 2rem;
   text-align: center;
   padding: 0.5rem 1rem;
+  border: none;
+  transition: all 0.1s ease-in-out;
+}
+.cart-remove:hover {
+  background-color: #ffc906;
 }
 .confirm-btn {
   background-color: var(--color-primary);
@@ -95,6 +99,10 @@ export default {
   border: none;
   border-radius: 1rem;
   margin-top: 2rem;
+  transition: all 0.1s ease-in-out;
+}
+.confirm-btn:hover {
+  background-color: #ffc906;
 }
 
 .total-qty {
@@ -109,6 +117,4 @@ export default {
     color: red;
   }
 }
-
-
 </style>

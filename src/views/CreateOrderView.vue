@@ -179,10 +179,10 @@
     </div>
     <div class="card-form__inner">
       <div class="card-input">
-        <label for="PaymentAmount">應付金額</label>
-        <div class="amount-placeholder">
-          <span>$</span>
-          <span>{{ paytotal }}</span>
+        <!-- <label for="PaymentAmount">應付金額</label> -->
+        <div class="amount">
+          <span>應付金額: </span>
+          <span class="amount-placeholder"> NT${{ paytotal }}</span>
         </div>
       </div>
       <div class="card-input">
@@ -447,11 +447,11 @@ body {
 }
 
 .card-form {
-  max-width: 570px;
+  max-width: 52rem;
   margin: auto;
   width: 100%;
-  margin-top: 5rem;
-  margin-bottom: 30rem;
+  // margin-top: 1rem;
+  margin-bottom: 10rem;
   @media screen and (max-width: 576px) {
     margin: 0 auto;
   }
@@ -459,10 +459,10 @@ body {
   &__inner {
     background: #fff;
     // box-shadow: 3px 13px 30px 0px rgba(21, 34, 67, 0.2);
-    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+    box-shadow: 0 2px 10px 0 rgba(90, 116, 148, 0.4);
     border-radius: 10px;
     padding: 35px;
-    padding-top: 180px;
+    padding-top: 17rem;
 
     @media screen and (max-width: 480px) {
       padding: 25px;
@@ -526,18 +526,21 @@ body {
 
   &__button {
     width: 100%;
-    height: 55px;
+    height: 5rem;
     background: var(--color-secondary);
     border: none;
-    border-radius: 5px;
+    border-radius: 1rem;
     font-size: 22px;
     font-weight: 500;
     font-family: 'Source Sans Pro', sans-serif;
-    box-shadow: 3px 10px 20px 0px rgba(35, 100, 210, 0.3);
+    box-shadow: 3px 5px 20px 0px rgba(35, 100, 210, 0.3);
     color: #fff;
-    margin-top: 20px;
+    margin-top: 0.5rem;
     cursor: pointer;
 
+    &:hover {
+      background-color: #06346f;
+    }
     @media screen and (max-width: 480px) {
       margin-top: 10px;
     }
@@ -952,10 +955,11 @@ body {
     width: 100%;
     display: block;
     user-select: none;
+    text-align: left;
   }
   &__input {
     width: 100%;
-    height: 50px;
+    height: 4rem;
     border-radius: 5px;
     box-shadow: none;
     border: 1px solid #ced6e0;
@@ -1023,5 +1027,10 @@ body {
   opacity: 0;
   transform: translateX(-10px) rotate(45deg);
   pointer-events: none;
+}
+.amount-placeholder {
+  margin-top: 1rem;
+  color: red;
+  font-weight: 700;
 }
 </style>
