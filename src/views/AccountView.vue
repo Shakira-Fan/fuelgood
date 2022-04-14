@@ -18,7 +18,9 @@
     />
     <p class="showRule" v-if="showRule">**密碼長度需至少8字元</p>
 
-    <p class="err" v-if="error.length">{{ error }}</p>
+    <p class="err" v-if="error.length">
+      <span class="material-icons"> warning </span>{{ error }}
+    </p>
     <button class="sign-up-btn">註冊</button>
 
     <div class="alternative">
@@ -194,8 +196,11 @@ span {
   font-weight: bold;
   color: #cd1818;
   padding-top: 2rem;
-  margin-left: 2rem;
-  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+}
+.material-icon {
+  font-size: 2rem;
 }
 .swal2-styled.swal2-confirm {
   border: 0;
